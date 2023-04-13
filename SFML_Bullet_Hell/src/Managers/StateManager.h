@@ -3,7 +3,7 @@
 #include <memory>
 #include <stack>
 
-#include "../States/State.h"
+#include "States/State.h"
 
 typedef std::unique_ptr<State> StateRef;
 

@@ -6,31 +6,32 @@ MainMenuState::MainMenuState(GameDataRef data)
     : m_data(data)
 {
     m_font = m_data->asset_manager.getFont("Kanit");
-    m_menuText.setFont(m_font);
-    m_menuText.setString("SFML BULLET HELL");
-    m_menuText.setCharacterSize(48);
-    m_startText.setFillColor(sf::Color::Red);
-    m_menuText.setPosition(200.f, 200.f);
 
-    m_startButton.setSize(sf::Vector2f(200.f, 50.f));
-    m_startButton.setFillColor(sf::Color::Green);
-    m_startButton.setPosition(300.f, 350.f);
+    // Menu Text
+    m_menuText = sf::Text("SFML BULLET HELL", m_font, 48);
 
-    m_startText.setFont(m_font);
-    m_startText.setString("Start Game");
-    m_startText.setCharacterSize(24);
-    m_startText.setFillColor(sf::Color::Red);
-    m_startText.setPosition(340.f, 360.f);
+    sf::Vector2f window_size = m_data->m_window.getView().getSize();
+    sf::FloatRect menuRect = m_menuText.getGlobalBounds();
 
-    m_quitButton.setSize(sf::Vector2f(200.f, 50.f));
-    m_quitButton.setFillColor(sf::Color::Red);
-    m_quitButton.setPosition(300.f, 420.f);
+    m_menuText.setOrigin({
+        m_menuText.getOrigin().x + menuRect.width / 2,
+        m_menuText.getOrigin().y + menuRect.height / 2
+	});
 
-    m_quitText.setFont(m_font);
-    m_quitText.setString("Quit Game");
-    m_quitText.setCharacterSize(24);
-    m_quitText.setFillColor(sf::Color::Black);
-    m_quitText.setPosition(340.f, 430.f);
+    m_menuText.setPosition({
+        window_size.x / 2,
+        window_size.y * 0.25f
+	});
+
+    // Start Button
+    sf::Text start_text = sf::Text("Start Game", m_font, 24);
+    start_text.setFillColor(sf::Color::Black);
+    m_start = Button(start_text, sf::Color::Green, { 300.f,350.f });
+
+    // Quit Button
+    sf::Text quit_text = sf::Text("Start Game", m_font, 24);
+    quit_text.setFillColor(sf::Color::Black);
+    m_quit = Button(quit_text, sf::Color::Red, { 300.f,420.f });
 }
 
 void MainMenuState::handleInput(sf::Event& event)
@@ -38,6 +39,7 @@ void MainMenuState::handleInput(sf::Event& event)
 	// Click
     if (event.type == sf::Event::MouseButtonPressed)
     {
+	/*
         if (event.mouseButton.button == sf::Mouse::Left &&
             m_startButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
         {
@@ -51,8 +53,10 @@ void MainMenuState::handleInput(sf::Event& event)
             std::cout << "Closing Game..." << std::endl;
             m_data->m_window.close();
         }
+	*/
     }
 
+/*
 	// Hover
 	//if (m_startButton.getGlobalBounds().contains(sf::Mouse::getPosition(m_data->m_window).x, sf::Mouse::getPosition(m_data->m_window).y))
 	if (m_startButton.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
@@ -74,46 +78,18 @@ void MainMenuState::handleInput(sf::Event& event)
 	{
         quitHovered = false;
     }
+*/
 }
 
 void MainMenuState::update() 
 {
-	if (startHovered)
-	{
-		m_startButton.setFillColor(sf::Color::Yellow);
-		m_startButton.setPosition(300.f, 348.f);
-		m_startText.setPosition(340.f, 358.f);
-	}
-    else if (startLastFrameHovered)
-    {
-		m_startButton.setFillColor(sf::Color::Green);
-		m_startButton.setPosition(300.f, 350.f);
-		m_startText.setPosition(340.f, 360.f);
-        startLastFrameHovered = false;
-    }
-
-    if (quitHovered)
-    {
-		m_quitButton.setFillColor(sf::Color::Yellow);
-		m_quitButton.setPosition(300.f, 418.f);
-		m_quitText.setPosition(340.f, 428.f);
-    }
-    else if (quitLastFrameHovered)
-    {
-		m_quitButton.setFillColor(sf::Color::Red);
-		m_quitButton.setPosition(300.f, 420.f);
-		m_quitText.setPosition(340.f, 430.f);
-        quitLastFrameHovered = false;
-    }
 }
 
 void MainMenuState::render(sf::RenderTarget& window)
 {
     window.draw(m_menuText);
-    window.draw(m_startButton);
-    window.draw(m_startText);
-    window.draw(m_quitButton);
-    window.draw(m_quitText);
+    m_start.render(window);
+    m_quit.render(window);
 }
 
 void MainMenuState::Init()

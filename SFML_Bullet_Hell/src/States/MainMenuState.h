@@ -1,5 +1,6 @@
 #include "State.h"
-#include "../Game.h"
+#include "Game.h"
+#include "Objects/UI/Menu/Button.h"
 
 #pragma once
 class MainMenuState : public State
@@ -12,16 +13,10 @@ private:
 	sf::Text m_menuText;
 
     // Start Button
-	sf::RectangleShape m_startButton;
-    bool startHovered = false;
-    bool startLastFrameHovered = false;
-	sf::Text m_startText;
+    Button m_start;
 
     // Quit Button
-	sf::RectangleShape m_quitButton;
-    bool quitHovered = false;
-    bool quitLastFrameHovered = false;
-	sf::Text m_quitText;
+    Button m_quit;
 
 public:
     MainMenuState(GameDataRef data);
