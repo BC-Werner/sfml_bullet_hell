@@ -26,59 +26,29 @@ MainMenuState::MainMenuState(GameDataRef data)
     // Start Button
     sf::Text start_text = sf::Text("Start Game", m_font, 24);
     start_text.setFillColor(sf::Color::Black);
-    m_start = Button(start_text, sf::Color::Green, { 300.f,350.f });
+    m_start_button = Button(start_text, sf::Color::Green, { 300.f,350.f });
 
     // Quit Button
     sf::Text quit_text = sf::Text("Start Game", m_font, 24);
     quit_text.setFillColor(sf::Color::Black);
-    m_quit = Button(quit_text, sf::Color::Red, { 300.f,420.f });
+    m_quit_button = Button(quit_text, sf::Color::Red, { 300.f,420.f });
 }
 
 void MainMenuState::handleInput(sf::Event& event)
 {
 	// Click
-    if (event.type == sf::Event::MouseButtonPressed)
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
-	/*
-        if (event.mouseButton.button == sf::Mouse::Left &&
-            m_startButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+        if (m_start_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {
-            // Transition to Gameplay
-            std::cout << "Go to Gameplay" << std::endl;
-			m_data->state_manager.AddState(StateRef(std::make_unique<GameState>(m_data)), false);
+            m_data->state_manager.AddState( StateRef(std::make_unique<GameState>(m_data)), true);
         }
-        if (event.mouseButton.button == sf::Mouse::Left &&
-            m_quitButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+        if (m_quit_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {
-            std::cout << "Closing Game..." << std::endl;
             m_data->m_window.close();
         }
-	*/
     }
-
-/*
-	// Hover
-	//if (m_startButton.getGlobalBounds().contains(sf::Mouse::getPosition(m_data->m_window).x, sf::Mouse::getPosition(m_data->m_window).y))
-	if (m_startButton.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
-	{
-        startHovered = true;
-        startLastFrameHovered = true;
-	}
-	else
-	{
-        startHovered = false;
-	}
-
-	if (m_quitButton.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
-	{
-        quitHovered = true;
-        quitLastFrameHovered = true;
-	}
-	else
-	{
-        quitHovered = false;
-    }
-*/
+    // Hover
 }
 
 void MainMenuState::update() 
@@ -88,8 +58,8 @@ void MainMenuState::update()
 void MainMenuState::render(sf::RenderTarget& window)
 {
     window.draw(m_menuText);
-    m_start.render(window);
-    m_quit.render(window);
+    m_start_button.render(window);
+    m_quit_button.render(window);
 }
 
 void MainMenuState::Init()

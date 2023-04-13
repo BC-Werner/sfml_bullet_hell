@@ -13,10 +13,10 @@ private:
 	sf::Text m_menuText;
 
     // Start Button
-    Button m_start;
+    Button m_start_button;
 
     // Quit Button
-    Button m_quit;
+    Button m_quit_button;
 
 public:
     MainMenuState(GameDataRef data);
