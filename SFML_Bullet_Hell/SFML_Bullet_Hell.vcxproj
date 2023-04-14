@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Objects\UI\HUD\GameClock.cpp" />
     <ClCompile Include="src\Objects\UI\Menu\Button.cpp" />
     <ClCompile Include="src\States\GameState.cpp" />
     <ClCompile Include="src\States\SplashState.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="src\Managers\StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Objects\UI\HUD\GameClock.h" />
     <ClInclude Include="src\Objects\UI\Menu\Button.h" />
     <ClInclude Include="src\States\GameState.h" />
     <ClInclude Include="src\States\SplashState.h" />

@@ -45,6 +45,9 @@
     <ClCompile Include="src\Objects\UI\Menu\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\UI\HUD\GameClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\UI\Menu\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\HUD\GameClock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

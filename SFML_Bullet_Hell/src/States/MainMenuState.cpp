@@ -25,13 +25,13 @@ MainMenuState::MainMenuState(GameDataRef data)
 
     // Start Button
     sf::Text start_text = sf::Text("Start Game", m_font, 24);
-    start_text.setFillColor(sf::Color::Black);
-    m_start_button = Button(start_text, sf::Color::Green, { 300.f,350.f });
+    sf::Vector2f start_btn_pos = { window_size.x / 2, window_size.y * 0.6f};
+    m_start_button = Button(start_text, sf::Color::Black, sf::Color::Green, start_btn_pos);
 
     // Quit Button
-    sf::Text quit_text = sf::Text("Start Game", m_font, 24);
-    quit_text.setFillColor(sf::Color::Black);
-    m_quit_button = Button(quit_text, sf::Color::Red, { 300.f,420.f });
+    sf::Text quit_text = sf::Text("Quit Game", m_font, 24);
+    sf::Vector2f quit_btn_pos = { window_size.x / 2, window_size.y * 0.73f};
+    m_quit_button = Button(quit_text, sf::Color::Black, sf::Color::Red, quit_btn_pos);
 }
 
 void MainMenuState::handleInput(sf::Event& event)
@@ -41,7 +41,7 @@ void MainMenuState::handleInput(sf::Event& event)
     {
         if (m_start_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {
-            m_data->state_manager.AddState( StateRef(std::make_unique<GameState>(m_data)), true);
+            m_data->state_manager.AddState( StateRef(std::make_unique<GameState>(m_data)), false);
         }
         if (m_quit_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {
@@ -55,7 +55,7 @@ void MainMenuState::update()
 {
 }
 
-void MainMenuState::render(sf::RenderTarget& window)
+void MainMenuState::render(sf::RenderWindow& window)
 {
     window.draw(m_menuText);
     m_start_button.render(window);

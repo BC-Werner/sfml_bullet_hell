@@ -25,7 +25,7 @@ void SplashState::update()
 	}
 }
 
-void SplashState::render(sf::RenderTarget& window)
+void SplashState::render(sf::RenderWindow& window)
 {
 	m_data->m_window.draw(m_splashText);
 }

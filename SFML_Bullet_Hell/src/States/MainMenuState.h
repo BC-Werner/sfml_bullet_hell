@@ -24,7 +24,7 @@ public:
 
     void handleInput(sf::Event& event) override;
     void update() override;
-    void render(sf::RenderTarget& window) override;
+    void render(sf::RenderWindow& window) override;
 
     void Init() override;
     void Pause() override;

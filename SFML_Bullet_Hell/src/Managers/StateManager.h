@@ -10,8 +10,8 @@ typedef std::unique_ptr<State> StateRef;
 class StateManager
 {
 public:
-	StateManager() {}
-	~StateManager() {}
+	StateManager();
+	~StateManager();
 
 	void AddState(StateRef newState, bool isReplacing = true);
 	void PopState();

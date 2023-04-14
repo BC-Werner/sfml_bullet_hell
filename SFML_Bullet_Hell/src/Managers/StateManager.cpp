@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "StateManager.h"
 
+StateManager::StateManager()
+{
+}
+
+StateManager::~StateManager()
+{
+}
+
 void StateManager::AddState(StateRef newState, bool isReplacing)
 {
 	m_isAdding = true;
