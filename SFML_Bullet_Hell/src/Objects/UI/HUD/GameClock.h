@@ -29,6 +29,7 @@ public:
 
 	void Pause();
 	void Resume();
+	void Restart();
 
 private:
 	std::string formatTime(float seconds);

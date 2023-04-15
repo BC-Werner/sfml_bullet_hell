@@ -74,6 +74,11 @@ void GameClock::Resume()
 	m_timer.Resume();
 }
 
+void GameClock::Restart()
+{
+	m_timer.Reset();
+}
+
 std::string GameClock::formatTime(float seconds)
 {
 	int input = static_cast<int>(seconds);

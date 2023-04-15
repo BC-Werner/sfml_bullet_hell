@@ -19,6 +19,6 @@ public:
 private:
 	GameDataRef m_data;
 
-	GameClock _game_clock;
+	GameClock m_game_clock;
 };
 
