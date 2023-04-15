@@ -14,16 +14,35 @@ MainMenuState::MainMenuState(GameDataRef data)
     // Start Button
     sf::Text start_text = sf::Text("Start Game", font, 24);
     sf::Vector2f start_btn_pos = { window_size.x / 2, window_size.y * 0.6f};
-    m_start_button = Button(start_text, sf::Color::Black, sf::Color::Green, start_btn_pos);
+    m_start_button = Button(start_text, sf::Color::Black, sf::Color::Green, sf::Color::Yellow, start_btn_pos);
 
     // Quit Button
     sf::Text quit_text = sf::Text("Quit Game", font, 24);
     sf::Vector2f quit_btn_pos = { window_size.x / 2, window_size.y * 0.7f};
-    m_quit_button = Button(quit_text, sf::Color::Black, sf::Color::Red, quit_btn_pos);
+    m_quit_button = Button(quit_text, sf::Color::Black, sf::Color::Red, sf::Color::Yellow, quit_btn_pos);
 }
 
 void MainMenuState::handleInput(sf::Event& event)
 {
+    // Hover
+	if (m_start_button.contains({ (float)event.mouseMove.x, (float)event.mouseMove.y }))
+	{
+		m_start_button.hover(true);
+	}
+	else
+	{
+		m_start_button.hover(false);
+	}
+
+	if (m_quit_button.contains({ (float)event.mouseMove.x, (float)event.mouseMove.y }))
+	{
+		m_quit_button.hover(true);
+	}
+	else
+	{
+		m_quit_button.hover(false);
+	}
+     
 	// Click
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -36,7 +55,6 @@ void MainMenuState::handleInput(sf::Event& event)
             m_data->m_window.close();
         }
     }
-    // Hover
 }
 
 void MainMenuState::update() 
