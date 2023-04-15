@@ -56,13 +56,11 @@ GameClock::~GameClock()
 
 void GameClock::update()
 {
-	//m_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
 	m_centered_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
 }
 
 void GameClock::render(sf::RenderWindow& window)
 {
-	//window.draw(m_text);
 	m_centered_text.render(window);
 }
 

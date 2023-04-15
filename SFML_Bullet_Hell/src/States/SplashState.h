@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Game.h"
+#include "Objects/UI/Utility/CenteredText.h"
 
 class SplashState : public State
 {
@@ -17,8 +18,9 @@ public:
 
 private:
 	GameDataRef m_data;
-	sf::Text m_splashText;
-	sf::Font m_font;
+
+	CenteredText m_splash_text;
+
 	sf::Clock m_clock;
 };
 

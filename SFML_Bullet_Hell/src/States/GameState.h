@@ -19,9 +19,6 @@ public:
 private:
 	GameDataRef m_data;
 
-	sf::Font _font;
-	sf::Text _text;
-
 	GameClock _game_clock;
 };
 

@@ -1,4 +1,6 @@
 #pragma once
+#include "Objects/UI/Utility/CenteredText.h"
+
 class Button
 {
 public:
@@ -12,6 +14,7 @@ public:
 
 private:
 	sf::RectangleShape m_rect;
-	sf::Text m_text;
+
+	CenteredText m_centered_text;
 };
 

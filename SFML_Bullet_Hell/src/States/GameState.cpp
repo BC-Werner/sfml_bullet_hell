@@ -4,13 +4,10 @@
 GameState::GameState(GameDataRef data)
 	: m_data(data)
 {
-	_font = m_data->asset_manager.getFont("Kanit");
-	_text = sf::Text("00:00", _font, 20);
-
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
-	sf::Vector2f pos = { window_size.x / 2, window_size.y };
+	sf::Font& font = m_data->asset_manager.getFont("Kanit");
 
-	_game_clock = GameClock(_text, sf::Color::White, pos);
+	_game_clock = GameClock(sf::Text("00:00", font, 20), sf::Color::White, { window_size.x / 2.f, window_size.y });
 }
 
 GameState::~GameState()
