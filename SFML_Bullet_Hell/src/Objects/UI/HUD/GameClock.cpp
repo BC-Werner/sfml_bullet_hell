@@ -44,16 +44,10 @@ GameClock::GameClock()
 }
 
 GameClock::GameClock(sf::Text text, sf::Color text_color, sf::Vector2f position)
-	: m_text(text)
 {
 	const float PADDING = 5.f;
-	sf::Vector2f bottom_center = sf::Vector2f(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height + PADDING);
-	sf::Vector2f localBounds = { m_text.getLocalBounds().left, m_text.getLocalBounds().top };
-	sf::Vector2f rounded = bottom_center + localBounds;
-
-	m_text.setOrigin(rounded);
-	m_text.setPosition(position);
-	m_text.setFillColor(text_color);
+	text.setFillColor(text_color);
+	m_centered_text = BottomCenteredText(text, { position.x, position.y - PADDING });
 }
 
 GameClock::~GameClock()
@@ -62,12 +56,14 @@ GameClock::~GameClock()
 
 void GameClock::update()
 {
-	m_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
+	//m_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
+	m_centered_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
 }
 
 void GameClock::render(sf::RenderWindow& window)
 {
-	window.draw(m_text);
+	//window.draw(m_text);
+	m_centered_text.render(window);
 }
 
 void GameClock::Pause()

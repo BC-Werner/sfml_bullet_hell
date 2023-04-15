@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Objects/UI/Utility/BottomCenteredText.h"
 
 class GameClock
 {
@@ -34,7 +34,7 @@ private:
 	std::string formatTime(float seconds);
 
 private:
-	sf::Text m_text;
+	BottomCenteredText m_centered_text;
 	Timer m_timer;
 };
 
