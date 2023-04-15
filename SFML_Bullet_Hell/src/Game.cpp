@@ -45,18 +45,23 @@ void Game::initResourceManager()
 
 void Game::pollEvents()
 {
+	if (m_event.type == sf::Event::MouseButtonReleased)
+		m_event = sf::Event();
+
 	while (m_data->m_window.pollEvent(m_event))
 	{
 		if (m_event.type == sf::Event::Closed)
-			m_data->m_window.close();
-
-		if (m_event.type == sf::Event::KeyPressed && m_event.key.code == sf::Keyboard::Escape)
 			m_data->m_window.close();
 	}
 }
 
 void Game::handleInput()
 {
+	//if (m_event.type == sf::Event::MouseButtonPressed)
+	//	std::cout << "MouseButtonPressed" << std::endl;
+	//if (m_event.type == sf::Event::MouseButtonReleased)
+	//	std::cout << "MouseButtonReleased" << std::endl;
+
 	// Handle input in current State
 	m_data->state_manager.GetActiveState()->handleInput(m_event);
 }

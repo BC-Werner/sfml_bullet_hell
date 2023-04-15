@@ -9,7 +9,7 @@ MainMenuState::MainMenuState(GameDataRef data)
     sf::Vector2f window_size = m_data->m_window.getView().getSize();
 
     // Menu Text
-    m_menuText = CenteredText(sf::Text("SFML BULLET HELL", font, 48), { window_size.x / 2.f, window_size.y * 0.25f });
+    m_menuText = CenteredText(sf::Text("SFML BULLET HELL", font, 48), { window_size.x / 2.f, window_size.y * 0.4f });
 
     // Start Button
     sf::Text start_text = sf::Text("Start Game", font, 24);
@@ -25,30 +25,17 @@ MainMenuState::MainMenuState(GameDataRef data)
 void MainMenuState::handleInput(sf::Event& event)
 {
     // Hover
-	if (m_start_button.contains({ (float)event.mouseMove.x, (float)event.mouseMove.y }))
-	{
-		m_start_button.hover(true);
-	}
-	else
-	{
-		m_start_button.hover(false);
-	}
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_data->m_window);
 
-	if (m_quit_button.contains({ (float)event.mouseMove.x, (float)event.mouseMove.y }))
-	{
-		m_quit_button.hover(true);
-	}
-	else
-	{
-		m_quit_button.hover(false);
-	}
+    m_start_button.handleHover({ (float) mouse_pos.x, (float) mouse_pos.y });
+    m_quit_button.handleHover({ (float) mouse_pos.x, (float) mouse_pos.y });
      
 	// Click
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
         if (m_start_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {
-            m_data->state_manager.AddState( StateRef(std::make_unique<GameState>(m_data)), false);
+            m_data->state_manager.AddState(StateRef(std::make_unique<GameState>(m_data)));
         }
         if (m_quit_button.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
         {

@@ -26,13 +26,25 @@ Button::~Button()
 {
 }
 
+void Button::handleHover(sf::Vector2f mouse_pos)
+{
+	if (contains(mouse_pos))
+	{
+		_hover(true);
+	}
+	else
+	{
+		_hover(false);
+	}
+}
+
 void Button::render(sf::RenderWindow& window)
 {
 	window.draw(m_rect);
 	m_centered_text.render(window);
 }
 
-void Button::hover(bool isHovering)
+void Button::_hover(bool isHovering)
 {
 	if (isHovering && !hoverStatus)
 	{

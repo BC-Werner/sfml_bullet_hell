@@ -8,7 +8,7 @@ SplashState::SplashState(GameDataRef data)
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 
 	m_splash_text = CenteredText(
-		sf::Text("A GAME\nBY\nBRANDON WERNER", m_data->asset_manager.getFont("Kanit"), 36), 
+		sf::Text("A GAME\nBY\nBRANDON WERNER", m_data->asset_manager.getFont("Kanit"), 48), 
 		{window_size.x / 2.f, window_size.y / 2.f});
 }
 
@@ -20,7 +20,7 @@ void SplashState::update()
 {
 	if (m_clock.getElapsedTime().asSeconds() > 2.0f)
 	{
-		m_data->state_manager.AddState(StateRef(std::make_unique<MainMenuState>(m_data)), true);
+		m_data->state_manager.AddState(StateRef(std::make_unique<MainMenuState>(m_data)));
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Game.h"
 #include "Objects/UI/HUD/GameClock.h"
+#include "Objects/UI/Menu/Button.h"
 
 class GameState : public State
 {
@@ -20,5 +21,6 @@ private:
 	GameDataRef m_data;
 
 	GameClock m_game_clock;
+	Button _pause_btn;
 };
 

@@ -9,7 +9,7 @@ private:
 	private:
 		sf::Clock m_c;
 		float runtime;
-		bool bPaused;
+		bool isPaused;
 
 	public:
 		Timer();

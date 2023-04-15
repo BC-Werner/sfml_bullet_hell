@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\States\PauseState.cpp" />
     <ClCompile Include="src\Objects\UI\Utility\BottomCenteredText.cpp" />
     <ClCompile Include="src\Objects\UI\Utility\CenteredText.cpp" />
     <ClCompile Include="src\Objects\UI\HUD\GameClock.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="src\Managers\StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\States\PauseState.h" />
     <ClInclude Include="src\Objects\UI\Utility\BottomCenteredText.h" />
     <ClInclude Include="src\Objects\UI\Utility\CenteredText.h" />
     <ClInclude Include="src\Objects\UI\HUD\GameClock.h" />

@@ -3,37 +3,37 @@
 
 GameClock::Timer::Timer()
 {
-	bPaused = false;
-	runtime = 0;
+	isPaused = false;
+	runtime = 0.f;
 	m_c.restart();
 }
 
 void GameClock::Timer::Reset()
 {
 	m_c.restart();
-	runtime = 0;
-	bPaused = false;
+	runtime = 0.f;
+	isPaused = false;
 }
 
 void GameClock::Timer::Resume()
 {
-	if (bPaused) {
+	if (isPaused) {
 		m_c.restart();
+		isPaused = false;
 	}
-	bPaused = false;
 }
 
 void GameClock::Timer::Pause()
 {
-	if (!bPaused) {
+	if (!isPaused) {
 		runtime += m_c.getElapsedTime().asSeconds();
+		isPaused = true;
 	}
-	bPaused = true;
 }
 
 float GameClock::Timer::GetElapsedSeconds()
 {
-	if (!bPaused) {
+	if (!isPaused) {
 		return runtime + m_c.getElapsedTime().asSeconds();
 	}
 	return runtime;
