@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameState.h"
 #include "PauseState.h"
+#include "GameOverState.h"
 
 GameState::GameState(GameDataRef data)
 	: m_data(data)
@@ -19,11 +20,6 @@ GameState::~GameState()
 
 void GameState::handleInput(sf::Event& event)
 {
-	// Button Hover
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_data->m_window);
-
-	_pause_btn.handleHover({ (float)mouse_pos.x, (float)mouse_pos.y });
-
 	// Button Click
     if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -33,15 +29,23 @@ void GameState::handleInput(sf::Event& event)
         }
     }
 
+	// Keyboard Events
 	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape)
 	{
 		Pause();
+	}
+
+	// Debug Game Over
+	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Z)
+	{
+		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
 	}
 }
 
 void GameState::update()
 {
 	m_game_clock.update();
+	_pause_btn.update(m_data->m_window);
 }
 
 void GameState::render(sf::RenderWindow& window)
