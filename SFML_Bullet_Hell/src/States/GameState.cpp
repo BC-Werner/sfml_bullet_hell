@@ -11,7 +11,7 @@ GameState::GameState(GameDataRef data)
 
 	m_game_clock = GameClock(sf::Text("00:00", font, 20), sf::Color::White, { window_size.x / 2.f, window_size.y });
 
-	_pause_btn = Button(sf::Text("Pause", font, 24), sf::Color::Black, sf::Color::Green, sf::Color::Yellow, { window_size.x * 0.06f , window_size.y * 0.04f });
+	_pause_btn = Button(sf::Text("| |", font, 24), sf::Color::Black, sf::Color::Green, sf::Color::Yellow, { window_size.x * 0.06f , window_size.y * 0.04f });
 }
 
 GameState::~GameState()
@@ -20,6 +20,9 @@ GameState::~GameState()
 
 void GameState::handleInput(sf::Event& event)
 {
+	// Button Hover
+	_pause_btn.handleHover(m_data->m_window);
+
 	// Button Click
     if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -45,7 +48,7 @@ void GameState::handleInput(sf::Event& event)
 void GameState::update()
 {
 	m_game_clock.update();
-	_pause_btn.update(m_data->m_window);
+	_pause_btn.update();
 }
 
 void GameState::render(sf::RenderWindow& window)

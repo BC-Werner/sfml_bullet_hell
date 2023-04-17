@@ -26,16 +26,10 @@ Button::~Button()
 {
 }
 
-void Button::handleHover(sf::Vector2f mouse_pos)
+void Button::handleHover(sf::RenderWindow& window)
 {
-	if (contains(mouse_pos))
-	{
-		_hover(true);
-	}
-	else
-	{
-		_hover(false);
-	}
+	sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+	_hover( contains({ (float)mouse_pos.x, (float)mouse_pos.y }) );
 }
 
 void Button::render(sf::RenderWindow& window)
@@ -44,10 +38,8 @@ void Button::render(sf::RenderWindow& window)
 	m_centered_text.render(window);
 }
 
-void Button::update(sf::RenderWindow& window)
+void Button::update()
 {
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-	handleHover({ (float)mouse_pos.x, (float)mouse_pos.y });
 }
 
 void Button::_hover(bool isHovering)

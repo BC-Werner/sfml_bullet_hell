@@ -17,6 +17,11 @@ PauseState::PauseState(GameDataRef data)
 
 void PauseState::handleInput(sf::Event& event)
 {
+	// Button Hover
+	m_resume_btn.handleHover(m_data->m_window);
+	m_main_menu_btn.handleHover(m_data->m_window);
+	m_quit_btn.handleHover(m_data->m_window);
+
 	// Button Click
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
 	{
@@ -38,13 +43,20 @@ void PauseState::handleInput(sf::Event& event)
 			return;
 		}
 	}
+
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
+	{
+		m_data->state_manager.PopState();
+		m_data->state_manager.GetActiveState()->Resume();
+		return;
+	}
 }
 
 void PauseState::update()
 {
-	m_resume_btn.update(m_data->m_window);
-	m_main_menu_btn.update(m_data->m_window);
-	m_quit_btn.update(m_data->m_window);
+	m_resume_btn.update();
+	m_main_menu_btn.update();
+	m_quit_btn.update();
 }
 
 void PauseState::render(sf::RenderWindow& window)

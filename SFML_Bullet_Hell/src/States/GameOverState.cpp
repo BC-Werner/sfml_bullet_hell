@@ -10,20 +10,38 @@ GameOverState::GameOverState(GameDataRef data)
 
 	m_gameover_text = CenteredText(sf::Text("GAME OVER", font, 48), { window_size.x / 2.f, window_size.y / 2.f });
 
-	m_playagain_btn = Button(sf::Text("Play Again", font, 24), sf::Color::Black, sf::Color::Green, sf::Color::Yellow, { window_size.x / 2.f, window_size.y * 0.6f});
-	m_quit_btn = Button(sf::Text("Quit Game", font, 24), sf::Color::Black, sf::Color::Red, sf::Color::Yellow, { window_size.x / 2.f, window_size.y * 0.7f });
+	m_playagain_btn = Button(
+		sf::Text("Play Again", font, 24), 
+		sf::Color::Black, 
+		sf::Color::Green, 
+		sf::Color::Yellow, 
+		{ window_size.x / 2.f, window_size.y * 0.6f}
+	);
+	m_quit_btn = Button(
+		sf::Text("Quit Game", font, 24), 
+		sf::Color::Black, 
+		sf::Color::Red, 
+		sf::Color::Yellow, 
+		{ window_size.x / 2.f, window_size.y * 0.7f }
+	);
 }
 
 void GameOverState::handleInput(sf::Event& event)
 {
+	// Button Hover
+	m_playagain_btn.handleHover(m_data->m_window);
+	m_quit_btn.handleHover(m_data->m_window);
+
 	// Click
 	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 	{
-		if (m_playagain_btn.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
+		sf::Vector2f mouse_pos = { (float)event.mouseButton.x, (float)event.mouseButton.y };
+
+		if (m_playagain_btn.contains(mouse_pos))
 		{
 			m_data->state_manager.AddState(StateRef(std::make_unique<GameState>(m_data)), true);
 		}
-		if (m_quit_btn.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
+		if (m_quit_btn.contains(mouse_pos))
 		{
 			m_data->m_window.close();
 		}
@@ -32,8 +50,8 @@ void GameOverState::handleInput(sf::Event& event)
 
 void GameOverState::update()
 {
-	m_playagain_btn.update(m_data->m_window);
-	m_quit_btn.update(m_data->m_window);
+	m_playagain_btn.update();
+	m_quit_btn.update();
 }
 
 void GameOverState::render(sf::RenderWindow& window)

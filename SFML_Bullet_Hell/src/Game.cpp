@@ -45,6 +45,7 @@ void Game::initResourceManager()
 
 void Game::pollEvents()
 {
+	m_event = sf::Event();
 	if (m_event.type == sf::Event::MouseButtonReleased)
 		m_event = sf::Event();
 

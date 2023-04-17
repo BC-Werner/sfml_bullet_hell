@@ -8,9 +8,9 @@ public:
 	Button(sf::Text text, sf::Color text_color, sf::Color rect_color, sf::Color hover_color, sf::Vector2f position);
 	~Button();
 
-	void handleHover(sf::Vector2f mouse_pos);
+	void handleHover(sf::RenderWindow& window);
 	void render(sf::RenderWindow& window);
-	void update(sf::RenderWindow& window);
+	void update();
 
 	bool contains(sf::Vector2f mouse_pos);
 
