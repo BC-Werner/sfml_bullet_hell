@@ -22,6 +22,7 @@ private:
 	CenteredText m_gameover_text;
 
 	Button m_playagain_btn;
+	Button m_mainmenu_btn;
 	Button m_quit_btn;
 };
 
