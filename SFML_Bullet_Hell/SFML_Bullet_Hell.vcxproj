@@ -201,6 +201,11 @@
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Managers\StateManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sfml_baseline.props" />
+    <None Include="sfml_debug_dependencies.props" />
+    <None Include="sfml_release_dependencies.props" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
