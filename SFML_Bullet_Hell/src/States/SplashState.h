@@ -1,7 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Game.h"
-#include "Objects/UI/Utility/CenteredText.h"
+#include "Objects/UI/Text/CenteredText.h"
 
 class SplashState : public State
 {

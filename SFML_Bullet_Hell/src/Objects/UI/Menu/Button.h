@@ -1,5 +1,5 @@
 #pragma once
-#include "Objects/UI/Utility/CenteredText.h"
+#include "Objects/UI/Text/CenteredText.h"
 
 class Button
 {
@@ -25,4 +25,3 @@ private:
 
 	CenteredText m_centered_text;
 };
-

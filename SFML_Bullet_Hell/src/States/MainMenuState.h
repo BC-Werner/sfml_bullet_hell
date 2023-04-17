@@ -2,7 +2,7 @@
 #include "State.h"
 #include "Game.h"
 #include "Objects/UI/Menu/Button.h"
-#include "Objects/UI/Utility/CenteredText.h"
+#include "Objects/UI/Text/CenteredText.h"
 
 class MainMenuState : public State
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Objects/UI/Utility/BottomCenteredText.h"
+#include "Objects/UI/Text/BottomCenteredText.h"
 
 class GameClock
 {
