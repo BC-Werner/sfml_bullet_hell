@@ -10,6 +10,7 @@ public:
 
 	void handleHover(sf::Vector2f mouse_pos);
 	void render(sf::RenderWindow& window);
+	void update(sf::RenderWindow& window);
 
 	bool contains(sf::Vector2f mouse_pos);
 

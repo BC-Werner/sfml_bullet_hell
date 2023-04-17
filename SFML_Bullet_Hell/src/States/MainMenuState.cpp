@@ -24,12 +24,6 @@ MainMenuState::MainMenuState(GameDataRef data)
 
 void MainMenuState::handleInput(sf::Event& event)
 {
-    // Hover
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_data->m_window);
-
-    m_start_button.handleHover({ (float) mouse_pos.x, (float) mouse_pos.y });
-    m_quit_button.handleHover({ (float) mouse_pos.x, (float) mouse_pos.y });
-     
 	// Click
     if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -46,6 +40,8 @@ void MainMenuState::handleInput(sf::Event& event)
 
 void MainMenuState::update() 
 {
+    m_start_button.update(m_data->m_window);
+    m_quit_button.update(m_data->m_window);
 }
 
 void MainMenuState::render(sf::RenderWindow& window)

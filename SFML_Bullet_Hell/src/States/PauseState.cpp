@@ -17,12 +17,6 @@ PauseState::PauseState(GameDataRef data)
 
 void PauseState::handleInput(sf::Event& event)
 {
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_data->m_window);
-
-	m_resume_btn.handleHover({ (float)mouse_pos.x, (float)mouse_pos.y });
-	m_main_menu_btn.handleHover({ (float)mouse_pos.x, (float)mouse_pos.y });
-	m_quit_btn.handleHover({ (float)mouse_pos.x, (float)mouse_pos.y });
-
 	// Button Click
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
 	{
@@ -48,6 +42,9 @@ void PauseState::handleInput(sf::Event& event)
 
 void PauseState::update()
 {
+	m_resume_btn.update(m_data->m_window);
+	m_main_menu_btn.update(m_data->m_window);
+	m_quit_btn.update(m_data->m_window);
 }
 
 void PauseState::render(sf::RenderWindow& window)
