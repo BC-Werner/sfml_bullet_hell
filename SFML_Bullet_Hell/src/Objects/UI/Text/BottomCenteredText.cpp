@@ -12,6 +12,14 @@ BottomCenteredText::BottomCenteredText(sf::Text text, sf::Vector2f pos)
 	m_text.setPosition(pos);
 }
 
+void BottomCenteredText::handleInput()
+{
+}
+
+void BottomCenteredText::update()
+{
+}
+
 void BottomCenteredText::render(sf::RenderWindow& window)
 {
 	window.draw(m_text);

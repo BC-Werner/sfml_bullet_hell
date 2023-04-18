@@ -13,6 +13,14 @@ CenteredText::CenteredText(sf::Text text, sf::Vector2f pos)
 	m_text.setPosition(pos);
 }
 
+void CenteredText::handleInput()
+{
+}
+
+void CenteredText::update()
+{
+}
+
 void CenteredText::render(sf::RenderWindow& window)
 {
 	window.draw(m_text);

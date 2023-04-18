@@ -1,11 +1,15 @@
 #pragma once
-class CenteredText
+#include "Objects/GameObject.h"
+
+class CenteredText : public GameObject
 {
 public:
 	CenteredText() {};
 	CenteredText(sf::Text text, sf::Vector2f pos);
 
-	void render(sf::RenderWindow& window);
+	virtual void handleInput() override;
+	virtual void update() override;
+	void render(sf::RenderWindow& window) override;
 
 	void setString(std::string str);
 

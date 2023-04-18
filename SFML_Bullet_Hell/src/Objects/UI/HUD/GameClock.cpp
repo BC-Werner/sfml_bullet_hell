@@ -54,6 +54,10 @@ GameClock::~GameClock()
 {
 }
 
+void GameClock::handleInput()
+{
+}
+
 void GameClock::update()
 {
 	m_centered_text.setString( formatTime(m_timer.GetElapsedSeconds()) );

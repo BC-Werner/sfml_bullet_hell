@@ -1,7 +1,8 @@
 #pragma once
 #include "Objects/UI/Text/CenteredText.h"
+#include "Objects/GameObject.h"
 
-class Button
+class Button : public GameObject
 {
 public:
 	Button();
@@ -9,8 +10,9 @@ public:
 	~Button();
 
 	void handleHover(sf::RenderWindow& window);
-	void render(sf::RenderWindow& window);
-	void update();
+	void handleInput() override;
+	void render(sf::RenderWindow& window) override;
+	void update() override;
 
 	bool contains(sf::Vector2f mouse_pos);
 
@@ -25,4 +27,6 @@ private:
 	sf::Color m_hover_color;
 
 	CenteredText m_centered_text;
+
+	// Inherited via GameObject
 };

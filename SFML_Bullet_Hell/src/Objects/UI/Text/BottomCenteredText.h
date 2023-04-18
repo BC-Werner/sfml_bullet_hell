@@ -1,11 +1,15 @@
 #pragma once
-class BottomCenteredText
+#include "Objects/GameObject.h"
+
+class BottomCenteredText : public GameObject
 {
 public:
 	BottomCenteredText() {};
 	BottomCenteredText(sf::Text text, sf::Vector2f pos);
 
-	void render(sf::RenderWindow& window);
+	void handleInput() override;
+	void update() override;
+	void render(sf::RenderWindow& window) override;
 
 	void setString(std::string str);
 

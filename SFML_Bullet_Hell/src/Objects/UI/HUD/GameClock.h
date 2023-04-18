@@ -1,7 +1,8 @@
 #pragma once
 #include "Objects/UI/Text/BottomCenteredText.h"
+#include "Objects/GameObject.h"
 
-class GameClock
+class GameClock : public GameObject
 {
 // Private Inner Timer Class
 private:
@@ -24,8 +25,9 @@ public:
 	GameClock(sf::Text text, sf::Color text_color, sf::Vector2f position);
 	~GameClock();
 
-	void update();
-	void render(sf::RenderWindow& window);
+	void handleInput() override;
+	void update() override;
+	void render(sf::RenderWindow& window) override;
 
 	void Pause();
 	void Resume();

@@ -57,6 +57,10 @@ void Button::_hover(bool isHovering)
 	}
 }
 
+void Button::handleInput()
+{
+}
+
 bool Button::contains(sf::Vector2f mouse_pos)
 {
 	return m_rect.getGlobalBounds().contains(mouse_pos);
