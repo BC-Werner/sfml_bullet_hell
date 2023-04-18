@@ -6,9 +6,8 @@ BottomCenteredText::BottomCenteredText(sf::Text text, sf::Vector2f pos)
 {
 	sf::Vector2f bottom_center = sf::Vector2f(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height);
 	sf::Vector2f localBounds = { m_text.getLocalBounds().left, m_text.getLocalBounds().top };
-	sf::Vector2f rounded = bottom_center + localBounds;
 
-	m_text.setOrigin(rounded);
+	m_text.setOrigin(bottom_center + localBounds);
 	m_text.setPosition(pos);
 }
 

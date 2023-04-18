@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Objects\Components\Component.cpp" />
     <ClCompile Include="src\Objects\GameObject.cpp" />
     <ClCompile Include="src\States\GameOverState.cpp" />
     <ClCompile Include="src\States\PauseState.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\Managers\StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Objects\Components\Component.h" />
     <ClInclude Include="src\Objects\GameObject.h" />
     <ClInclude Include="src\States\GameOverState.h" />
     <ClInclude Include="src\States\PauseState.h" />

@@ -9,11 +9,11 @@ public:
 	Button(sf::Text text, sf::Color text_color, sf::Color rect_color, sf::Color hover_color, sf::Vector2f position);
 	~Button();
 
-	void handleHover(sf::RenderWindow& window);
 	void handleInput() override;
 	void render(sf::RenderWindow& window) override;
 	void update() override;
 
+	void handleHover(sf::RenderWindow& window);
 	bool contains(sf::Vector2f mouse_pos);
 
 private:
