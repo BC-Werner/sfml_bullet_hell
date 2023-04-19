@@ -10,9 +10,18 @@ GameState::GameState(GameDataRef data)
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
 	sf::Texture& texture = m_data->asset_manager.getTexture("Triangle");
 
-	m_game_clock = GameClock(sf::Text("00:00", font, 20), sf::Color::White, { window_size.x / 2.f, window_size.y });
+	m_game_clock = GameClock(
+		sf::Text("00:00", font, 20), 
+		sf::Color::White, 
+		{ window_size.x / 2.f, window_size.y }
+	);
 
-	_pause_btn = Button(sf::Text("| |", font, 24), sf::Color::Black, sf::Color::Green, sf::Color::Yellow, { window_size.x * 0.06f , window_size.y * 0.04f });
+	_pause_btn = Button(
+		sf::Text("| |", font, 24), 
+		sf::Color::Black, sf::Color::Green, sf::Color::Yellow, sf::Color::Blue,
+		{ window_size.x * 0.06f , window_size.y * 0.04f },
+		&(m_data->m_window)
+	);
 
 	m_player = Player(100, texture);
 	m_player.scale(0.05f);
@@ -25,8 +34,7 @@ GameState::~GameState()
 
 void GameState::handleInput(sf::Event& event)
 {
-	// Button Hover
-	_pause_btn.handleHover(m_data->m_window);
+	_pause_btn.handleInput(event);
 
 	// Button Click
     if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)

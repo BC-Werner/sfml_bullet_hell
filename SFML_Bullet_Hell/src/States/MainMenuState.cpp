@@ -14,19 +14,18 @@ MainMenuState::MainMenuState(GameDataRef data)
     // Start Button
     sf::Text start_text = sf::Text("Start Game", font, 24);
     sf::Vector2f start_btn_pos = { window_size.x / 2, window_size.y * 0.6f};
-    m_start_button = Button(start_text, sf::Color::Black, sf::Color::Green, sf::Color::Yellow, start_btn_pos);
+    m_start_button = Button(start_text, sf::Color::Black, sf::Color::Green, sf::Color::Yellow, sf::Color::Blue, start_btn_pos, &(m_data->m_window));
 
     // Quit Button
     sf::Text quit_text = sf::Text("Quit Game", font, 24);
     sf::Vector2f quit_btn_pos = { window_size.x / 2, window_size.y * 0.7f};
-    m_quit_button = Button(quit_text, sf::Color::Black, sf::Color::Red, sf::Color::Yellow, quit_btn_pos);
+    m_quit_button = Button(quit_text, sf::Color::Black, sf::Color::Red, sf::Color::Yellow, sf::Color::Blue, quit_btn_pos, &(m_data->m_window));
 }
 
 void MainMenuState::handleInput(sf::Event& event)
 {
-    // Button Hover
-    m_start_button.handleHover(m_data->m_window);
-    m_quit_button.handleHover(m_data->m_window);
+    m_start_button.handleInput(event);
+    m_quit_button.handleInput(event);
 
 	// Click
     if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)

@@ -16,30 +16,35 @@ GameOverState::GameOverState(GameDataRef data)
 		sf::Color::Black, 
 		sf::Color::Green, 
 		sf::Color::Yellow, 
-		{ window_size.x / 2.f, window_size.y * 0.6f}
+		sf::Color::Blue, 
+		{ window_size.x / 2.f, window_size.y * 0.6f},
+		&(m_data->m_window)
 	);
 	m_mainmenu_btn = Button(
 		sf::Text("Main Menu", font, 24), 
 		sf::Color::Black, 
 		sf::Color::Green, 
 		sf::Color::Yellow, 
-		{ window_size.x / 2.f, window_size.y * 0.7f}
+		sf::Color::Blue, 
+		{ window_size.x / 2.f, window_size.y * 0.7f},
+		&(m_data->m_window)
 	);
 	m_quit_btn = Button(
 		sf::Text("Quit Game", font, 24), 
 		sf::Color::Black, 
 		sf::Color::Red, 
 		sf::Color::Yellow, 
-		{ window_size.x / 2.f, window_size.y * 0.8f }
+		sf::Color::Blue, 
+		{ window_size.x / 2.f, window_size.y * 0.8f },
+		&(m_data->m_window)
 	);
 }
 
 void GameOverState::handleInput(sf::Event& event)
 {
-	// Button Hover
-	m_playagain_btn.handleHover(m_data->m_window);
-	m_mainmenu_btn.handleHover(m_data->m_window);
-	m_quit_btn.handleHover(m_data->m_window);
+	m_playagain_btn.handleInput(event);
+	m_mainmenu_btn.handleInput(event);
+	m_quit_btn.handleInput(event);
 
 	// Click
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)

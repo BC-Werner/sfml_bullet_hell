@@ -2,11 +2,18 @@
 #include "Button.h"
 
 Button::Button()
+	: m_window_ref(nullptr)
 {
 }
 
-Button::Button(sf::Text text, sf::Color text_color, sf::Color rect_color, sf::Color hover_color, sf::Vector2f position)
-	: m_rect_color(rect_color), m_hover_color(hover_color)
+Button::Button(
+	sf::Text text, 
+	sf::Color text_color, 
+	sf::Color rect_color, sf::Color hover_color, sf::Color active_color, 
+	sf::Vector2f position,
+	sf::RenderWindow* window
+)
+	: m_idle_color(rect_color), m_hover_color(hover_color), m_active_color(active_color), m_window_ref(window)
 {
 	m_rect = sf::RectangleShape({ 200.f, 50.f });
 	m_rect.setFillColor(rect_color);
@@ -23,6 +30,31 @@ Button::~Button()
 
 void Button::handleInput(sf::Event& event)
 {
+	sf::Vector2i mouse_pos = sf::Mouse::getPosition(*m_window_ref);
+
+	m_status = IDLE;
+	if (contains({(float)mouse_pos.x, (float)mouse_pos.y}))
+	{
+		m_status = HOVER;
+
+		if (sf::Mouse::isButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			m_status = ACTIVE;
+		}
+	}
+
+	switch (m_status)
+	{
+		case IDLE:
+			m_rect.setFillColor(m_idle_color);
+			break;
+		case HOVER:
+			m_rect.setFillColor(m_hover_color);
+			break;
+		case ACTIVE:
+			m_rect.setFillColor(m_active_color);
+			break;
+	}
 }
 
 void Button::render(sf::RenderWindow& window)
@@ -33,27 +65,6 @@ void Button::render(sf::RenderWindow& window)
 
 void Button::update()
 {
-}
-
-void Button::_hover(bool isHovering)
-{
-	if (isHovering && !hoverStatus)
-	{
-		m_rect.setFillColor(m_hover_color);
-		hoverStatus = true;
-	}
-
-	if (!isHovering && hoverStatus)
-	{
-		m_rect.setFillColor(m_rect_color);
-		hoverStatus = false;
-	}
-}
-
-void Button::handleHover(sf::RenderWindow& window)
-{
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-	_hover( contains({ (float)mouse_pos.x, (float)mouse_pos.y }) );
 }
 
 bool Button::contains(sf::Vector2f mouse_pos)
