@@ -54,7 +54,7 @@ GameClock::~GameClock()
 {
 }
 
-void GameClock::handleInput()
+void GameClock::handleInput(sf::Event& event)
 {
 }
 

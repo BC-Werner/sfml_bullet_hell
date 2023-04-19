@@ -18,7 +18,7 @@ CenteredText::CenteredText(sf::Text text, sf::Vector2f pos)
 	m_text.setPosition(pos);
 }
 
-void CenteredText::handleInput()
+void CenteredText::handleInput(sf::Event& event)
 {
 }
 

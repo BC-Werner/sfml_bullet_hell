@@ -21,7 +21,7 @@ Button::~Button()
 {
 }
 
-void Button::handleInput()
+void Button::handleInput(sf::Event& event)
 {
 }
 

@@ -128,7 +128,7 @@
     <ClInclude Include="src\Player\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HealthComponent.h">
+    <ClInclude Include="src\Objects\Components\HealthComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

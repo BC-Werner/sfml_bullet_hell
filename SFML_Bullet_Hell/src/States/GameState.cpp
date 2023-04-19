@@ -8,10 +8,15 @@ GameState::GameState(GameDataRef data)
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
+	sf::Texture& texture = m_data->asset_manager.getTexture("Triangle");
 
 	m_game_clock = GameClock(sf::Text("00:00", font, 20), sf::Color::White, { window_size.x / 2.f, window_size.y });
 
 	_pause_btn = Button(sf::Text("| |", font, 24), sf::Color::Black, sf::Color::Green, sf::Color::Yellow, { window_size.x * 0.06f , window_size.y * 0.04f });
+
+	m_player = Player(100, texture);
+	m_player.scale(0.05f);
+	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
 }
 
 GameState::~GameState()
@@ -49,10 +54,12 @@ void GameState::update()
 {
 	m_game_clock.update();
 	_pause_btn.update();
+	m_player.update();
 }
 
 void GameState::render(sf::RenderWindow& window)
 {
+	m_player.render(window);
 	m_game_clock.render(window);
 	_pause_btn.render(window);
 }

@@ -7,7 +7,7 @@ public:
 	BottomCenteredText() {};
 	BottomCenteredText(sf::Text text, sf::Vector2f pos);
 
-	void handleInput() override;
+	void handleInput(sf::Event& event) override;
 	void update() override;
 	void render(sf::RenderWindow& window) override;
 

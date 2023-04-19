@@ -9,7 +9,7 @@ public:
 	Button(sf::Text text, sf::Color text_color, sf::Color rect_color, sf::Color hover_color, sf::Vector2f position);
 	~Button();
 
-	void handleInput() override;
+	void handleInput(sf::Event& event) override;
 	void render(sf::RenderWindow& window) override;
 	void update() override;
 

@@ -11,7 +11,7 @@ BottomCenteredText::BottomCenteredText(sf::Text text, sf::Vector2f pos)
 	m_text.setPosition(pos);
 }
 
-void BottomCenteredText::handleInput()
+void BottomCenteredText::handleInput(sf::Event& event)
 {
 }
 

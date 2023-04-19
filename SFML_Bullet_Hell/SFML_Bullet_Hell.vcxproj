@@ -189,7 +189,7 @@
     <ClCompile Include="src\Managers\StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="src\Objects\Components\HealthComponent.h" />
     <ClInclude Include="src\Player\Player.h" />
     <ClInclude Include="src\Objects\Components\Component.h" />
     <ClInclude Include="src\Objects\GameObject.h" />

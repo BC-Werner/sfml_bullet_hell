@@ -25,7 +25,7 @@ public:
 	GameClock(sf::Text text, sf::Color text_color, sf::Vector2f position);
 	~GameClock();
 
-	void handleInput() override;
+	void handleInput(sf::Event& event) override;
 	void update() override;
 	void render(sf::RenderWindow& window) override;
 

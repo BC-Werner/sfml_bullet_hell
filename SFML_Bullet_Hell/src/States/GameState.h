@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Objects/UI/HUD/GameClock.h"
 #include "Objects/UI/Menu/Button.h"
+#include "Player/Player.h"
 
 class GameState : public State
 {
@@ -22,5 +23,7 @@ private:
 
 	GameClock m_game_clock;
 	Button _pause_btn;
+
+	Player m_player;
 };
 
