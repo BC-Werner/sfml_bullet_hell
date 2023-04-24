@@ -5,8 +5,8 @@
 class Player : public GameObject
 {
 public:
-	Player(sf::RenderWindow& window) : m_window(window), max_move_speed(100.f), m_health(0) {}
-	Player(sf::RenderWindow& window, float speed, float size, unsigned max_health);
+	Player(sf::RenderWindow& window);
+	Player(sf::RenderWindow& window, float speed, float size, unsigned max_health, sf::Font& font);
 	~Player() {};
 
 	virtual void handleInput(sf::Event& event) override;
@@ -36,7 +36,9 @@ private:
 		bool up = false;
 		bool down = false;
 	};
-
 	MoveFlags move_flags;
+
+	// Replace with Top Right Centered Text
+	sf::Text m_health_text;
 };
 

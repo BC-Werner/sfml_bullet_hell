@@ -1,12 +1,25 @@
 #include "stdafx.h"
 #include "Player.h"
 
-#define _USE_MATH_DEFINES
-#include <math.h>
+#define PI 3.14159265358979323846f
 
-Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_health)
-	: m_window(window), max_move_speed(speed), m_health(max_health), m_cirle_shape(size, 3), m_bounding_circle(size * 0.7f, 16)
+Player::Player(sf::RenderWindow& window)
+	: m_window(window), max_move_speed(0.f), m_health(0)
 {
+}
+
+Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_health, sf::Font& font)
+	:	m_window(window),
+		max_move_speed(speed),
+		m_health(max_health),
+		m_health_text(),
+		m_cirle_shape(size, 3), 
+		m_bounding_circle(size * 0.7f, 16)
+{
+	m_health_text = sf::Text("000", font, 24);
+	m_health_text.setFillColor(sf::Color::White);
+	m_health_text.setPosition(m_window.getView().getSize().x - m_health_text.getGlobalBounds().width, 0);
+
 	m_cirle_shape.setOrigin(m_cirle_shape.getRadius(), m_cirle_shape.getRadius());
 	m_bounding_circle.setOrigin(m_bounding_circle.getRadius(), m_bounding_circle.getRadius());
 
@@ -15,9 +28,11 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
+	m_cirle_shape.rotate(45.f);
 
 	m_bounding_circle.setOutlineThickness(2.f);
 	m_bounding_circle.setOutlineColor(sf::Color::Green);
+
 }
 
 void Player::handleInput(sf::Event& event)
@@ -29,41 +44,52 @@ void Player::handleInput(sf::Event& event)
 	move_flags.left =	sf::Keyboard::isKeyPressed(sf::Keyboard::A);
 	move_flags.right =	sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 
+	enum DirectionValues { Negative = -1, Neutral = 0, Positive = 1 };
+
+	movement_vector.x = Neutral;
+	movement_vector.y = Neutral;
+
 	// Vertical Movement
 	if (move_flags.up ^ move_flags.down)
-		movement_vector.y = move_flags.up ? -1.f : 1.f;
-	else
-		movement_vector.y = 0.f;
+		movement_vector.y = move_flags.up ? (float) Negative : (float) Positive;
 
 	// Horizontal Movement
 	if (move_flags.left ^ move_flags.right)
-		movement_vector.x = move_flags.left ? -1.f : 1.f;
-	else
-		movement_vector.x = 0.f;
+		movement_vector.x = move_flags.left ? (float) Negative : (float) Positive;
+
+	// Debug Take Damage
+	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::P)
+	{
+		m_health.lose_health(10);
+	}
 }
 
 void Player::update(float dt)
 {
+	// Movement
 	sf::Vector2f dir = movement_vector;
 	float Length = sqrtf(dir.x * dir.x + dir.y * dir.y);
 	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
 	set_position(get_position() + (normalized * move_speed * dt));
 
 	// Rotate to look at mouse position
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(m_window);
+	sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window).x, (float)sf::Mouse::getPosition(m_window).y };
 	sf::Vector2f player_pos = get_position();
-	sf::Vector2f D = player_pos - sf::Vector2f(mouse_pos.x, mouse_pos.y);
+	sf::Vector2f D = player_pos - mouse_pos;
 
-	float radians = atan2f(D.y, D.x);
+	float radians = atan2(D.y, D.x);
 
-	m_cirle_shape.setRotation(radians * 180 / M_PI);
-	m_cirle_shape.rotate(30.f);
+	// 30 is the magic number and i have no idea why
+	m_cirle_shape.setRotation(radians * 180.f / PI + 30.f);
+
+	// Update health text
+	m_health_text.setString(std::to_string(m_health.get_health()));
 }
 
 void Player::render(sf::RenderWindow& window)
 {
 	window.draw(m_cirle_shape);
-	//window.draw(m_bounding_circle);
+	window.draw(m_health_text);
 }
 
 void Player::set_texture(sf::Texture& texture)
