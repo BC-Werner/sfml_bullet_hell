@@ -5,8 +5,8 @@
 class Player : public GameObject
 {
 public:
-	Player(sf::RenderWindow& window) : m_window(window), m_health(0) {}
-	Player(sf::RenderWindow& window, float size, unsigned max_health);
+	Player(sf::RenderWindow& window) : m_window(window), max_move_speed(100.f), m_health(0) {}
+	Player(sf::RenderWindow& window, float speed, float size, unsigned max_health);
 	~Player() {};
 
 	virtual void handleInput(sf::Event& event) override;
@@ -26,7 +26,8 @@ private:
 	sf::CircleShape m_bounding_circle;
 
 	sf::Vector2f movement_vector;
-	float move_speed = 100.f;
+	const float max_move_speed;
+	float move_speed = max_move_speed;
 
 	struct MoveFlags
 	{

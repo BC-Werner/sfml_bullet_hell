@@ -4,7 +4,7 @@
 #include "GameOverState.h"
 
 GameState::GameState(GameDataRef data)
-	: m_data(data), m_player(m_data->m_window, 30.f, 100)
+	: m_data(data), m_player(m_data->m_window, 200.f, 30.f, 100)
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");

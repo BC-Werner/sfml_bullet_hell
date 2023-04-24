@@ -4,8 +4,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-Player::Player(sf::RenderWindow& window, float size, unsigned max_health)
-	: m_window(window), m_health(max_health), m_cirle_shape(size, 3), m_bounding_circle(size * 0.7f, 16)
+Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_health)
+	: m_window(window), max_move_speed(speed), m_health(max_health), m_cirle_shape(size, 3), m_bounding_circle(size * 0.7f, 16)
 {
 	m_cirle_shape.setOrigin(m_cirle_shape.getRadius(), m_cirle_shape.getRadius());
 	m_bounding_circle.setOrigin(m_bounding_circle.getRadius(), m_bounding_circle.getRadius());
@@ -22,6 +22,8 @@ Player::Player(sf::RenderWindow& window, float size, unsigned max_health)
 
 void Player::handleInput(sf::Event& event)
 {
+	move_speed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? max_move_speed * 2.f : max_move_speed;
+
 	move_flags.up =		sf::Keyboard::isKeyPressed(sf::Keyboard::W);
 	move_flags.down =	sf::Keyboard::isKeyPressed(sf::Keyboard::S);
 	move_flags.left =	sf::Keyboard::isKeyPressed(sf::Keyboard::A);
@@ -61,7 +63,7 @@ void Player::update(float dt)
 void Player::render(sf::RenderWindow& window)
 {
 	window.draw(m_cirle_shape);
-	window.draw(m_bounding_circle);
+	//window.draw(m_bounding_circle);
 }
 
 void Player::set_texture(sf::Texture& texture)
