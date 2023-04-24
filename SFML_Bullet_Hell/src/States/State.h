@@ -6,7 +6,7 @@ public:
 	virtual ~State() {};
 
 	virtual void handleInput(sf::Event& event) = 0;
-	virtual void update() = 0;
+	virtual void update(float dt) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;
 
 	virtual void Init() = 0;

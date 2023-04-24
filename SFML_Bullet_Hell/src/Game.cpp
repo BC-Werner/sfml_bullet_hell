@@ -46,7 +46,7 @@ void Game::initResourceManager()
 
 void Game::pollEvents()
 {
-	//m_event = sf::Event();
+	m_event = sf::Event();
 	if (m_event.type == sf::Event::MouseButtonReleased)
 		m_event = sf::Event();
 
@@ -77,7 +77,7 @@ void Game::update(float dt)
 {
 	m_data->state_manager.ProcessStateChanges();
 	// Update current State
-	m_data->state_manager.GetActiveState()->update();
+	m_data->state_manager.GetActiveState()->update(dt);
 }
 
 void Game::render()

@@ -22,7 +22,7 @@ void CenteredText::handleInput(sf::Event& event)
 {
 }
 
-void CenteredText::update()
+void CenteredText::update(float dt)
 {
 }
 

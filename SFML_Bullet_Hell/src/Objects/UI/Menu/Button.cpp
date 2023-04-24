@@ -42,18 +42,21 @@ void Button::handleInput(sf::Event& event)
 			m_status = ACTIVE;
 		}
 	}
+}
 
+void Button::update(float dt)
+{
 	switch (m_status)
 	{
-		case IDLE:
-			m_rect.setFillColor(m_idle_color);
-			break;
-		case HOVER:
-			m_rect.setFillColor(m_hover_color);
-			break;
-		case ACTIVE:
-			m_rect.setFillColor(m_active_color);
-			break;
+	case IDLE:
+		m_rect.setFillColor(m_idle_color);
+		break;
+	case HOVER:
+		m_rect.setFillColor(m_hover_color);
+		break;
+	case ACTIVE:
+		m_rect.setFillColor(m_active_color);
+		break;
 	}
 }
 
@@ -63,11 +66,7 @@ void Button::render(sf::RenderWindow& window)
 	m_centered_text.render(window);
 }
 
-void Button::update()
+bool Button::contains(sf::Vector2f point)
 {
-}
-
-bool Button::contains(sf::Vector2f mouse_pos)
-{
-	return m_rect.getGlobalBounds().contains(mouse_pos);
+	return m_rect.getGlobalBounds().contains(point);
 }

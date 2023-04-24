@@ -11,7 +11,7 @@ public:
 	~GameOverState() {};
 
 	virtual void handleInput(sf::Event& event) override;
-	virtual void update() override;
+	virtual void update(float dt) override;
 	virtual void render(sf::RenderWindow& window) override;
 	virtual void Init() override;
 	virtual void Pause() override;

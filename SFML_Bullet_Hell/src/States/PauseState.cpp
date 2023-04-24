@@ -66,11 +66,11 @@ void PauseState::handleInput(sf::Event& event)
 	}
 }
 
-void PauseState::update()
+void PauseState::update(float dt)
 {
-	m_resume_btn.update();
-	m_main_menu_btn.update();
-	m_quit_btn.update();
+	m_resume_btn.update(dt);
+	m_main_menu_btn.update(dt);
+	m_quit_btn.update(dt);
 }
 
 void PauseState::render(sf::RenderWindow& window)

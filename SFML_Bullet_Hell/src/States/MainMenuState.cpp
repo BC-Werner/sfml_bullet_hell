@@ -41,10 +41,10 @@ void MainMenuState::handleInput(sf::Event& event)
     }
 }
 
-void MainMenuState::update() 
+void MainMenuState::update(float dt) 
 {
-    m_start_button.update();
-    m_quit_button.update();
+    m_start_button.update(dt);
+    m_quit_button.update(dt);
 }
 
 void MainMenuState::render(sf::RenderWindow& window)

@@ -19,7 +19,7 @@ public:
     ~MainMenuState() {};
 
     void handleInput(sf::Event& event) override;
-    void update() override;
+    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 
     void Init() override;

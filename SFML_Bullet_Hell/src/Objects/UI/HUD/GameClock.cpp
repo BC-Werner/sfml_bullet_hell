@@ -58,7 +58,7 @@ void GameClock::handleInput(sf::Event& event)
 {
 }
 
-void GameClock::update()
+void GameClock::update(float dt)
 {
 	m_centered_text.setString( formatTime(m_timer.GetElapsedSeconds()) );
 }

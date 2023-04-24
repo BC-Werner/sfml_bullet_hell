@@ -2,8 +2,6 @@
 #include "Objects/UI/Text/CenteredText.h"
 #include "Objects/GameObject.h"
 
-enum ButtonStatus { IDLE, HOVER, ACTIVE };
-
 class Button : public GameObject
 {
 public:
@@ -18,12 +16,14 @@ public:
 	~Button();
 
 	void handleInput(sf::Event& event) override;
+	void update(float dt) override;
 	void render(sf::RenderWindow& window) override;
-	void update() override;
 
-	bool contains(sf::Vector2f mouse_pos);
+	bool contains(sf::Vector2f point);
 
 private:
+	static enum ButtonStatus { IDLE, HOVER, ACTIVE };
+
 	sf::RenderWindow* m_window_ref;
 	ButtonStatus m_status = ButtonStatus::IDLE;
 

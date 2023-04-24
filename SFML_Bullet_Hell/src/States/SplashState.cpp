@@ -16,7 +16,7 @@ void SplashState::handleInput(sf::Event& event)
 {
 }
 
-void SplashState::update()
+void SplashState::update(float dt)
 {
 	if (m_clock.getElapsedTime().asSeconds() > 2.0f)
 	{

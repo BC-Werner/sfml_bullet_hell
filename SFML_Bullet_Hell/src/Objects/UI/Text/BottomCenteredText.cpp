@@ -15,7 +15,7 @@ void BottomCenteredText::handleInput(sf::Event& event)
 {
 }
 
-void BottomCenteredText::update()
+void BottomCenteredText::update(float dt)
 {
 }
 

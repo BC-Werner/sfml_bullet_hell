@@ -66,11 +66,11 @@ void GameOverState::handleInput(sf::Event& event)
 	}
 }
 
-void GameOverState::update()
+void GameOverState::update(float dt)
 {
-	m_playagain_btn.update();
-	m_mainmenu_btn.update();
-	m_quit_btn.update();
+	m_playagain_btn.update(dt);
+	m_mainmenu_btn.update(dt);
+	m_quit_btn.update(dt);
 }
 
 void GameOverState::render(sf::RenderWindow& window)

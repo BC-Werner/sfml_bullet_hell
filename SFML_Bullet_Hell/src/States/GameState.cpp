@@ -4,7 +4,7 @@
 #include "GameOverState.h"
 
 GameState::GameState(GameDataRef data)
-	: m_data(data)
+	: m_data(data), m_player(m_data->m_window, 30.f, 100)
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
@@ -23,8 +23,7 @@ GameState::GameState(GameDataRef data)
 		&(m_data->m_window)
 	);
 
-	m_player = Player(100, texture);
-	m_player.scale(0.05f);
+	//m_player.scale(0.05f);
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
 }
 
@@ -56,13 +55,15 @@ void GameState::handleInput(sf::Event& event)
 	{
 		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
 	}
+
+	m_player.handleInput(event);
 }
 
-void GameState::update()
+void GameState::update(float dt)
 {
-	m_game_clock.update();
-	_pause_btn.update();
-	m_player.update();
+	m_game_clock.update(dt);
+	_pause_btn.update(dt);
+	m_player.update(dt);
 }
 
 void GameState::render(sf::RenderWindow& window)
