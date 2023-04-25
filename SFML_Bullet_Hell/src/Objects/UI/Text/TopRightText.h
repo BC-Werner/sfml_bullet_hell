@@ -1,11 +1,11 @@
 #pragma once
 #include "Objects/GameObject.h"
 
-class TopRightCenteredText : public GameObject
+class TopRightText : public GameObject
 {
 public:
-	TopRightCenteredText();
-	TopRightCenteredText(sf::Text text, sf::Vector2f pos);
+	TopRightText();
+	TopRightText(sf::Text text, sf::Vector2f pos);
 
 	virtual void handleInput(sf::Event& event) override;
 	virtual void update(float dt) override;

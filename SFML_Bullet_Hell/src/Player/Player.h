@@ -2,7 +2,7 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
 #include "Objects/Components/CircleColliderComponent.h"
-#include "Objects/UI/Text/TopRightCenteredText.h"
+#include "Objects/UI/Text/TopRightText.h"
 
 class Player : public GameObject
 {
@@ -41,6 +41,6 @@ private:
 	MoveFlags move_flags;
 
 	// Replace with Top Right Centered Text
-	TopRightCenteredText m_health_text;
+	TopRightText m_health_text;
 };
 

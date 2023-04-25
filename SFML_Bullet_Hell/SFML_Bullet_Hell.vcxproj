@@ -163,6 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Objects\UI\Text\LeftCenteredText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\BottomLeftText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\BottomRightText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\RightCenteredText.cpp" />
     <ClCompile Include="src\Objects\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="src\Objects\Components\HealthComponent.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
@@ -188,9 +192,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Managers\StateManager.cpp" />
-    <ClCompile Include="src\Objects\UI\Text\TopRightCenteredText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\TopRightText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\TopCenteredText.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\TopLeftText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Objects\UI\Text\LeftCenteredText.h" />
+    <ClInclude Include="src\Objects\UI\Text\BottomLeftText.h" />
+    <ClInclude Include="src\Objects\UI\Text\BottomRightText.h" />
+    <ClInclude Include="src\Objects\UI\Text\RightCenteredText.h" />
     <ClInclude Include="src\Objects\Components\CircleColliderComponent.h" />
     <ClInclude Include="src\Objects\Components\HealthComponent.h" />
     <ClInclude Include="src\Player\Player.h" />
@@ -211,7 +221,9 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Managers\StateManager.h" />
-    <ClInclude Include="src\Objects\UI\Text\TopRightCenteredText.h" />
+    <ClInclude Include="src\Objects\UI\Text\TopRightText.h" />
+    <ClInclude Include="src\Objects\UI\Text\TopCenteredText.h" />
+    <ClInclude Include="src\Objects\UI\Text\TopLeftText.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sfml_baseline.props" />

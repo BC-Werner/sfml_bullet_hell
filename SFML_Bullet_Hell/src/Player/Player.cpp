@@ -19,7 +19,7 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	sf::Text _text = sf::Text("000", font, 24);
 	_text.setFillColor(sf::Color::White);
 
-	m_health_text = TopRightCenteredText(_text, {m_window.getView().getSize().x, 10.f});
+	m_health_text = TopRightText(_text, {m_window.getView().getSize().x, 10.f});
 
 	m_collider.set_position(m_cirle_shape.getPosition());
 

@@ -75,7 +75,25 @@
     <ClCompile Include="src\Objects\Components\CircleColliderComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\UI\Text\TopRightCenteredText.cpp">
+    <ClCompile Include="src\Objects\UI\Text\TopRightText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\RightCenteredText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\BottomRightText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\BottomLeftText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\TopLeftText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\TopCenteredText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\LeftCenteredText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,7 +158,25 @@
     <ClInclude Include="src\Objects\Components\CircleColliderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Objects\UI\Text\TopRightCenteredText.h">
+    <ClInclude Include="src\Objects\UI\Text\TopRightText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\RightCenteredText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\BottomRightText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\BottomLeftText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\TopLeftText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\TopCenteredText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\LeftCenteredText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
