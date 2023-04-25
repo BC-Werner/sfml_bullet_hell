@@ -1,6 +1,7 @@
 #pragma once
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
+#include "Objects/Components/CircleColliderComponent.h"
 
 class Player : public GameObject
 {
@@ -21,9 +22,9 @@ public:
 private:
 	sf::RenderWindow& m_window;
 	HealthComponent m_health;
+	CircleColliderComponent m_collider;
 
 	sf::CircleShape m_cirle_shape;
-	sf::CircleShape m_bounding_circle;
 
 	sf::Vector2f movement_vector;
 	const float max_move_speed;

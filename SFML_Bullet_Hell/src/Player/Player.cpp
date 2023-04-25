@@ -4,7 +4,7 @@
 #define PI 3.14159265358979323846f
 
 Player::Player(sf::RenderWindow& window)
-	: m_window(window), max_move_speed(0.f), m_health(0)
+	: m_window(window), max_move_speed(0.f), m_health(0), m_collider(0.f)
 {
 }
 
@@ -14,24 +14,20 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 		m_health(max_health),
 		m_health_text(),
 		m_cirle_shape(size, 3), 
-		m_bounding_circle(size * 0.7f, 16)
+		m_collider(size * 0.7f)
 {
 	m_health_text = sf::Text("000", font, 24);
 	m_health_text.setFillColor(sf::Color::White);
 	m_health_text.setPosition(m_window.getView().getSize().x - m_health_text.getGlobalBounds().width, 0);
 
+	m_collider.set_position(m_cirle_shape.getPosition());
+
 	m_cirle_shape.setOrigin(m_cirle_shape.getRadius(), m_cirle_shape.getRadius());
-	m_bounding_circle.setOrigin(m_bounding_circle.getRadius(), m_bounding_circle.getRadius());
 
-	m_bounding_circle.setFillColor(sf::Color::Transparent);
 	m_cirle_shape.setFillColor(sf::Color::Transparent);
-
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
 	m_cirle_shape.rotate(45.f);
-
-	m_bounding_circle.setOutlineThickness(2.f);
-	m_bounding_circle.setOutlineColor(sf::Color::Green);
 
 }
 
@@ -45,9 +41,7 @@ void Player::handleInput(sf::Event& event)
 	move_flags.right =	sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 
 	enum DirectionValues { Negative = -1, Neutral = 0, Positive = 1 };
-
-	movement_vector.x = Neutral;
-	movement_vector.y = Neutral;
+	movement_vector = { (float) Neutral, (float) Neutral };
 
 	// Vertical Movement
 	if (move_flags.up ^ move_flags.down)
@@ -99,7 +93,7 @@ void Player::set_texture(sf::Texture& texture)
 void Player::set_position(sf::Vector2f position)
 {
 	m_cirle_shape.setPosition(position);
-	m_bounding_circle.setPosition(position);
+	m_collider.set_position(position);
 }
 
 const sf::Vector2f Player::get_position() const

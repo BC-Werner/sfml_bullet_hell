@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Objects\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="src\Objects\Components\HealthComponent.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
     <ClCompile Include="src\Objects\Components\Component.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\Managers\StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Objects\Components\CircleColliderComponent.h" />
     <ClInclude Include="src\Objects\Components\HealthComponent.h" />
     <ClInclude Include="src\Player\Player.h" />
     <ClInclude Include="src\Objects\Components\Component.h" />
