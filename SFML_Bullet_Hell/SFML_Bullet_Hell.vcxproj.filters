@@ -75,6 +75,9 @@
     <ClCompile Include="src\Objects\Components\CircleColliderComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\UI\Text\TopRightCenteredText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Components\CircleColliderComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI\Text\TopRightCenteredText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

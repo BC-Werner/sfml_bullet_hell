@@ -16,9 +16,10 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 		m_cirle_shape(size, 3), 
 		m_collider(size * 0.7f)
 {
-	m_health_text = sf::Text("000", font, 24);
-	m_health_text.setFillColor(sf::Color::White);
-	m_health_text.setPosition(m_window.getView().getSize().x - m_health_text.getGlobalBounds().width, 0);
+	sf::Text _text = sf::Text("000", font, 24);
+	_text.setFillColor(sf::Color::White);
+
+	m_health_text = TopRightCenteredText(_text, {m_window.getView().getSize().x, 10.f});
 
 	m_collider.set_position(m_cirle_shape.getPosition());
 
@@ -27,7 +28,6 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	m_cirle_shape.setFillColor(sf::Color::Transparent);
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
-	m_cirle_shape.rotate(45.f);
 
 }
 
@@ -83,7 +83,7 @@ void Player::update(float dt)
 void Player::render(sf::RenderWindow& window)
 {
 	window.draw(m_cirle_shape);
-	window.draw(m_health_text);
+	m_health_text.render(window);
 }
 
 void Player::set_texture(sf::Texture& texture)

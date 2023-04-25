@@ -2,6 +2,7 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
 #include "Objects/Components/CircleColliderComponent.h"
+#include "Objects/UI/Text/TopRightCenteredText.h"
 
 class Player : public GameObject
 {
@@ -40,6 +41,6 @@ private:
 	MoveFlags move_flags;
 
 	// Replace with Top Right Centered Text
-	sf::Text m_health_text;
+	TopRightCenteredText m_health_text;
 };
 

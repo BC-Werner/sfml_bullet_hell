@@ -9,7 +9,7 @@ CircleColliderComponent::CircleColliderComponent(float radius)
 
 bool CircleColliderComponent::isColliding(CircleColliderComponent other)
 {
-	sf::Vector2f A = m_bounding_circle.getPosition();
+	sf::Vector2f A = get_position();
 	sf::Vector2f B = other.get_position();
 	sf::Vector2f D = B - A;
 

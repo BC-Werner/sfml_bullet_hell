@@ -188,6 +188,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Managers\StateManager.cpp" />
+    <ClCompile Include="src\Objects\UI\Text\TopRightCenteredText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Objects\Components\CircleColliderComponent.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Managers\StateManager.h" />
+    <ClInclude Include="src\Objects\UI\Text\TopRightCenteredText.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sfml_baseline.props" />
