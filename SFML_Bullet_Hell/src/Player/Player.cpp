@@ -61,9 +61,8 @@ void Player::handleInput(sf::Event& event)
 void Player::update(float dt)
 {
 	// Movement
-	sf::Vector2f dir = move_direction;
 	float Length = sqrtf(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
-	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
+	sf::Vector2f normalized = move_direction / (Length == 0.f ? 1.f : Length);
 	set_position(get_position() + (normalized * move_speed * dt));
 
 	// Rotate to look at mouse position

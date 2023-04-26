@@ -75,8 +75,8 @@ void Game::updateDt()
 
 	if (m_data->m_show_fps)
 	{
-		int s = 1000 / (int) m_dt.asMilliseconds();
-		_fps.setString(std::to_string(s));
+		int fps = 1000 / (int) m_dt.asMilliseconds();
+		_fps.setString(std::to_string(fps));
 	}
 }
 
