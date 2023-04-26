@@ -8,6 +8,11 @@ Game::Game(int width, int height, const std::string& name)
 	initWindow(width, height, name);
 	initResourceManager();
 	initStateMachine();
+
+	m_data->m_is_running = true;
+	m_data->m_show_fps = false;
+
+	_fps = BottomLeftText(sf::Text("00", m_data->asset_manager.getFont("Kanit"), 24), {5.f, m_data->m_window.getView().getSize().y -5.f});
 }
 
 Game::~Game()
@@ -16,7 +21,7 @@ Game::~Game()
 
 void Game::run()
 {
-	while (m_data->m_window.isOpen())
+	while (m_data->m_is_running)
 	{
 		pollEvents();
 		handleInput();
@@ -24,6 +29,7 @@ void Game::run()
 		update(m_dt.asSeconds());
 		render();
 	}
+	m_data->m_window.close();
 }
 
 void Game::initWindow(int width, int height, const std::string& name)
@@ -59,11 +65,6 @@ void Game::pollEvents()
 
 void Game::handleInput()
 {
-	//if (m_event.type == sf::Event::MouseButtonPressed)
-	//	std::cout << "MouseButtonPressed" << std::endl;
-	//if (m_event.type == sf::Event::MouseButtonReleased)
-	//	std::cout << "MouseButtonReleased" << std::endl;
-
 	// Handle input in current State
 	m_data->state_manager.GetActiveState()->handleInput(m_event);
 }
@@ -71,6 +72,12 @@ void Game::handleInput()
 void Game::updateDt()
 {
 	m_dt = m_clock.restart();
+
+	if (m_data->m_show_fps)
+	{
+		int s = 1000 / (int) m_dt.asMilliseconds();
+		_fps.setString(std::to_string(s));
+	}
 }
 
 void Game::update(float dt)
@@ -86,6 +93,11 @@ void Game::render()
 
 	// Render Current State
 	m_data->state_manager.GetActiveState()->render(m_data->m_window);
+
+	if (m_data->m_show_fps)
+	{
+		_fps.render(m_data->m_window);
+	}
 
 	m_data->m_window.display();
 }

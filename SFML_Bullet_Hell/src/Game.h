@@ -4,6 +4,7 @@
 #include "Managers/AssetManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/StateManager.h"
+#include "Objects/UI/Text/BottomLeftText.h"
 
 struct GameData
 {
@@ -11,6 +12,8 @@ struct GameData
 	InputManager input_manager;
 	AssetManager asset_manager;
 	StateManager state_manager;
+	bool m_is_running = true;
+	bool m_show_fps = false;
 };
 typedef std::shared_ptr<GameData> GameDataRef;
 
@@ -23,6 +26,8 @@ private:
 	sf::Event m_event;
 	sf::Clock m_clock;
 	sf::Time m_dt;
+
+	BottomLeftText _fps;
 
 // Methods
 public:

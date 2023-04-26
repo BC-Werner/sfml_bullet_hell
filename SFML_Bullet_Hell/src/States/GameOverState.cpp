@@ -61,7 +61,7 @@ void GameOverState::handleInput(sf::Event& event)
 		}
 		if (m_quit_btn.contains(mouse_pos))
 		{
-			m_data->m_window.close();
+			m_data->m_is_running = false;
 		}
 	}
 }

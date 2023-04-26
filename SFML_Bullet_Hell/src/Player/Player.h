@@ -22,6 +22,7 @@ public:
 	 
 private:
 	sf::RenderWindow& m_window;
+
 	HealthComponent m_health;
 	CircleColliderComponent m_collider;
 
@@ -40,7 +41,6 @@ private:
 	};
 	MoveFlags move_flags;
 
-	// Replace with Top Right Centered Text
 	TopRightText m_health_text;
 };
 

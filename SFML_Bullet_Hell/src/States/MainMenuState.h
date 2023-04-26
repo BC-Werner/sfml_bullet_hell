@@ -11,8 +11,9 @@ private:
 
     CenteredText m_menuText;
 
-    Button m_start_button;
-    Button m_quit_button;
+    Button m_start_btn;
+    Button m_options_menu_btn;
+    Button m_quit_btn;
 
 public:
     MainMenuState(GameDataRef data);
