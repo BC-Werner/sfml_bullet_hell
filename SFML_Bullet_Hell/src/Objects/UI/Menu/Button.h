@@ -22,7 +22,7 @@ public:
 	bool contains(sf::Vector2f point);
 
 private:
-	static enum ButtonStatus { IDLE, HOVER, ACTIVE };
+	enum ButtonStatus { IDLE, HOVER, ACTIVE };
 
 	sf::RenderWindow* m_window_ref;
 	ButtonStatus m_status = ButtonStatus::IDLE;

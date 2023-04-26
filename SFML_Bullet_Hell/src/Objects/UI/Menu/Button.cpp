@@ -37,7 +37,7 @@ void Button::handleInput(sf::Event& event)
 	{
 		m_status = HOVER;
 
-		if (sf::Mouse::isButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			m_status = ACTIVE;
 		}

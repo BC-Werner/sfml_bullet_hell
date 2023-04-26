@@ -4,12 +4,12 @@
 #define PI 3.14159265358979323846f
 
 Player::Player(sf::RenderWindow& window)
-	: m_window(window), max_move_speed(0.f), m_health(0), m_collider(0.f)
+	: m_window_ref(window), max_move_speed(0.f), m_health(0), m_collider(0.f)
 {
 }
 
 Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_health, sf::Font& font)
-	:	m_window(window),
+	:	m_window_ref(window),
 		max_move_speed(speed),
 		m_health(max_health),
 		m_health_text(),
@@ -19,7 +19,7 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	sf::Text _text = sf::Text("000", font, 24);
 	_text.setFillColor(sf::Color::White);
 
-	m_health_text = TopRightText(_text, {m_window.getView().getSize().x, 10.f});
+	m_health_text = TopRightText(_text, {m_window_ref.getView().getSize().x, 10.f});
 
 	m_collider.set_position(m_cirle_shape.getPosition());
 
@@ -66,7 +66,7 @@ void Player::update(float dt)
 	set_position(get_position() + (normalized * move_speed * dt));
 
 	// Rotate to look at mouse position
-	sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window).x, (float)sf::Mouse::getPosition(m_window).y };
+	sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window_ref).x, (float)sf::Mouse::getPosition(m_window_ref).y };
 	sf::Vector2f player_pos = get_position();
 	sf::Vector2f D = player_pos - mouse_pos;
 
@@ -85,10 +85,6 @@ void Player::render(sf::RenderWindow& window)
 	m_health_text.render(window);
 }
 
-void Player::set_texture(sf::Texture& texture)
-{
-}
-
 void Player::set_position(sf::Vector2f position)
 {
 	m_cirle_shape.setPosition(position);
@@ -98,8 +94,4 @@ void Player::set_position(sf::Vector2f position)
 const sf::Vector2f Player::get_position() const
 {
 	return m_cirle_shape.getPosition();
-}
-
-void Player::scale(float scalar)
-{
 }

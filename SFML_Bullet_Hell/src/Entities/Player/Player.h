@@ -15,13 +15,11 @@ public:
 	virtual void update(float dt) override;
 	virtual void render(sf::RenderWindow& window) override;
 
-	void set_texture(sf::Texture& texture);
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
-	void scale(float scalar);
 	 
 private:
-	sf::RenderWindow& m_window;
+	sf::RenderWindow& m_window_ref;
 
 	HealthComponent m_health;
 	CircleColliderComponent m_collider;

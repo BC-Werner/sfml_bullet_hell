@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Objects/UI/HUD/GameClock.h"
 #include "Objects/UI/Menu/Button.h"
-#include "Player/Player.h"
+#include "Entities/Player/Player.h"
 
 class GameState : public State
 {

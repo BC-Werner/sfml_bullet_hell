@@ -167,7 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Enemy\Enemy.cpp" />
+    <ClCompile Include="src\Entities\Enemy\Enemy.cpp" />
     <ClCompile Include="src\States\OptionsState.cpp" />
     <ClCompile Include="src\Objects\UI\Text\LeftCenteredText.cpp" />
     <ClCompile Include="src\Objects\UI\Text\BottomLeftText.cpp" />
@@ -175,7 +175,7 @@
     <ClCompile Include="src\Objects\UI\Text\RightCenteredText.cpp" />
     <ClCompile Include="src\Objects\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="src\Objects\Components\HealthComponent.cpp" />
-    <ClCompile Include="src\Player\Player.cpp" />
+    <ClCompile Include="src\Entities\Player\Player.cpp" />
     <ClCompile Include="src\Objects\Components\Component.cpp" />
     <ClCompile Include="src\Objects\GameObject.cpp" />
     <ClCompile Include="src\States\GameOverState.cpp" />
@@ -203,7 +203,7 @@
     <ClCompile Include="src\Objects\UI\Text\TopLeftText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Enemy\Enemy.h" />
+    <ClInclude Include="src\Entities\Enemy\Enemy.h" />
     <ClInclude Include="src\States\OptionsState.h" />
     <ClInclude Include="src\Objects\UI\Text\LeftCenteredText.h" />
     <ClInclude Include="src\Objects\UI\Text\BottomLeftText.h" />
@@ -211,7 +211,7 @@
     <ClInclude Include="src\Objects\UI\Text\RightCenteredText.h" />
     <ClInclude Include="src\Objects\Components\CircleColliderComponent.h" />
     <ClInclude Include="src\Objects\Components\HealthComponent.h" />
-    <ClInclude Include="src\Player\Player.h" />
+    <ClInclude Include="src\Entities\Player\Player.h" />
     <ClInclude Include="src\Objects\Components\Component.h" />
     <ClInclude Include="src\Objects\GameObject.h" />
     <ClInclude Include="src\States\GameOverState.h" />
