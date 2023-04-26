@@ -28,7 +28,7 @@ private:
 
 	sf::CircleShape m_cirle_shape;
 
-	sf::Vector2f movement_vector;
+	sf::Vector2f move_direction;
 	const float max_move_speed;
 	float move_speed = max_move_speed;
 

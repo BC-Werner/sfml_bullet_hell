@@ -41,15 +41,15 @@ void Player::handleInput(sf::Event& event)
 	move_flags.right =	sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 
 	enum DirectionValues { Negative = -1, Neutral = 0, Positive = 1 };
-	movement_vector = { (float) Neutral, (float) Neutral };
+	move_direction = { (float) Neutral, (float) Neutral };
 
 	// Vertical Movement
 	if (move_flags.up ^ move_flags.down)
-		movement_vector.y = move_flags.up ? (float) Negative : (float) Positive;
+		move_direction.y = move_flags.up ? (float) Negative : (float) Positive;
 
 	// Horizontal Movement
 	if (move_flags.left ^ move_flags.right)
-		movement_vector.x = move_flags.left ? (float) Negative : (float) Positive;
+		move_direction.x = move_flags.left ? (float) Negative : (float) Positive;
 
 	// Debug Take Damage
 	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::P)
@@ -61,8 +61,8 @@ void Player::handleInput(sf::Event& event)
 void Player::update(float dt)
 {
 	// Movement
-	sf::Vector2f dir = movement_vector;
-	float Length = sqrtf(dir.x * dir.x + dir.y * dir.y);
+	sf::Vector2f dir = move_direction;
+	float Length = sqrtf(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
 	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
 	set_position(get_position() + (normalized * move_speed * dt));
 
