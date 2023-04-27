@@ -24,8 +24,5 @@ private:
 
 	std::random_device rd;
 	std::mt19937 rng;
-
-	int i = 0;
-	float f = 0.f;
 };
 
