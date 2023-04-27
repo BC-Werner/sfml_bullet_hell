@@ -11,8 +11,7 @@ GameState::GameState(GameDataRef data)
 			30.f, 
 			100, 
 			data->asset_manager.getFont("Kanit")
-		),
-		_enemy(Random::Float(5.f, 50.f))
+		)
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
@@ -24,17 +23,7 @@ GameState::GameState(GameDataRef data)
 		{ window_size.x / 2.f, window_size.y }
 	);
 
-	_pause_btn = Button(
-		sf::Text("| |", font, 24), 
-		sf::Color::Black, sf::Color::Green, sf::Color::Yellow, sf::Color::Blue,
-		{ window_size.x * 0.06f , window_size.y * 0.04f },
-		&(m_data->m_window)
-	);
-
-	//m_player.scale(0.05f);
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
-
-	_enemy.set_position({ 500.f, 500.f });
 }
 
 GameState::~GameState()
@@ -43,17 +32,6 @@ GameState::~GameState()
 
 void GameState::handleInput(sf::Event& event)
 {
-	_pause_btn.handleInput(event);
-
-	// Button Click
-    if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
-    {
-        if (_pause_btn.contains({ (float)event.mouseButton.x, (float)event.mouseButton.y }))
-        {
-			Pause();
-        }
-    }
-
 	// Keyboard Events
 	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape)
 	{
@@ -67,28 +45,47 @@ void GameState::handleInput(sf::Event& event)
 	}
 
 	m_player.handleInput(event);
+
+	for (EnemyPtr enemy : m_enemies)
+	{
+		if (enemy->active)
+			enemy->handleInput(event);
+	}
 }
 
 void GameState::update(float dt)
 {
 	m_game_clock.update(dt);
-	_pause_btn.update(dt);
 	m_player.update(dt);
 
-	_enemy.update(dt);
+	for (EnemyPtr enemy : m_enemies)
+	{
+		if (enemy->active)
+			enemy->update(dt);
+	}
 }
 
 void GameState::render(sf::RenderWindow& window)
 {
 	m_player.render(window);
 	m_game_clock.render(window);
-	_pause_btn.render(window);
 
-	_enemy.render(window);
+	for (EnemyPtr enemy : m_enemies)
+	{
+		if (enemy->active)
+			enemy->render(window);
+	}
 }
 
 void GameState::Init()
 {
+	sf::Vector2f window_size = m_data->m_window.getView().getSize();
+	for (int i = 0; i < 3; i++)
+	{
+		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true);
+		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
+		m_enemies.push_back(e);
+	}
 }
 
 void GameState::Pause()

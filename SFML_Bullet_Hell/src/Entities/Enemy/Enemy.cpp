@@ -3,15 +3,16 @@
 
 #include "Random.h"
 
-Enemy::Enemy(float radius)
+Enemy::Enemy(float radius, bool isActive)
 	:	m_health(100),
 		m_circle_shape(radius, Random::Int(3,8)),
-		m_collider(radius * 0.7f)
+		m_collider(radius * 0.7f),
+		active(isActive)
 {
 	m_collider.set_position(m_circle_shape.getPosition());
 	m_circle_shape.setOrigin(m_circle_shape.getRadius(), m_circle_shape.getRadius());
-	m_circle_shape.setFillColor(sf::Color::Red);
-	m_circle_shape.setOutlineThickness(2.f);
+	m_circle_shape.setFillColor(sf::Color::Transparent);
+	m_circle_shape.setOutlineThickness(4.f);
 	m_circle_shape.setOutlineColor(sf::Color(Random::Int(0,255), Random::Int(0,255), Random::Int(0,255), 255));
 }
 

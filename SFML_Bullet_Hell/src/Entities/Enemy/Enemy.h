@@ -6,7 +6,7 @@
 class Enemy : public GameObject
 {
 public:
-	Enemy(float radius);
+	Enemy(float radius, bool isActive);
 	~Enemy();
 
 	virtual void handleInput(sf::Event& event) override;
@@ -19,10 +19,13 @@ public:
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
 
+	bool active = false;
+
 private:
 	HealthComponent m_health;
 	CircleColliderComponent m_collider;
 
 	sf::CircleShape m_circle_shape;
+
 };
 typedef std::shared_ptr<Enemy> EnemyPtr;

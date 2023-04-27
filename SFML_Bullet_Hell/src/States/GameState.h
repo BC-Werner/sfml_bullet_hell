@@ -23,10 +23,8 @@ private:
 	GameDataRef m_data;
 
 	GameClock m_game_clock;
-	Button _pause_btn;
 
 	Player m_player;
-	Enemy _enemy;
 	std::vector<EnemyPtr> m_enemies;
 };
 
