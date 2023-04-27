@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "Random.h"
 
-inline int Random::Int(int lower, int upper) { return Get()._Int(lower, upper); }
+int Random::Int(int lower, int upper) { return Get()._Int(lower, upper); }
 
-inline float Random::Float(float lower, float upper) { return Get()._Float(lower, upper); }
+float Random::Float(float lower, float upper) { return Get()._Float(lower, upper); }
 
-inline int Random::_Int(int lower, int upper)
+int Random::_Int(int lower, int upper)
 {
 	if (lower < upper)
 	{
@@ -19,7 +19,7 @@ inline int Random::_Int(int lower, int upper)
 	}
 }
 
-inline float Random::_Float(float lower, float upper)
+float Random::_Float(float lower, float upper)
 {
 	if (lower < upper)
 	{

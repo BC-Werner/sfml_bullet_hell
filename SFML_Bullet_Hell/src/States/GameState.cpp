@@ -32,6 +32,8 @@ GameState::GameState(GameDataRef data)
 
 	//m_player.scale(0.05f);
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
+
+	_enemy.set_position({ 500.f, 500.f });
 }
 
 GameState::~GameState()
@@ -71,6 +73,8 @@ void GameState::update(float dt)
 	m_game_clock.update(dt);
 	_pause_btn.update(dt);
 	m_player.update(dt);
+
+	_enemy.update(dt);
 }
 
 void GameState::render(sf::RenderWindow& window)
@@ -78,6 +82,8 @@ void GameState::render(sf::RenderWindow& window)
 	m_player.render(window);
 	m_game_clock.render(window);
 	_pause_btn.render(window);
+
+	_enemy.render(window);
 }
 
 void GameState::Init()

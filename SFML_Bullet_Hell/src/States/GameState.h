@@ -4,6 +4,7 @@
 #include "Objects/UI/HUD/GameClock.h"
 #include "Objects/UI/Menu/Button.h"
 #include "Entities/Player/Player.h"
+#include "Entities/Enemy/Enemy.h"
 
 class GameState : public State
 {
@@ -25,5 +26,7 @@ private:
 	Button _pause_btn;
 
 	Player m_player;
+	Enemy _enemy;
+	std::vector<EnemyPtr> m_enemies;
 };
 

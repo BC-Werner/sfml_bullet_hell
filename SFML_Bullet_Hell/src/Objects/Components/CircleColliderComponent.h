@@ -9,6 +9,7 @@ public:
 	bool isColliding(CircleColliderComponent other);
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
+	void set_radius(float r);
 	const float get_radius() const;
 
 private:

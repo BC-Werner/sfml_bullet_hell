@@ -27,6 +27,11 @@ const sf::Vector2f CircleColliderComponent::get_position() const
 	return m_bounding_circle.getPosition();
 }
 
+void CircleColliderComponent::set_radius(float r)
+{
+	m_bounding_circle.setRadius(r);
+}
+
 const float CircleColliderComponent::get_radius() const
 {
 	return m_bounding_circle.getRadius();
