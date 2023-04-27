@@ -11,7 +11,8 @@ GameState::GameState(GameDataRef data)
 			30.f, 
 			100, 
 			data->asset_manager.getFont("Kanit")
-		)
+		),
+		_enemy(Random::Float(5.f, 50.f))
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");

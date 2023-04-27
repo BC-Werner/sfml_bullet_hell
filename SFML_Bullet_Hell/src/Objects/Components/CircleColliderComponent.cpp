@@ -2,7 +2,7 @@
 #include "CircleColliderComponent.h"
 
 CircleColliderComponent::CircleColliderComponent(float radius)
-	: m_bounding_circle(radius, 16)
+	: m_bounding_circle(sf::CircleShape(radius, 16))
 {
 	m_bounding_circle.setOrigin(get_radius(), get_radius());
 }

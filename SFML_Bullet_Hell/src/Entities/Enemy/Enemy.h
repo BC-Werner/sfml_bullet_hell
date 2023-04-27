@@ -6,7 +6,7 @@
 class Enemy : public GameObject
 {
 public:
-	Enemy();
+	Enemy(float radius);
 	~Enemy();
 
 	virtual void handleInput(sf::Event& event) override;
@@ -24,7 +24,5 @@ private:
 	CircleColliderComponent m_collider;
 
 	sf::CircleShape m_circle_shape;
-
-	float m_size;
 };
 typedef std::shared_ptr<Enemy> EnemyPtr;
