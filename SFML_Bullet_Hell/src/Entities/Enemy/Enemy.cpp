@@ -27,13 +27,6 @@ void Enemy::handleInput(sf::Event& event)
 
 void Enemy::update(float dt)
 {
-	// Move toward player
-	sf::Vector2f dir = m_player_location - get_position();
-	float Length = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
-
-	set_position(get_position() + normalized * m_speed * dt);
-
 	// update collider position
 	m_collider.set_position(m_circle_shape.getPosition());
 }
@@ -64,7 +57,12 @@ const sf::Vector2f Enemy::get_position() const
 	return m_circle_shape.getPosition();
 }
 
-void Enemy::set_player_location(sf::Vector2f position)
+void Enemy::move_toward(sf::Vector2f position, float dt)
 {
-	m_player_location = position;
+	// Move toward player
+	sf::Vector2f dir = position - get_position();
+	float Length = sqrtf(dir.x * dir.x + dir.y * dir.y);
+	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
+
+	set_position(get_position() + normalized * m_speed * dt);
 }

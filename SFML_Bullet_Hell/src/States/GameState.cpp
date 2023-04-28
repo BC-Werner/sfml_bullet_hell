@@ -83,8 +83,7 @@ void GameState::update(float dt)
 
 			}
 
-			// get player location
-			enemy->set_player_location(m_player.get_position());
+			enemy->move_toward(m_player.get_position(), dt);
 			enemy->update(dt);
 		}
 	}

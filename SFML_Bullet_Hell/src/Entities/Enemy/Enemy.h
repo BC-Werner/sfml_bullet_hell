@@ -19,7 +19,7 @@ public:
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
 
-	void set_player_location(sf::Vector2f position);
+	void move_toward(sf::Vector2f position, float dt);
 
 	bool active = false;
 
@@ -28,7 +28,6 @@ private:
 	CircleColliderComponent m_collider;
 	sf::CircleShape m_circle_shape;
 
-	sf::Vector2f m_player_location;
 	float m_speed;
 
 };
