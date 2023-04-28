@@ -12,7 +12,7 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	:	m_window_ref(window),
 		max_move_speed(speed),
 		m_health(max_health),
-		m_cirle_shape(size, 3), 
+		m_cirle_shape(size, 3),
 		m_collider(size * 0.7f)
 {
 	sf::Text _text = sf::Text("000", font, 24);
@@ -64,8 +64,7 @@ void Player::update(float dt)
 
 	float radians = atan2(D.y, D.x);
 
-	// 30 is the magic number and i have no idea why
-	m_cirle_shape.setRotation(radians * 180.f / PI + 30.f);
+	m_cirle_shape.setRotation(radians * 180.f / PI - 90.f);
 
 	// Update health text
 	m_health_text.setString(std::to_string(m_health.get_health()));
