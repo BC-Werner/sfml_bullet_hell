@@ -12,6 +12,9 @@ public:
 	void set_radius(float r);
 	const float get_radius() const;
 
+	// Temp
+	sf::CircleShape& get_shape();
+
 private:
 	sf::CircleShape m_bounding_circle;
 };
