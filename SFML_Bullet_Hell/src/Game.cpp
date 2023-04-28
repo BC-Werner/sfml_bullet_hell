@@ -53,13 +53,13 @@ void Game::initResourceManager()
 void Game::pollEvents()
 {
 	m_event = sf::Event();
-	if (m_event.type == sf::Event::MouseButtonReleased)
-		m_event = sf::Event();
 
 	while (m_data->m_window.pollEvent(m_event))
 	{
 		if (m_event.type == sf::Event::Closed)
-			m_data->m_window.close();
+		{
+			m_data->m_is_running = false;
+		}
 	}
 }
 
