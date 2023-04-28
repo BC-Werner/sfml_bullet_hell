@@ -69,6 +69,7 @@ void GameState::update(float dt)
 	{
 		if (enemy->active)
 		{
+			// Collide with player
 			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.can_take_damage())
 			{
 				m_player.get_health_component().lose_health(2.f);
@@ -81,6 +82,28 @@ void GameState::update(float dt)
 					return;
 				}
 
+			}
+
+			// Collide with other enemies
+			for (EnemyPtr other : m_enemies)
+			{
+				if (other == enemy) continue;
+
+				if (enemy->get_collider_component().isColliding(other->get_collider_component()))
+				{
+					// Get dist between
+					sf::Vector2f A = enemy->get_position();
+					sf::Vector2f B = other->get_position();
+					sf::Vector2f D = B - A;
+					float dist = sqrtf((D.x * D.x) + (D.y * D.y));
+
+					// Normalize -D
+					float L = sqrtf(D.x * D.x + D.y * D.y);
+					sf::Vector2f normalized = -D / (L == 0.f ? 1.f : L);
+
+					// Move away by overlap
+					enemy->set_position(enemy->get_position() + normalized);
+				}
 			}
 
 			enemy->move_toward(m_player.get_position(), dt);
