@@ -23,6 +23,7 @@ private:
 	GameDataRef m_data;
 
 	GameClock m_game_clock;
+	TopRightText m_health_text;
 
 	Player m_player;
 	std::vector<EnemyPtr> m_enemies;

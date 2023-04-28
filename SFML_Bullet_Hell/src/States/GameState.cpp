@@ -11,11 +11,17 @@ GameState::GameState(GameDataRef data)
 			30.f, 
 			100, 
 			data->asset_manager.getFont("Kanit")
-		)
+		),
+		m_health_text()
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
-	sf::Texture& texture = m_data->asset_manager.getTexture("Triangle");
+	std::string health_str = std::to_string(m_player.get_health_component().get_health());
+
+	m_health_text = TopRightText(
+		sf::Text(health_str, font, 24),
+		{ window_size.x, 10.f }
+	);
 
 	m_game_clock = GameClock(
 		sf::Text("00:00", font, 20), 
@@ -62,9 +68,11 @@ void GameState::update(float dt)
 	{
 		if (enemy->active)
 		{
-			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.can_take_damage())
+			if (m_player.can_take_damage() && m_player.get_collider_component().isColliding(enemy->get_collider_component()))
 			{
 				m_player.get_health_component().lose_health(2.f);
+				// Update helth text
+				m_health_text.setString(std::to_string(m_player.get_health_component().get_health()));
 
 				if (m_player.get_health_component().get_health() <= 0.0f)
 				{
@@ -79,6 +87,7 @@ void GameState::update(float dt)
 			enemy->update(dt);
 		}
 	}
+
 }
 
 void GameState::render(sf::RenderWindow& window)
@@ -91,6 +100,8 @@ void GameState::render(sf::RenderWindow& window)
 		if (enemy->active)
 			enemy->render(window);
 	}
+
+	m_health_text.render(window);
 }
 
 void GameState::Init()
