@@ -61,7 +61,23 @@ void GameState::update(float dt)
 	for (EnemyPtr enemy : m_enemies)
 	{
 		if (enemy->active)
+		{
+			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.can_take_damage())
+			{
+				m_player.get_health_component().lose_health(2.f);
+
+				if (m_player.get_health_component().get_health() <= 0.0f)
+				{
+					m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
+					return;
+				}
+
+			}
+
+			// get player location
+			enemy->set_player_location(m_player.get_position());
 			enemy->update(dt);
+		}
 	}
 }
 

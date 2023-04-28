@@ -29,6 +29,7 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
 
+	m_iFrames = sf::seconds(0.1f);
 }
 
 void Player::handleInput(sf::Event& event)
@@ -50,12 +51,6 @@ void Player::handleInput(sf::Event& event)
 	// Horizontal Movement
 	if (move_flags.left ^ move_flags.right)
 		move_direction.x = move_flags.left ? (float) Negative : (float) Positive;
-
-	// Debug Take Damage
-	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::P)
-	{
-		m_health.lose_health(10);
-	}
 }
 
 void Player::update(float dt)
@@ -94,4 +89,24 @@ void Player::set_position(sf::Vector2f position)
 const sf::Vector2f Player::get_position() const
 {
 	return m_cirle_shape.getPosition();
+}
+
+HealthComponent& Player::get_health_component()
+{
+	return m_health;
+}
+
+CircleColliderComponent& Player::get_collider_component()
+{
+	return m_collider;
+}
+
+bool Player::can_take_damage()
+{
+	if (m_damage_timer.getElapsedTime().asSeconds() >= m_iFrames.asSeconds())
+	{
+		m_damage_timer.restart();
+		return true;
+	}
+	return false;
 }

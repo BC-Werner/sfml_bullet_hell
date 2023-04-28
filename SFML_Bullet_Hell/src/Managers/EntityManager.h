@@ -8,6 +8,6 @@ public:
 	~EntityManager();
 
 private:
-	std::map<std::string, GameObject> m_entities;
+	std::map<std::string, GameObject*> m_entities;
 };
 

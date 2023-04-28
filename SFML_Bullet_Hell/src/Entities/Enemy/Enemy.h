@@ -19,13 +19,17 @@ public:
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
 
+	void set_player_location(sf::Vector2f position);
+
 	bool active = false;
 
 private:
 	HealthComponent m_health;
 	CircleColliderComponent m_collider;
-
 	sf::CircleShape m_circle_shape;
+
+	sf::Vector2f m_player_location;
+	float m_speed;
 
 };
 typedef std::shared_ptr<Enemy> EnemyPtr;

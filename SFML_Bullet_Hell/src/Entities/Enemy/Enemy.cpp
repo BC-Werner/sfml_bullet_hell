@@ -7,7 +7,8 @@ Enemy::Enemy(float radius, bool isActive)
 	:	m_health(100),
 		m_circle_shape(radius, Random::Int(3,8)),
 		m_collider(radius * 0.7f),
-		active(isActive)
+		active(isActive),
+		m_speed(125.f)
 {
 	m_collider.set_position(m_circle_shape.getPosition());
 	m_circle_shape.setOrigin(m_circle_shape.getRadius(), m_circle_shape.getRadius());
@@ -26,6 +27,14 @@ void Enemy::handleInput(sf::Event& event)
 
 void Enemy::update(float dt)
 {
+	// Move toward player
+	sf::Vector2f dir = m_player_location - get_position();
+	float Length = sqrtf(dir.x * dir.x + dir.y * dir.y);
+	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
+
+	set_position(get_position() + normalized * m_speed * dt);
+
+	// update collider position
 	m_collider.set_position(m_circle_shape.getPosition());
 }
 
@@ -53,4 +62,9 @@ void Enemy::set_position(sf::Vector2f position)
 const sf::Vector2f Enemy::get_position() const
 {
 	return m_circle_shape.getPosition();
+}
+
+void Enemy::set_player_location(sf::Vector2f position)
+{
+	m_player_location = position;
 }

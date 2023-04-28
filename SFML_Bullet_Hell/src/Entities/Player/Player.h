@@ -17,6 +17,11 @@ public:
 
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
+
+	HealthComponent& get_health_component();
+	CircleColliderComponent& get_collider_component();
+
+	bool can_take_damage();
 	 
 private:
 	sf::RenderWindow& m_window_ref;
@@ -40,5 +45,8 @@ private:
 	MoveFlags move_flags;
 
 	TopRightText m_health_text;
+
+	sf::Clock m_damage_timer;
+	sf::Time m_iFrames;
 };
 
