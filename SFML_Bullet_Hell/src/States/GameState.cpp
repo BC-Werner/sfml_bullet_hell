@@ -17,10 +17,11 @@ GameState::GameState(GameDataRef data)
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	sf::Font& font = m_data->asset_manager.getFont("Kanit");
 	std::string health_str = std::to_string(m_player.get_health_component().get_health());
+	const float PADDING = 10.f;
 
 	m_health_text = TopRightText(
 		sf::Text(health_str, font, 24),
-		{ window_size.x, 10.f }
+		{ window_size.x - PADDING, PADDING }
 	);
 
 	m_game_clock = GameClock(
@@ -68,7 +69,7 @@ void GameState::update(float dt)
 	{
 		if (enemy->active)
 		{
-			if (m_player.can_take_damage() && m_player.get_collider_component().isColliding(enemy->get_collider_component()))
+			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.can_take_damage())
 			{
 				m_player.get_health_component().lose_health(2.f);
 				// Update helth text
