@@ -70,6 +70,7 @@ void Player::update(float dt)
 	m_cirle_shape.setRotation(radians * 180.f / PI - 90.f);
 
 	// Shooting
+	should_spawn = false;
 	if (m_shot_timer.getElapsedTime() >= m_shot_delay)
 	{
 		shoot_flags.canShoot = true;
@@ -77,10 +78,12 @@ void Player::update(float dt)
 
 	if (shoot_flags.isShooting && shoot_flags.canShoot)
 	{
-		// Spawn a bullet
-		// Handled by the GameState?
-
 		std::cout << "BANG!!" << std::endl;
+
+		// Spawn a bullet
+		// Handled by Bullet Manager
+		//  -- notify bullet manager
+		should_spawn = true;
 
 		shoot_flags.canShoot = false;
 		m_shot_timer.restart();

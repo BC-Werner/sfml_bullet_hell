@@ -22,6 +22,8 @@ public:
 	CircleColliderComponent& get_collider_component();
 
 	bool can_take_damage();
+
+	bool should_spawn = false;
 	 
 private:
 	sf::RenderWindow& m_window_ref;
