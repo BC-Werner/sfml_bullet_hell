@@ -23,7 +23,7 @@ public:
 
 	bool can_take_damage();
 
-	bool should_spawn = false;
+	bool should_spawn_bullet = false;
 	 
 private:
 	sf::RenderWindow& m_window_ref;
