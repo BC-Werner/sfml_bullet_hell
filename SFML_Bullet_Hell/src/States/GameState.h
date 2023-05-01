@@ -5,6 +5,7 @@
 #include "Objects/UI/Menu/Button.h"
 #include "Objects/Entities/Player/Player.h"
 #include "Objects/Entities/Enemy/Enemy.h"
+#include "Objects/Entities/Bullet/Bullet.h"
 
 class GameState : public State
 {
@@ -27,5 +28,6 @@ private:
 
 	Player m_player;
 	std::vector<EnemyPtr> m_enemies;
+	std::vector<BulletPtr> m_bullets;
 };
 

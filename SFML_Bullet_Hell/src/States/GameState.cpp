@@ -111,6 +111,21 @@ void GameState::update(float dt)
 		}
 	}
 
+	if (m_player.should_spawn)
+	{
+		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_data->m_window).x, (float)sf::Mouse::getPosition(m_data->m_window).y };
+		BulletPtr bullet = std::make_shared<Bullet>(m_player.get_position(), mouse_pos, 1000.f, 10);
+		m_bullets.push_back(bullet);
+		bullet->activate();
+	}
+
+	for (BulletPtr bullet : m_bullets)
+	{
+		if (bullet->is_active())
+		{
+			bullet->update(dt);
+		}
+	}
 }
 
 void GameState::render(sf::RenderWindow& window)
@@ -122,6 +137,13 @@ void GameState::render(sf::RenderWindow& window)
 	{
 		if (enemy->active)
 			enemy->render(window);
+	}
+	for (BulletPtr bullet : m_bullets)
+	{
+		if (bullet->is_active())
+		{
+			bullet->render(window);
+		}
 	}
 
 	m_health_text.render(window);
