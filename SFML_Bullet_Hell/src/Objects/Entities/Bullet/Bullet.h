@@ -30,6 +30,8 @@ private:
 	sf::Vector2f m_direction;
 	sf::CircleShape m_shape;
 	CircleColliderComponent m_collider;
+	sf::Clock m_life_clock;
+	sf::Time m_lifetime;
 };
-typedef std::shared_ptr<Bullet> BulletPtr;
+using BulletPtr = std::shared_ptr<Bullet>;
 

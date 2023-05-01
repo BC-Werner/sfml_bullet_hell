@@ -14,6 +14,8 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f target, float speed, unsigned
 
 	sf::Vector2f direction = target - position;
 	m_direction = normalize_direction(direction);
+	m_lifetime = sf::seconds(2.f);
+	m_life_clock.restart();
 }
 
 Bullet::~Bullet()
@@ -29,6 +31,11 @@ void Bullet::update(float dt)
 	if (m_is_active)
 	{
 		m_shape.setPosition(m_shape.getPosition() + m_direction * m_bullet_speed * dt);
+
+		if (m_life_clock.getElapsedTime() >= m_lifetime)
+		{
+			deactivate();
+		}
 	}
 }
 
@@ -58,6 +65,7 @@ const bool Bullet::is_active() const
 void Bullet::activate()
 {
 	m_is_active = true;
+	m_life_clock.restart();
 }
 
 void Bullet::deactivate()
@@ -77,6 +85,7 @@ void Bullet::reactivate(sf::Vector2f position, sf::Vector2f target, float speed,
 	m_direction = normalize_direction(direction);
 
 	m_is_active = true;
+	m_life_clock.restart();
 }
 
 sf::Vector2f Bullet::normalize_direction(sf::Vector2f direction)
