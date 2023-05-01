@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Managers\BulletManager.cpp" />
     <ClCompile Include="src\Objects\Entities\Bullet\Bullet.cpp" />
     <ClCompile Include="src\Managers\EntityManager.cpp" />
     <ClCompile Include="src\Random.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="src\Objects\UI\Text\TopLeftText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Managers\BulletManager.h" />
     <ClInclude Include="src\Objects\Entities\Bullet\Bullet.h" />
     <ClInclude Include="src\Managers\EntityManager.h" />
     <ClInclude Include="src\Random.h" />

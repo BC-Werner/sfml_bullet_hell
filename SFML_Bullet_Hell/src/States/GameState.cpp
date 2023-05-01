@@ -65,6 +65,14 @@ void GameState::update(float dt)
 	m_game_clock.update(dt);
 	m_player.update(dt);
 
+	if (m_player.should_spawn_bullet)
+	{
+		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_data->m_window).x, (float)sf::Mouse::getPosition(m_data->m_window).y };
+		BulletPtr bullet = std::make_shared<Bullet>(m_player.get_position(), mouse_pos, 1000.f, 10);
+		bullet->activate();
+		m_bullets.push_back(bullet);
+	}
+
 	for (EnemyPtr enemy : m_enemies)
 	{
 		if (enemy->active)
@@ -106,17 +114,28 @@ void GameState::update(float dt)
 				}
 			}
 
+			// Collide with Bullet
+			for (BulletPtr bullet : m_bullets)
+			{
+				if (bullet->is_active())
+				{
+					if (enemy->get_collider_component().isColliding(bullet->get_collider_component()))
+					{
+						enemy->get_health_component().lose_health(bullet->get_damage());
+						bullet->deactivate();
+					}
+				}
+			}
+
 			enemy->move_toward(m_player.get_position(), dt);
 			enemy->update(dt);
-		}
-	}
 
-	if (m_player.should_spawn)
-	{
-		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_data->m_window).x, (float)sf::Mouse::getPosition(m_data->m_window).y };
-		BulletPtr bullet = std::make_shared<Bullet>(m_player.get_position(), mouse_pos, 1000.f, 10);
-		m_bullets.push_back(bullet);
-		bullet->activate();
+			// Deactivate enemy or update
+			if (enemy->get_health_component().get_health() <= 0)
+			{
+				enemy->active = false;
+			}
+		}
 	}
 
 	for (BulletPtr bullet : m_bullets)
@@ -138,6 +157,7 @@ void GameState::render(sf::RenderWindow& window)
 		if (enemy->active)
 			enemy->render(window);
 	}
+
 	for (BulletPtr bullet : m_bullets)
 	{
 		if (bullet->is_active())
