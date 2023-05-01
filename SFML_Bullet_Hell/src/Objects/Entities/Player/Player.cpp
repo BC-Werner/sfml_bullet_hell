@@ -26,6 +26,7 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
 
+	m_shot_delay = sf::seconds(0.4f);
 	m_iFrames = sf::seconds(0.1f);
 }
 
@@ -33,6 +34,7 @@ void Player::handleInput(sf::Event& event)
 {
 	move_speed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? max_move_speed * 2.f : max_move_speed;
 
+	// Movement
 	move_flags.up =		sf::Keyboard::isKeyPressed(sf::Keyboard::W);
 	move_flags.down =	sf::Keyboard::isKeyPressed(sf::Keyboard::S);
 	move_flags.left =	sf::Keyboard::isKeyPressed(sf::Keyboard::A);
@@ -48,6 +50,9 @@ void Player::handleInput(sf::Event& event)
 	// Horizontal Movement
 	if (move_flags.left ^ move_flags.right)
 		move_direction.x = move_flags.left ? (float) Negative : (float) Positive;
+
+	// Shooting
+	shoot_flags.isShooting = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
 
 void Player::update(float dt)
@@ -61,10 +66,25 @@ void Player::update(float dt)
 	sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window_ref).x, (float)sf::Mouse::getPosition(m_window_ref).y };
 	sf::Vector2f player_pos = get_position();
 	sf::Vector2f D = player_pos - mouse_pos;
-
 	float radians = atan2(D.y, D.x);
-
 	m_cirle_shape.setRotation(radians * 180.f / PI - 90.f);
+
+	// Shooting
+	if (m_shot_timer.getElapsedTime() >= m_shot_delay)
+	{
+		shoot_flags.canShoot = true;
+	}
+
+	if (shoot_flags.isShooting && shoot_flags.canShoot)
+	{
+		// Spawn a bullet
+		// Handled by the GameState?
+
+		std::cout << "BANG!!" << std::endl;
+
+		shoot_flags.canShoot = false;
+		m_shot_timer.restart();
+	}
 
 	// Update health text
 	m_health_text.setString(std::to_string(m_health.get_health()));

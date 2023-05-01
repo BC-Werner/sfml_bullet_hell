@@ -44,7 +44,17 @@ private:
 	};
 	MoveFlags move_flags;
 
+	struct ShootFlags
+	{
+		bool isShooting = false;
+		bool canShoot = true;
+	};
+	ShootFlags shoot_flags;
+
 	TopRightText m_health_text;
+
+	sf::Clock m_shot_timer;
+	sf::Time m_shot_delay;
 
 	sf::Clock m_damage_timer;
 	sf::Time m_iFrames;

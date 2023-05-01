@@ -66,7 +66,7 @@
     <ClCompile Include="src\Objects\Components\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Entities\Player\Player.cpp">
+    <ClCompile Include="src\Objects\Entities\Player\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\Components\HealthComponent.cpp">
@@ -99,13 +99,16 @@
     <ClCompile Include="src\States\OptionsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Entities\Enemy\Enemy.cpp">
+    <ClCompile Include="src\Objects\Entities\Enemy\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Managers\EntityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Entities\Bullet\Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,7 +164,7 @@
     <ClInclude Include="src\Objects\Components\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Entities\Player\Player.h">
+    <ClInclude Include="src\Objects\Entities\Player\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Components\HealthComponent.h">
@@ -194,13 +197,16 @@
     <ClInclude Include="src\States\OptionsState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Entities\Enemy\Enemy.h">
+    <ClInclude Include="src\Objects\Entities\Enemy\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Managers\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Entities\Bullet\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

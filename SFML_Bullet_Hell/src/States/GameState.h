@@ -3,8 +3,8 @@
 #include "Game.h"
 #include "Objects/UI/HUD/GameClock.h"
 #include "Objects/UI/Menu/Button.h"
-#include "Entities/Player/Player.h"
-#include "Entities/Enemy/Enemy.h"
+#include "Objects/Entities/Player/Player.h"
+#include "Objects/Entities/Enemy/Enemy.h"
 
 class GameState : public State
 {
