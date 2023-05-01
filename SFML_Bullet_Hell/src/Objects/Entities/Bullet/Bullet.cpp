@@ -1,12 +1,19 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Vector2f position, sf::Vector2f target, float speed)
-	: m_shape(5.f, 16), m_collider(2.f)
+Bullet::Bullet(sf::Vector2f position, sf::Vector2f target, float speed, unsigned damage)
+	:	m_shape(5.f, 16), 
+		m_collider(2.f), 
+		m_bullet_speed(speed), 
+		m_damage(damage), 
+		m_is_active(false)
 {
 	m_shape.setFillColor(sf::Color::White);
+	m_shape.setPosition(position);
+	m_collider.set_position(position);
 
-	activate(position, target, speed);
+	sf::Vector2f direction = target - position;
+	m_direction = normalize_direction(direction);
 }
 
 Bullet::~Bullet()
@@ -33,7 +40,12 @@ void Bullet::render(sf::RenderWindow& window)
 	}
 }
 
-const int Bullet::get_damage() const
+CircleColliderComponent& Bullet::get_collider_component()
+{
+	return m_collider;
+}
+
+const unsigned Bullet::get_damage() const
 {
 	return m_damage;
 }
@@ -43,22 +55,33 @@ const bool Bullet::is_active() const
 	return m_is_active;
 }
 
-void Bullet::activate(sf::Vector2f position, sf::Vector2f target, float speed)
+void Bullet::activate()
 {
-	m_shape.setPosition(position);
-	m_collider.set_position(position);
-	m_bullet_speed = speed;
-
-	// Normalized direction
-	sf::Vector2f direction = target - position;
-	float L = sqrtf(direction.x * direction.x + direction.y * direction.y);
-	sf::Vector2f normalized = direction / (L == 0.f ? 1.f : L);
-	m_direction = normalized;
-
 	m_is_active = true;
 }
 
 void Bullet::deactivate()
 {
 	m_is_active = false;
+}
+
+void Bullet::reactivate(sf::Vector2f position, sf::Vector2f target, float speed, unsigned damage)
+{
+	m_shape.setPosition(position);
+	m_collider.set_position(position);
+	m_bullet_speed = speed;
+	m_damage = damage;
+
+	// Normalized direction
+	sf::Vector2f direction = target - position;
+	m_direction = normalize_direction(direction);
+
+	m_is_active = true;
+}
+
+sf::Vector2f Bullet::normalize_direction(sf::Vector2f direction)
+{
+	float L = sqrtf(direction.x * direction.x + direction.y * direction.y);
+	sf::Vector2f normalized = direction / (L == 0.f ? 1.f : L);
+	return normalized;
 }
