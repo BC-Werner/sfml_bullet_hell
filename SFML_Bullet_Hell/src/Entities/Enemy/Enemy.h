@@ -16,6 +16,8 @@ public:
 	CircleColliderComponent& get_collider_component();
 	HealthComponent& get_health_component();
 
+	const int get_damage() const;
+
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
 
@@ -29,6 +31,7 @@ private:
 	sf::CircleShape m_circle_shape;
 
 	float m_speed;
+	int m_damage;
 
 };
 typedef std::shared_ptr<Enemy> EnemyPtr;
