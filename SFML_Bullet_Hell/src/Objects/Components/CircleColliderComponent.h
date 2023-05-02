@@ -1,7 +1,6 @@
 #pragma once
-#include "Component.h"
 
-class CircleColliderComponent : public Component
+class CircleColliderComponent
 {
 public:
 	CircleColliderComponent(float radius);

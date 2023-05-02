@@ -1,7 +1,6 @@
 #pragma once
-#include "Objects/Components/Component.h"
 
-class HealthComponent : public Component
+class HealthComponent
 {
 public:
 	HealthComponent(unsigned max_health);
