@@ -6,7 +6,8 @@
 GameState::GameState(GameDataRef data)
 	:	m_data(data), 
 		m_player(
-			m_data->m_window, 
+			data->m_window, 
+			data->bullet_manager,
 			200.f, 
 			30.f, 
 			100, 
@@ -65,14 +66,8 @@ void GameState::update(float dt)
 	m_game_clock.update(dt);
 	m_player.update(dt);
 
-	if (m_player.should_spawn_bullet)
-	{
-		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_data->m_window).x, (float)sf::Mouse::getPosition(m_data->m_window).y };
-		BulletPtr bullet = std::make_shared<Bullet>(m_player.get_position(), mouse_pos, 1000.f, 10);
-		bullet->activate();
-		m_bullets.push_back(bullet);
-	}
-
+	// TODO: move enmy specific logic to an enemy manager
+	// TODO: move collision specific logic to a collision manager
 	for (EnemyPtr enemy : m_enemies)
 	{
 		if (enemy->active)
@@ -114,19 +109,6 @@ void GameState::update(float dt)
 				}
 			}
 
-			// Collide with Bullet
-			for (BulletPtr bullet : m_bullets)
-			{
-				if (bullet->is_active())
-				{
-					if (enemy->get_collider_component().isColliding(bullet->get_collider_component()))
-					{
-						enemy->get_health_component().lose_health(bullet->get_damage());
-						bullet->deactivate();
-					}
-				}
-			}
-
 			enemy->move_toward(m_player.get_position(), dt);
 			enemy->update(dt);
 
@@ -138,12 +120,10 @@ void GameState::update(float dt)
 		}
 	}
 
-	for (BulletPtr bullet : m_bullets)
+	auto bullets = m_data->bullet_manager.get_bullets();
+	for (BulletPtr bullet : bullets)
 	{
-		if (bullet->is_active())
-		{
-			bullet->update(dt);
-		}
+		bullet->update(dt);
 	}
 }
 
@@ -158,12 +138,10 @@ void GameState::render(sf::RenderWindow& window)
 			enemy->render(window);
 	}
 
-	for (BulletPtr bullet : m_bullets)
+	auto bullets = m_data->bullet_manager.get_bullets();
+	for (BulletPtr bullet : bullets)
 	{
-		if (bullet->is_active())
-		{
-			bullet->render(window);
-		}
+		bullet->render(window);
 	}
 
 	m_health_text.render(window);

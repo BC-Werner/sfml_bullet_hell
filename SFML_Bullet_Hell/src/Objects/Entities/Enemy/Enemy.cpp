@@ -4,13 +4,13 @@
 #include "Random.h"
 
 Enemy::Enemy(float radius, bool isActive)
-	:	m_health(100),
+	:	m_health_component(100),
 		m_circle_shape(radius, Random::Int(4,8)),
-		m_collider(radius * 0.7f),
+		m_collider_component(radius * 0.7f),
 		active(isActive),
 		m_speed(125.f)
 {
-	m_collider.set_position(m_circle_shape.getPosition());
+	m_collider_component.set_position(m_circle_shape.getPosition());
 
 	m_circle_shape.setOrigin(m_circle_shape.getRadius(), m_circle_shape.getRadius());
 	m_circle_shape.setFillColor(sf::Color::Transparent);
@@ -31,7 +31,7 @@ void Enemy::handleInput(sf::Event& event)
 void Enemy::update(float dt)
 {
 	// update collider position
-	m_collider.set_position(m_circle_shape.getPosition());
+	m_collider_component.set_position(m_circle_shape.getPosition());
 }
 
 void Enemy::render(sf::RenderWindow& window)
@@ -41,12 +41,12 @@ void Enemy::render(sf::RenderWindow& window)
 
 CircleColliderComponent& Enemy::get_collider_component() 
 {
-	return m_collider;
+	return m_collider_component;
 }
 
 HealthComponent& Enemy::get_health_component()
 {
-	return m_health;
+	return m_health_component;
 }
 
 const int Enemy::get_damage() const
@@ -57,7 +57,7 @@ const int Enemy::get_damage() const
 void Enemy::set_position(sf::Vector2f position)
 {
 	m_circle_shape.setPosition(position);
-	m_collider.set_position(position);
+	m_collider_component.set_position(position);
 }
 
 const sf::Vector2f Enemy::get_position() const

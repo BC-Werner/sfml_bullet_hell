@@ -2,6 +2,15 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/CircleColliderComponent.h"
 
+struct BulletData
+{
+	sf::Vector2f start_position;
+	sf::Vector2f end_position;
+	float speed;
+	unsigned damage;
+
+};
+
 class Bullet : public GameObject
 {
 public:
@@ -24,12 +33,12 @@ public:
 private:
 	sf::Vector2f normalize_direction(sf::Vector2f direction);
 
+	BulletData m_bullet_data;
+
 	bool m_is_active;
-	unsigned m_damage;
-	float m_bullet_speed;
 	sf::Vector2f m_direction;
 	sf::CircleShape m_shape;
-	CircleColliderComponent m_collider;
+	CircleColliderComponent m_collider_component;
 	sf::Clock m_life_clock;
 	sf::Time m_lifetime;
 };

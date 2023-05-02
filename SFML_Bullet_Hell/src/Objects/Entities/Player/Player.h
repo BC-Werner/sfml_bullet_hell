@@ -2,13 +2,14 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
 #include "Objects/Components/CircleColliderComponent.h"
+#include "Objects/Components/Shootingcomponent.h"
 #include "Objects/UI/Text/TopRightText.h"
 
 class Player : public GameObject
 {
 public:
-	Player(sf::RenderWindow& window);
-	Player(sf::RenderWindow& window, float speed, float size, unsigned max_health, sf::Font& font);
+	Player(sf::RenderWindow& window, BulletManager& bullet_manager);
+	Player(sf::RenderWindow& window, BulletManager& bullet_manager, float speed, float size, unsigned max_health, sf::Font& font);
 	~Player() {};
 
 	virtual void handleInput(sf::Event& event) override;
@@ -22,17 +23,20 @@ public:
 	CircleColliderComponent& get_collider_component();
 
 	bool can_take_damage();
-
-	bool should_spawn_bullet = false;
 	 
 private:
 	sf::RenderWindow& m_window_ref;
 
-	HealthComponent m_health;
-	CircleColliderComponent m_collider;
+	// Components
+	HealthComponent m_health_component;
+	CircleColliderComponent m_collider_component;
+	ShootingComponent m_shooting_component;
 
 	sf::CircleShape m_cirle_shape;
 
+	TopRightText m_health_text;
+
+	// Move into Movement Component
 	sf::Vector2f move_direction;
 	const float max_move_speed;
 	float move_speed = max_move_speed;
@@ -45,18 +49,6 @@ private:
 		bool down = false;
 	};
 	MoveFlags move_flags;
-
-	struct ShootFlags
-	{
-		bool isShooting = false;
-		bool canShoot = true;
-	};
-	ShootFlags shoot_flags;
-
-	TopRightText m_health_text;
-
-	sf::Clock m_shot_timer;
-	sf::Time m_shot_delay;
 
 	sf::Clock m_damage_timer;
 	sf::Time m_iFrames;

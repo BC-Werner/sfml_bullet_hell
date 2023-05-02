@@ -5,7 +5,7 @@
 
 #include "States/State.h"
 
-typedef std::unique_ptr<State> StateRef;
+using StateRef = std::unique_ptr<State>;
 
 class StateManager
 {

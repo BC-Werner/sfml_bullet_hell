@@ -4,6 +4,7 @@
 #include "Managers/AssetManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/StateManager.h"
+#include "Managers/BulletManager.h"
 #include "Objects/UI/Text/BottomLeftText.h"
 #include "Random.h"
 
@@ -13,11 +14,12 @@ struct GameData
 	InputManager input_manager;
 	AssetManager asset_manager;
 	StateManager state_manager;
+	BulletManager bullet_manager;
 	Random& random_number_generator = Random::Get();
 	bool m_is_running = true;
 	bool m_show_fps = false;
 };
-typedef std::shared_ptr<GameData> GameDataRef;
+using GameDataRef = std::shared_ptr<GameData>;
 
 class Game
 {
