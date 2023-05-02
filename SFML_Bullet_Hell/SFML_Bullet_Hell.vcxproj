@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Managers\BulletManager.cpp" />
+    <ClCompile Include="src\Objects\Components\MovementComponent.cpp" />
     <ClCompile Include="src\Objects\Components\ShootingComponent.cpp" />
     <ClCompile Include="src\Objects\Entities\Bullet\Bullet.cpp" />
     <ClCompile Include="src\Managers\EntityManager.cpp" />
@@ -208,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Managers\BulletManager.h" />
+    <ClInclude Include="src\Objects\Components\MovementComponent.h" />
     <ClInclude Include="src\Objects\Components\ShootingComponent.h" />
     <ClInclude Include="src\Objects\Entities\Bullet\Bullet.h" />
     <ClInclude Include="src\Managers\EntityManager.h" />

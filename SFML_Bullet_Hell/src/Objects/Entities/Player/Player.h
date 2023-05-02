@@ -2,14 +2,15 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
 #include "Objects/Components/CircleColliderComponent.h"
-#include "Objects/Components/Shootingcomponent.h"
+#include "Objects/Components/ShootingComponent.h"
+#include "Objects/Components/MovementComponent.h"
 #include "Objects/UI/Text/TopRightText.h"
 
 class Player : public GameObject
 {
 public:
 	Player(sf::RenderWindow& window, BulletManager& bullet_manager);
-	Player(sf::RenderWindow& window, BulletManager& bullet_manager, float speed, float size, unsigned max_health, sf::Font& font);
+	Player(sf::RenderWindow& window, BulletManager& bullet_manager, float size, unsigned max_health, sf::Font& font);
 	~Player() {};
 
 	virtual void handleInput(sf::Event& event) override;
@@ -21,8 +22,6 @@ public:
 
 	HealthComponent& get_health_component();
 	CircleColliderComponent& get_collider_component();
-
-	bool can_take_damage();
 	 
 private:
 	sf::RenderWindow& m_window_ref;
@@ -31,26 +30,9 @@ private:
 	HealthComponent m_health_component;
 	CircleColliderComponent m_collider_component;
 	ShootingComponent m_shooting_component;
+	MovementComponent m_movement_component;
 
-	sf::CircleShape m_cirle_shape;
+	sf::CircleShape m_circle_shape;
 
-	TopRightText m_health_text;
-
-	// Move into Movement Component
-	sf::Vector2f move_direction;
-	const float max_move_speed;
-	float move_speed = max_move_speed;
-
-	struct MoveFlags
-	{
-		bool left = false;
-		bool right = false;
-		bool up = false;
-		bool down = false;
-	};
-	MoveFlags move_flags;
-
-	sf::Clock m_damage_timer;
-	sf::Time m_iFrames;
 };
 
