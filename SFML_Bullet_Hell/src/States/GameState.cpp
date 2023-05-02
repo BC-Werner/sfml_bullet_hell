@@ -66,6 +66,8 @@ void GameState::update(float dt)
 	m_game_clock.update(dt);
 	m_player.update(dt);
 
+	// TODO: move enmy specific logic to an enemy manager
+	// TODO: move collision specific logic to a collision manager
 	for (EnemyPtr enemy : m_enemies)
 	{
 		if (enemy->active)
