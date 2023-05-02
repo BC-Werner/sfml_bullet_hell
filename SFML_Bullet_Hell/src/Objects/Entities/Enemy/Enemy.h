@@ -26,8 +26,8 @@ public:
 	bool active = false;
 
 private:
-	HealthComponent m_health;
-	CircleColliderComponent m_collider;
+	HealthComponent m_health_component;
+	CircleColliderComponent m_collider_component;
 	sf::CircleShape m_circle_shape;
 
 	float m_speed;

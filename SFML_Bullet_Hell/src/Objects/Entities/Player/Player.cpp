@@ -3,22 +3,27 @@
 
 #define PI 3.14159265358979323846f
 
-Player::Player(sf::RenderWindow& window)
-	: m_window_ref(window), max_move_speed(0.f), m_health(0), m_collider(0.f)
+Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager)
+	:	m_window_ref(window), 
+		max_move_speed(0.f), 
+		m_health_component(0), 
+		m_collider_component(0.f), 
+		m_shooting_component(bullet_manager)
 {
 }
 
-Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_health, sf::Font& font)
+Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float speed, float size, unsigned max_health, sf::Font& font)
 	:	m_window_ref(window),
 		max_move_speed(speed),
-		m_health(max_health),
+		m_health_component(max_health),
 		m_cirle_shape(size, 3),
-		m_collider(size * 0.7f)
+		m_collider_component(size * 0.7f),
+		m_shooting_component(bullet_manager)
 {
 	sf::Text _text = sf::Text("000", font, 24);
 	_text.setFillColor(sf::Color::White);
 
-	m_collider.set_position(m_cirle_shape.getPosition());
+	m_collider_component.set_position(m_cirle_shape.getPosition());
 
 	m_cirle_shape.setOrigin(m_cirle_shape.getRadius(), m_cirle_shape.getRadius());
 
@@ -26,7 +31,6 @@ Player::Player(sf::RenderWindow& window, float speed, float size, unsigned max_h
 	m_cirle_shape.setOutlineThickness(2.f);
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
 
-	m_shot_delay = sf::seconds(0.4f);
 	m_iFrames = sf::seconds(0.1f);
 }
 
@@ -51,8 +55,12 @@ void Player::handleInput(sf::Event& event)
 	if (move_flags.left ^ move_flags.right)
 		move_direction.x = move_flags.left ? (float) Negative : (float) Positive;
 
-	// Shooting
-	shoot_flags.isShooting = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	// Shoot
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window_ref).x, (float)sf::Mouse::getPosition(m_window_ref).y };
+		m_shooting_component.Shoot({ get_position(), mouse_pos, 1000.f, 50 });
+	}
 }
 
 void Player::update(float dt)
@@ -69,26 +77,8 @@ void Player::update(float dt)
 	float radians = atan2(D.y, D.x);
 	m_cirle_shape.setRotation(radians * 180.f / PI - 90.f);
 
-	// Shooting
-	should_spawn_bullet = false;
-	if (m_shot_timer.getElapsedTime() >= m_shot_delay)
-	{
-		shoot_flags.canShoot = true;
-	}
-
-	if (shoot_flags.isShooting && shoot_flags.canShoot)
-	{
-		std::cout << "BANG!!" << std::endl;
-
-		// Spawn a bullet
-		should_spawn_bullet = true;
-
-		shoot_flags.canShoot = false;
-		m_shot_timer.restart();
-	}
-
 	// Update health text
-	m_health_text.setString(std::to_string(m_health.get_health()));
+	m_health_text.setString(std::to_string(m_health_component.get_health()));
 }
 
 void Player::render(sf::RenderWindow& window)
@@ -100,7 +90,7 @@ void Player::render(sf::RenderWindow& window)
 void Player::set_position(sf::Vector2f position)
 {
 	m_cirle_shape.setPosition(position);
-	m_collider.set_position(position);
+	m_collider_component.set_position(position);
 }
 
 const sf::Vector2f Player::get_position() const
@@ -110,12 +100,12 @@ const sf::Vector2f Player::get_position() const
 
 HealthComponent& Player::get_health_component()
 {
-	return m_health;
+	return m_health_component;
 }
 
 CircleColliderComponent& Player::get_collider_component()
 {
-	return m_collider;
+	return m_collider_component;
 }
 
 bool Player::can_take_damage()

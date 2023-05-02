@@ -3,14 +3,13 @@
 
 Bullet::Bullet(sf::Vector2f position, sf::Vector2f target, float speed, unsigned damage)
 	:	m_shape(5.f, 16), 
-		m_collider(2.f), 
-		m_bullet_speed(speed), 
-		m_damage(damage), 
-		m_is_active(false)
+		m_collider_component(2.f), 
+		m_is_active(false),
+		m_bullet_data{ position, target, speed, damage }
 {
 	m_shape.setFillColor(sf::Color::White);
 	m_shape.setPosition(position);
-	m_collider.set_position(position);
+	m_collider_component.set_position(position);
 
 	sf::Vector2f direction = target - position;
 	m_direction = normalize_direction(direction);
@@ -30,7 +29,7 @@ void Bullet::update(float dt)
 {
 	if (m_is_active)
 	{
-		m_shape.setPosition(m_shape.getPosition() + m_direction * m_bullet_speed * dt);
+		m_shape.setPosition(m_shape.getPosition() + m_direction * m_bullet_data.speed * dt);
 
 		if (m_life_clock.getElapsedTime() >= m_lifetime)
 		{
@@ -49,12 +48,12 @@ void Bullet::render(sf::RenderWindow& window)
 
 CircleColliderComponent& Bullet::get_collider_component()
 {
-	return m_collider;
+	return m_collider_component;
 }
 
 const unsigned Bullet::get_damage() const
 {
-	return m_damage;
+	return m_bullet_data.damage;
 }
 
 const bool Bullet::is_active() const
@@ -76,9 +75,9 @@ void Bullet::deactivate()
 void Bullet::reactivate(sf::Vector2f position, sf::Vector2f target, float speed, unsigned damage)
 {
 	m_shape.setPosition(position);
-	m_collider.set_position(position);
-	m_bullet_speed = speed;
-	m_damage = damage;
+	m_collider_component.set_position(position);
+	m_bullet_data.speed = speed;
+	m_bullet_data.damage = damage;
 
 	// Normalized direction
 	sf::Vector2f direction = target - position;

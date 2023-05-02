@@ -28,6 +28,5 @@ private:
 
 	Player m_player;
 	std::vector<EnemyPtr> m_enemies;
-	std::vector<BulletPtr> m_bullets;
 };
 
