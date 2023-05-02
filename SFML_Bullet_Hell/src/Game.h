@@ -19,7 +19,7 @@ struct GameData
 	bool m_is_running = true;
 	bool m_show_fps = false;
 };
-typedef std::shared_ptr<GameData> GameDataRef;
+using GameDataRef = std::shared_ptr<GameData>;
 
 class Game
 {

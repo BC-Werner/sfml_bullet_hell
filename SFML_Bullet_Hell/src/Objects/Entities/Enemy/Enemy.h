@@ -34,4 +34,4 @@ private:
 	int m_damage;
 
 };
-typedef std::shared_ptr<Enemy> EnemyPtr;
+using EnemyPtr = std::shared_ptr<Enemy>;
