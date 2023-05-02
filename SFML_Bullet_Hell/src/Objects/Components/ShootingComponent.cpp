@@ -27,3 +27,8 @@ void ShootingComponent::Shoot(BulletData data)
 		m_time_since_last_shot.restart();
 	}
 }
+
+void ShootingComponent::set_reload_time(float seconds)
+{
+	m_reload_time = sf::seconds(seconds);
+}

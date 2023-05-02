@@ -32,6 +32,8 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float sp
 	m_cirle_shape.setOutlineColor(sf::Color::Red);
 
 	m_iFrames = sf::seconds(0.1f);
+
+	m_shooting_component.set_reload_time(0.25f);
 }
 
 void Player::handleInput(sf::Event& event)

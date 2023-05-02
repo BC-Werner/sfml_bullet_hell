@@ -9,6 +9,8 @@ public:
 
 	void Shoot(BulletData data);
 
+	void set_reload_time(float seconds);
+
 private:
 	BulletManager& m_bm_ref;
 
