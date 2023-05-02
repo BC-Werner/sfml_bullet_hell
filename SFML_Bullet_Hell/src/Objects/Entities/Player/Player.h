@@ -2,7 +2,8 @@
 #include "Objects/GameObject.h"
 #include "Objects/Components/HealthComponent.h"
 #include "Objects/Components/CircleColliderComponent.h"
-#include "Objects/Components/Shootingcomponent.h"
+#include "Objects/Components/ShootingComponent.h"
+#include "Objects/Components/MovementComponent.h"
 #include "Objects/UI/Text/TopRightText.h"
 
 class Player : public GameObject
@@ -31,6 +32,7 @@ private:
 	HealthComponent m_health_component;
 	CircleColliderComponent m_collider_component;
 	ShootingComponent m_shooting_component;
+	MovementComponent m_movement_component;
 
 	sf::CircleShape m_cirle_shape;
 
@@ -40,15 +42,6 @@ private:
 	sf::Vector2f move_direction;
 	const float max_move_speed;
 	float move_speed = max_move_speed;
-
-	struct MoveFlags
-	{
-		bool left = false;
-		bool right = false;
-		bool up = false;
-		bool down = false;
-	};
-	MoveFlags move_flags;
 
 	sf::Clock m_damage_timer;
 	sf::Time m_iFrames;

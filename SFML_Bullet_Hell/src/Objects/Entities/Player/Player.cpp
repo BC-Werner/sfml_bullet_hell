@@ -41,21 +41,13 @@ void Player::handleInput(sf::Event& event)
 	move_speed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? max_move_speed * 2.f : max_move_speed;
 
 	// Movement
-	move_flags.up =		sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-	move_flags.down =	sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-	move_flags.left =	sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-	move_flags.right =	sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-
-	enum DirectionValues { Negative = -1, Neutral = 0, Positive = 1 };
-	move_direction = { (float) Neutral, (float) Neutral };
-
-	// Vertical Movement
-	if (move_flags.up ^ move_flags.down)
-		move_direction.y = move_flags.up ? (float) Negative : (float) Positive;
-
-	// Horizontal Movement
-	if (move_flags.left ^ move_flags.right)
-		move_direction.x = move_flags.left ? (float) Negative : (float) Positive;
+	m_movement_component.set_flags({
+		sf::Keyboard::isKeyPressed(sf::Keyboard::W),
+		sf::Keyboard::isKeyPressed(sf::Keyboard::S),
+		sf::Keyboard::isKeyPressed(sf::Keyboard::A),
+		sf::Keyboard::isKeyPressed(sf::Keyboard::D),
+		sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)
+	});
 
 	// Shoot
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -68,9 +60,11 @@ void Player::handleInput(sf::Event& event)
 void Player::update(float dt)
 {
 	// Movement
-	float Length = sqrtf(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
-	sf::Vector2f normalized = move_direction / (Length == 0.f ? 1.f : Length);
-	set_position(get_position() + (normalized * move_speed * dt));
+	//float Length = sqrtf(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
+	//sf::Vector2f normalized = move_direction / (Length == 0.f ? 1.f : Length);
+	//set_position(get_position() + (normalized * move_speed * dt));
+
+	set_position(m_movement_component.get_position() * dt);
 
 	// Rotate to look at mouse position
 	sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window_ref).x, (float)sf::Mouse::getPosition(m_window_ref).y };
