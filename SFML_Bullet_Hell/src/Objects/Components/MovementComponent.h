@@ -16,7 +16,7 @@ public:
 	~MovementComponent();
 
 	void set_flags(MoveFlags flags);
-	void update_position();
+	void update_position(float dt);
 
 	sf::Vector2f get_position() const;
 	void set_position(sf::Vector2f position);

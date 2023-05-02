@@ -19,7 +19,7 @@ void MovementComponent::set_flags(MoveFlags flags)
 
 sf::Vector2f MovementComponent::get_position() const
 {
-	return sf::Vector2f();
+	return m_position;
 }
 
 void MovementComponent::set_position(sf::Vector2f position)
@@ -27,8 +27,10 @@ void MovementComponent::set_position(sf::Vector2f position)
 	m_position = position;
 }
 
-void MovementComponent::update_position()
+void MovementComponent::update_position(float dt)
 {
+	m_speed = m_flags.boost ? M_MAX_SPEED * 2.f : M_MAX_SPEED;
+
 	m_direction = { (float) DirectionValues::Neutral, (float) DirectionValues::Neutral };
 
 	// Vertical Movement
@@ -41,8 +43,8 @@ void MovementComponent::update_position()
 
 	// Normalize and mult by speed
 	float Length = sqrtf(m_direction.x * m_direction.x + m_direction.y * m_direction.y);
-	sf::Vector2f m_direection = m_direction / (Length == 0.f ? 1.f : Length);
-	m_direection *= m_speed;
+	m_direction = m_direction / (Length == 0.f ? 1.f : Length);
+	m_direction *= m_speed * dt;
 
 	m_position += m_direction;
 }

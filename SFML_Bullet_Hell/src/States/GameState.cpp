@@ -8,7 +8,6 @@ GameState::GameState(GameDataRef data)
 		m_player(
 			data->m_window, 
 			data->bullet_manager,
-			200.f, 
 			30.f, 
 			100, 
 			data->asset_manager.getFont("Kanit")

@@ -10,7 +10,7 @@ class Player : public GameObject
 {
 public:
 	Player(sf::RenderWindow& window, BulletManager& bullet_manager);
-	Player(sf::RenderWindow& window, BulletManager& bullet_manager, float speed, float size, unsigned max_health, sf::Font& font);
+	Player(sf::RenderWindow& window, BulletManager& bullet_manager, float size, unsigned max_health, sf::Font& font);
 	~Player() {};
 
 	virtual void handleInput(sf::Event& event) override;
@@ -34,14 +34,7 @@ private:
 	ShootingComponent m_shooting_component;
 	MovementComponent m_movement_component;
 
-	sf::CircleShape m_cirle_shape;
-
-	TopRightText m_health_text;
-
-	// Move into Movement Component
-	sf::Vector2f move_direction;
-	const float max_move_speed;
-	float move_speed = max_move_speed;
+	sf::CircleShape m_circle_shape;
 
 	sf::Clock m_damage_timer;
 	sf::Time m_iFrames;
