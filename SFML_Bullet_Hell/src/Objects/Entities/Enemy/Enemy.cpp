@@ -4,7 +4,7 @@
 #include "Random.h"
 
 Enemy::Enemy(float radius, bool isActive)
-	:	m_health_component(100),
+	:	m_health_component(100, 0.1f),
 		m_circle_shape(radius, Random::Int(4,8)),
 		m_collider_component(radius * 0.7f),
 		active(isActive),

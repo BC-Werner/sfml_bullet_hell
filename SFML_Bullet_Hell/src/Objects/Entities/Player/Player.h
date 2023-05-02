@@ -22,8 +22,6 @@ public:
 
 	HealthComponent& get_health_component();
 	CircleColliderComponent& get_collider_component();
-
-	bool can_take_damage();
 	 
 private:
 	sf::RenderWindow& m_window_ref;
@@ -36,7 +34,5 @@ private:
 
 	sf::CircleShape m_circle_shape;
 
-	sf::Clock m_damage_timer;
-	sf::Time m_iFrames;
 };
 

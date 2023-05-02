@@ -72,7 +72,7 @@ void GameState::update(float dt)
 		if (enemy->active)
 		{
 			// Collide with player
-			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.can_take_damage())
+			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.get_health_component().can_take_damage())
 			{
 				m_player.get_health_component().lose_health( enemy->get_damage() );
 				// Update helth text

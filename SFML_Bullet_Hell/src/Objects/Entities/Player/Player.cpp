@@ -5,7 +5,7 @@
 
 Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager)
 	:	m_window_ref(window), 
-		m_health_component(0), 
+		m_health_component(0, 0.1f), 
 		m_collider_component(0.f), 
 		m_shooting_component(bullet_manager)
 {
@@ -13,7 +13,7 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager)
 
 Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float size, unsigned max_health, sf::Font& font)
 	:	m_window_ref(window),
-		m_health_component(max_health),
+		m_health_component(max_health, 0.1f),
 		m_circle_shape(size, 3),
 		m_collider_component(size * 0.7f),
 		m_shooting_component(bullet_manager)
@@ -28,8 +28,6 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float si
 	m_circle_shape.setFillColor(sf::Color::Transparent);
 	m_circle_shape.setOutlineThickness(2.f);
 	m_circle_shape.setOutlineColor(sf::Color::Red);
-
-	m_iFrames = sf::seconds(0.1f);
 
 	m_shooting_component.set_reload_time(0.25f);
 }
@@ -96,14 +94,4 @@ HealthComponent& Player::get_health_component()
 CircleColliderComponent& Player::get_collider_component()
 {
 	return m_collider_component;
-}
-
-bool Player::can_take_damage()
-{
-	if (m_damage_timer.getElapsedTime().asSeconds() >= m_iFrames.asSeconds())
-	{
-		m_damage_timer.restart();
-		return true;
-	}
-	return false;
 }
