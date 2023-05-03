@@ -2,6 +2,7 @@
 #include "StateManager.h"
 
 StateManager::StateManager()
+	: m_isRemoving(false), m_isAdding(false), m_isReplacing(false)
 {
 }
 
