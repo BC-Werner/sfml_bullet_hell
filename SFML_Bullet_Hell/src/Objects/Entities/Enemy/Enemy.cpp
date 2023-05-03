@@ -9,6 +9,7 @@ Enemy::Enemy(float radius, bool isActive, BulletManager& bullet_manager)
 		m_collider_component(radius * 0.7f),
 		m_shooting_component(bullet_manager),
 		active(isActive),
+		m_draw_debug_collider(false),
 		m_speed(125.f)
 {
 	m_collider_component.set_position(m_circle_shape.getPosition());
@@ -47,6 +48,10 @@ void Enemy::update(float dt)
 void Enemy::render(sf::RenderWindow& window)
 {
 	window.draw(m_circle_shape);
+	if (m_draw_debug_collider)
+	{
+		window.draw(m_collider_component.get_shape());
+	}
 }
 
 CircleColliderComponent& Enemy::get_collider_component() 
@@ -93,4 +98,9 @@ void Enemy::move_toward(sf::Vector2f position, float dt)
 	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
 
 	set_position(get_position() + normalized * m_speed * dt);
+}
+
+void Enemy::draw_debug_collider(bool value)
+{
+	m_draw_debug_collider = value;
 }

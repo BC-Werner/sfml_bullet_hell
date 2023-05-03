@@ -28,6 +28,8 @@ public:
 
 	void move_toward(sf::Vector2f position, float dt);
 
+	void draw_debug_collider(bool value);
+
 	bool active = false;
 
 private:
@@ -40,6 +42,7 @@ private:
 
 	float m_speed;
 	int m_damage;
+	bool m_draw_debug_collider;
 
 };
 using EnemyPtr = std::shared_ptr<Enemy>;

@@ -21,8 +21,6 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float si
 	sf::Text _text = sf::Text("000", font, 24);
 	_text.setFillColor(sf::Color::White);
 
-	//m_collider_component.set_position(m_cirle_shape.getPosition());
-
 	m_circle_shape.setOrigin(m_circle_shape.getRadius(), m_circle_shape.getRadius());
 
 	m_circle_shape.setFillColor(sf::Color::Transparent);
@@ -34,8 +32,6 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float si
 
 void Player::handleInput(sf::Event& event)
 {
-	//move_speed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? max_move_speed * 2.f : max_move_speed;
-
 	// Movement
 	m_movement_component.set_flags(MoveFlags{
 		sf::Keyboard::isKeyPressed(sf::Keyboard::W),
@@ -82,7 +78,6 @@ void Player::set_position(sf::Vector2f position)
 
 const sf::Vector2f Player::get_position() const
 {
-	//return m_cirle_shape.getPosition();
 	return m_movement_component.get_position();
 }
 

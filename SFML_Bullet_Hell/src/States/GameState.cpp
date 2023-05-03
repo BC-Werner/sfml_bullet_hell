@@ -123,18 +123,38 @@ void GameState::update(float dt)
 	auto bullets = m_data->bullet_manager.get_bullets();
 	for (BulletPtr bullet : bullets)
 	{
+		if (!bullet->is_active()) continue;
+
 		bullet->update(dt);
 
-		if (
-			bullet->is_active() &&
-			bullet->get_collider_component().isColliding(m_player.get_collider_component()) && 
-			m_player.get_health_component().can_take_damage()
-		)
+		// Handle player bullets
+		if (bullet->is_player_bullet())
 		{
-			if (!bullet->is_player_bullet())
+			for (EnemyPtr enemy : m_enemies)
 			{
-				m_player.get_health_component().lose_health(bullet->get_damage());
-				bullet->deactivate();
+				if (!enemy->active) continue;
+
+				if (
+					bullet->get_collider_component().isColliding(enemy->get_collider_component()) &&
+					enemy->get_health_component().can_take_damage()
+				)
+				{
+					enemy->get_health_component().lose_health(bullet->get_damage());
+					bullet->deactivate();
+				}
+			}
+		}
+
+		// Handle enemy bullets
+		if (!bullet->is_player_bullet())
+		{
+			if (
+				bullet->get_collider_component().isColliding(m_player.get_collider_component()) && 
+				m_player.get_health_component().can_take_damage()
+			)
+			{
+					m_player.get_health_component().lose_health(bullet->get_damage());
+					bullet->deactivate();
 			}
 		}
 	}
@@ -178,6 +198,7 @@ void GameState::Init()
 		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
 		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
 		m_enemies.push_back(e);
+		e->draw_debug_collider(false);
 	}
 }
 
