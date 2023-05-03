@@ -31,6 +31,10 @@ GameState::GameState(GameDataRef data)
 	);
 
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
+
+	for (EnemyPtr enemy : m_enemies)
+	{
+	}
 }
 
 GameState::~GameState()
@@ -71,6 +75,9 @@ void GameState::update(float dt)
 	{
 		if (enemy->active)
 		{
+			// Update targeting
+			enemy->update_player_position(m_player.get_position());
+
 			// Collide with player
 			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.get_health_component().can_take_damage())
 			{
@@ -151,7 +158,7 @@ void GameState::Init()
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	for (int i = 0; i < 3; i++)
 	{
-		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true);
+		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
 		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
 		m_enemies.push_back(e);
 	}
