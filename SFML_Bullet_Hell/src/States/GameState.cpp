@@ -81,16 +81,8 @@ void GameState::update(float dt)
 			// Collide with player
 			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.get_health_component().can_take_damage())
 			{
+				// Damage player
 				m_player.get_health_component().lose_health( enemy->get_damage() );
-				// Update helth text
-				m_health_text.setString(std::to_string(m_player.get_health_component().get_health()));
-
-				if (m_player.get_health_component().get_health() <= 0.0f)
-				{
-					m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
-					return;
-				}
-
 			}
 
 			// Collide with other enemies
@@ -130,6 +122,25 @@ void GameState::update(float dt)
 	for (BulletPtr bullet : bullets)
 	{
 		bullet->update(dt);
+
+		if (bullet->is_active() && bullet->get_collider_component().isColliding(m_player.get_collider_component()))
+		{
+			if (!bullet->is_player_bullet())
+			{
+				m_player.get_health_component().lose_health(bullet->get_damage());
+				bullet->deactivate();
+			}
+		}
+	}
+
+	 // Update helth text
+	m_health_text.setString(std::to_string(m_player.get_health_component().get_health()));
+
+	// End game
+	if (m_player.get_health_component().get_health() <= 0.0f)
+	{
+		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
+		return;
 	}
 }
 

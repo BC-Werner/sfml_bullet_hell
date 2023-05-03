@@ -49,7 +49,7 @@ void Player::handleInput(sf::Event& event)
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		sf::Vector2f mouse_pos = { (float)sf::Mouse::getPosition(m_window_ref).x, (float)sf::Mouse::getPosition(m_window_ref).y };
-		m_shooting_component.Shoot({ get_position(), mouse_pos, 1000.f, 50 });
+		m_shooting_component.Shoot({ get_position(), mouse_pos, 1000.f, 50, true });
 	}
 }
 

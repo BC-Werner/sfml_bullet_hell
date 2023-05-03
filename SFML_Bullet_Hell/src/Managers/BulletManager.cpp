@@ -17,13 +17,13 @@ void BulletManager::SpawnBullet(BulletData data)
 	{
 		if (!bullet->is_active())
 		{
-			bullet->reactivate(data.start_position, data.end_position, data.speed, data.damage);
+			bullet->reactivate(data);
 			return;
 		}
 	}
 
 	// Otherwise add a new bullet
-	BulletPtr bullet = std::make_shared<Bullet>(data.start_position, data.end_position, data.speed, data.damage);
+	BulletPtr bullet = std::make_shared<Bullet>(data);
 	bullet->activate();
 	m_bullets.push_back(bullet);
 }

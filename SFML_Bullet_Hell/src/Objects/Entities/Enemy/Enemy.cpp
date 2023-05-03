@@ -39,7 +39,8 @@ void Enemy::update(float dt)
 		get_position(),
 		m_player_position_ref,
 		75.f * m_circle_shape.getPointCount(),
-		(unsigned)m_circle_shape.getPointCount() * 2
+		(unsigned)m_circle_shape.getPointCount() * 2,
+		false
 	});
 }
 
