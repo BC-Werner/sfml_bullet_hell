@@ -14,7 +14,7 @@ Bullet::Bullet(BulletData bullet_data)
 
 	sf::Vector2f direction = m_bullet_data.end_position - m_bullet_data.start_position;
 	m_direction = normalize_direction(direction);
-	m_lifetime = sf::seconds(2.f);
+	m_lifetime = sf::seconds(4.f);
 	m_life_clock.restart();
 }
 

@@ -15,11 +15,10 @@ void BulletManager::SpawnBullet(BulletData data)
 	// -- Reactivate it with the new properties
 	for (BulletPtr bullet : m_bullets)
 	{
-		if (!bullet->is_active())
-		{
-			bullet->reactivate(data);
-			return;
-		}
+		if (bullet->is_active()) continue;
+
+		bullet->reactivate(data);
+		return;
 	}
 
 	// Otherwise add a new bullet

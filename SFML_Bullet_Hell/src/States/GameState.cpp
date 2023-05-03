@@ -73,48 +73,50 @@ void GameState::update(float dt)
 	// TODO: move collision specific logic to a collision manager
 	for (EnemyPtr enemy : m_enemies)
 	{
-		if (enemy->active)
+		if (!enemy->active) continue;
+
+		// Update targeting
+		enemy->update_player_position(m_player.get_position());
+
+		// Collide with player
+		if (
+			m_player.get_collider_component().isColliding(enemy->get_collider_component()) && 
+			m_player.get_health_component().can_take_damage()
+		)
 		{
-			// Update targeting
-			enemy->update_player_position(m_player.get_position());
+			// Damage player
+			m_player.get_health_component().lose_health( enemy->get_damage() );
+		}
 
-			// Collide with player
-			if (m_player.get_collider_component().isColliding(enemy->get_collider_component()) && m_player.get_health_component().can_take_damage())
+		// Collide with other enemies
+		for (EnemyPtr other : m_enemies)
+		{
+			if (other == enemy) continue;
+
+			if (enemy->get_collider_component().isColliding(other->get_collider_component()))
 			{
-				// Damage player
-				m_player.get_health_component().lose_health( enemy->get_damage() );
+				// Get dist between
+				sf::Vector2f A = enemy->get_position();
+				sf::Vector2f B = other->get_position();
+				sf::Vector2f D = B - A;
+				float dist = sqrtf((D.x * D.x) + (D.y * D.y));
+
+				// Normalize -D
+				float L = sqrtf(D.x * D.x + D.y * D.y);
+				sf::Vector2f normalized = -D / (L == 0.f ? 1.f : L);
+
+				// Move away by overlap
+				enemy->set_position(enemy->get_position() + normalized);
 			}
+		}
 
-			// Collide with other enemies
-			for (EnemyPtr other : m_enemies)
-			{
-				if (other == enemy) continue;
+		enemy->move_toward(m_player.get_position(), dt);
+		enemy->update(dt);
 
-				if (enemy->get_collider_component().isColliding(other->get_collider_component()))
-				{
-					// Get dist between
-					sf::Vector2f A = enemy->get_position();
-					sf::Vector2f B = other->get_position();
-					sf::Vector2f D = B - A;
-					float dist = sqrtf((D.x * D.x) + (D.y * D.y));
-
-					// Normalize -D
-					float L = sqrtf(D.x * D.x + D.y * D.y);
-					sf::Vector2f normalized = -D / (L == 0.f ? 1.f : L);
-
-					// Move away by overlap
-					enemy->set_position(enemy->get_position() + normalized);
-				}
-			}
-
-			enemy->move_toward(m_player.get_position(), dt);
-			enemy->update(dt);
-
-			// Deactivate enemy or update
-			if (enemy->get_health_component().get_health() <= 0)
-			{
-				enemy->active = false;
-			}
+		// Deactivate enemy or update
+		if (enemy->get_health_component().get_health() <= 0)
+		{
+			enemy->active = false;
 		}
 	}
 
@@ -123,7 +125,11 @@ void GameState::update(float dt)
 	{
 		bullet->update(dt);
 
-		if (bullet->is_active() && bullet->get_collider_component().isColliding(m_player.get_collider_component()))
+		if (
+			bullet->is_active() &&
+			bullet->get_collider_component().isColliding(m_player.get_collider_component()) && 
+			m_player.get_health_component().can_take_damage()
+		)
 		{
 			if (!bullet->is_player_bullet())
 			{
