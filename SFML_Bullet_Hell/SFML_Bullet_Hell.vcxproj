@@ -171,7 +171,6 @@
     <ClCompile Include="src\Objects\Components\MovementComponent.cpp" />
     <ClCompile Include="src\Objects\Components\ShootingComponent.cpp" />
     <ClCompile Include="src\Objects\Entities\Bullet\Bullet.cpp" />
-    <ClCompile Include="src\Managers\EntityManager.cpp" />
     <ClCompile Include="src\Random.cpp" />
     <ClCompile Include="src\Objects\Entities\Enemy\Enemy.cpp" />
     <ClCompile Include="src\States\OptionsState.cpp" />
@@ -212,7 +211,6 @@
     <ClInclude Include="src\Objects\Components\MovementComponent.h" />
     <ClInclude Include="src\Objects\Components\ShootingComponent.h" />
     <ClInclude Include="src\Objects\Entities\Bullet\Bullet.h" />
-    <ClInclude Include="src\Managers\EntityManager.h" />
     <ClInclude Include="src\Random.h" />
     <ClInclude Include="src\Objects\Entities\Enemy\Enemy.h" />
     <ClInclude Include="src\States\OptionsState.h" />
