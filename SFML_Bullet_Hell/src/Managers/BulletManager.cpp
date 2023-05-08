@@ -9,6 +9,17 @@ BulletManager::~BulletManager()
 {
 }
 
+void BulletManager::render(sf::RenderWindow& window)
+{
+	for (BulletPtr bullet : m_bullets)
+	{
+		if (bullet->is_active())
+		{
+			bullet->render(window);
+		}
+	}
+}
+
 void BulletManager::SpawnBullet(BulletData data)
 {
 	// Find an inactive bullet

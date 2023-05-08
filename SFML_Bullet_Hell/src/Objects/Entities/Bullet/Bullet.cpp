@@ -42,13 +42,10 @@ void Bullet::update(float dt)
 
 void Bullet::render(sf::RenderWindow& window)
 {
-	if (m_is_active)
+	window.draw(m_shape);
+	if (m_draw_debug_collider)
 	{
-		window.draw(m_shape);
-		if (m_draw_debug_collider)
-		{
-			window.draw(m_collider_component.get_shape());
-		}
+		window.draw(m_collider_component.get_shape());
 	}
 }
 

@@ -165,12 +165,7 @@ void GameState::render(sf::RenderWindow& window)
 	m_game_clock.render(window);
 
 	m_data->enemy_manager.render(window);
-
-	auto bullets = m_data->bullet_manager.get_bullets();
-	for (BulletPtr bullet : bullets)
-	{
-		bullet->render(window);
-	}
+	m_data->bullet_manager.render(window);
 
 	m_health_text.render(window);
 }
