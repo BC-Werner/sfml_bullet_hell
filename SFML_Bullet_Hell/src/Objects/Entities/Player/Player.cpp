@@ -7,6 +7,7 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager)
 	:	m_window_ref(window), 
 		m_health_component(0, 0.1f), 
 		m_collider_component(0.f), 
+		m_movement_component(400.f),
 		m_shooting_component(bullet_manager)
 {
 }
@@ -16,6 +17,7 @@ Player::Player(sf::RenderWindow& window, BulletManager& bullet_manager, float si
 		m_health_component(max_health, 0.1f),
 		m_circle_shape(size, 3),
 		m_collider_component(size * 0.7f),
+		m_movement_component(400.f),
 		m_shooting_component(bullet_manager)
 {
 	sf::Text _text = sf::Text("000", font, 24);

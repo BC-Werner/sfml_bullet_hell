@@ -3,8 +3,8 @@
 
 enum DirectionValues { Negative = -1, Neutral = 0, Positive = 1 };
 
-MovementComponent::MovementComponent()
-	: M_MAX_SPEED(200.f), m_speed(200.f), m_flags{false, false, false, false, false}
+MovementComponent::MovementComponent(float move_speed)
+	: M_MAX_SPEED(move_speed), m_speed(0.f), m_flags{false, false, false, false, false}
 {
 }
 

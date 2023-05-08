@@ -12,7 +12,7 @@ struct MoveFlags
 class MovementComponent
 {
 public:
-	MovementComponent();
+	MovementComponent(float move_speed);
 	~MovementComponent();
 
 	void set_flags(MoveFlags flags);

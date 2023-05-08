@@ -31,10 +31,6 @@ GameState::GameState(GameDataRef data)
 	);
 
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
-
-	for (EnemyPtr enemy : m_enemies)
-	{
-	}
 }
 
 GameState::~GameState()
