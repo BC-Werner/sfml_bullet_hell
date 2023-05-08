@@ -69,14 +69,11 @@ void GameState::update(float dt)
 	m_game_clock.update(dt);
 	m_player.update(dt);
 
-	// TODO: move enmy specific logic to an enemy manager
 	// TODO: move collision specific logic to a collision manager
-	for (EnemyPtr enemy : m_enemies)
+	// Update Collisions
+	for (EnemyPtr enemy : m_data->enemy_manager.get_enemies())
 	{
 		if (!enemy->active) continue;
-
-		// Update targeting
-		enemy->update_player_position(m_player.get_position());
 
 		// Collide with player
 		if (
@@ -109,17 +106,9 @@ void GameState::update(float dt)
 				enemy->set_position(enemy->get_position() + normalized);
 			}
 		}
-
-		enemy->move_toward(m_player.get_position(), dt);
-		enemy->update(dt);
-
-		// Deactivate enemy or update
-		if (enemy->get_health_component().get_health() <= 0)
-		{
-			enemy->active = false;
-		}
 	}
 
+	// Update bullets
 	auto bullets = m_data->bullet_manager.get_bullets();
 	for (BulletPtr bullet : bullets)
 	{
@@ -130,7 +119,7 @@ void GameState::update(float dt)
 		// Handle player bullets
 		if (bullet->is_player_bullet())
 		{
-			for (EnemyPtr enemy : m_enemies)
+			for (EnemyPtr enemy : m_data->enemy_manager.get_enemies())
 			{
 				if (!enemy->active) continue;
 
@@ -159,6 +148,10 @@ void GameState::update(float dt)
 		}
 	}
 
+	// Update Enemies
+	m_data->enemy_manager.update_player_position(m_player.get_position());
+	m_data->enemy_manager.update(dt);
+
 	 // Update helth text
 	m_health_text.setString(std::to_string(m_player.get_health_component().get_health()));
 
@@ -175,11 +168,7 @@ void GameState::render(sf::RenderWindow& window)
 	m_player.render(window);
 	m_game_clock.render(window);
 
-	for (EnemyPtr enemy : m_enemies)
-	{
-		if (enemy->active)
-			enemy->render(window);
-	}
+	m_data->enemy_manager.render(window);
 
 	auto bullets = m_data->bullet_manager.get_bullets();
 	for (BulletPtr bullet : bullets)
@@ -197,8 +186,8 @@ void GameState::Init()
 	{
 		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
 		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
-		m_enemies.push_back(e);
 		e->draw_debug_collider(false);
+		m_data->enemy_manager.get_enemies().push_back(e);
 	}
 }
 

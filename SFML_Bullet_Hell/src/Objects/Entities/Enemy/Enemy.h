@@ -24,9 +24,8 @@ public:
 	void set_position(sf::Vector2f position);
 	const sf::Vector2f get_position() const;
 
-	void update_player_position(sf::Vector2f player_position);
-
 	void move_toward(sf::Vector2f position, float dt);
+	void shoot_toward(sf::Vector2f target);
 
 	void draw_debug_collider(bool value);
 
@@ -37,8 +36,6 @@ private:
 	CircleColliderComponent m_collider_component;
 	ShootingComponent m_shooting_component;
 	sf::CircleShape m_circle_shape;
-
-	sf::Vector2f m_player_position_ref;
 
 	float m_speed;
 	int m_damage;

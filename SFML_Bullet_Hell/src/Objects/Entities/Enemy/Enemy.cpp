@@ -36,13 +36,6 @@ void Enemy::update(float dt)
 {
 	// update collider position
 	m_collider_component.set_position(m_circle_shape.getPosition());
-	m_shooting_component.Shoot({
-		get_position(),
-		m_player_position_ref,
-		75.f * m_circle_shape.getPointCount(),
-		(unsigned)m_circle_shape.getPointCount() * 2,
-		false
-	});
 }
 
 void Enemy::render(sf::RenderWindow& window)
@@ -85,11 +78,6 @@ const sf::Vector2f Enemy::get_position() const
 	return m_circle_shape.getPosition();
 }
 
-void Enemy::update_player_position(sf::Vector2f player_position)
-{
-	m_player_position_ref = player_position;
-}
-
 void Enemy::move_toward(sf::Vector2f position, float dt)
 {
 	// Move toward player
@@ -98,6 +86,17 @@ void Enemy::move_toward(sf::Vector2f position, float dt)
 	sf::Vector2f normalized = dir / (Length == 0.f ? 1.f : Length);
 
 	set_position(get_position() + normalized * m_speed * dt);
+}
+
+void Enemy::shoot_toward(sf::Vector2f target)
+{
+	m_shooting_component.Shoot({
+		get_position(),
+		target,
+		75.f * m_circle_shape.getPointCount(),
+		(unsigned)m_circle_shape.getPointCount() * 2,
+		false
+	});
 }
 
 void Enemy::draw_debug_collider(bool value)
