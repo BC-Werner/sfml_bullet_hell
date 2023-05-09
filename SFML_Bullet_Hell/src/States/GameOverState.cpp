@@ -53,8 +53,6 @@ void GameOverState::handleInput(sf::Event& event)
 
 		if (m_playagain_btn.contains(mouse_pos))
 		{
-			m_data->enemy_manager.clear();
-			m_data->bullet_manager.clear();
 			m_data->state_manager.AddState(StateRef(std::make_unique<GameState>(m_data)), true);
 		}
 		if (m_mainmenu_btn.contains(mouse_pos))

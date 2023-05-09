@@ -163,6 +163,8 @@ void GameState::render(sf::RenderWindow& window)
 
 void GameState::Init()
 {
+	m_data->enemy_manager.clear();
+	m_data->bullet_manager.clear();
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	for (int i = 0; i < 3; i++)
 	{
