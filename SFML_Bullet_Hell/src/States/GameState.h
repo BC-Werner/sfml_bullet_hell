@@ -1,7 +1,8 @@
 #pragma once
 #include "State.h"
 #include "Game.h"
-#include "Objects/UI/HUD/GameClock.h"
+#include "Objects/Entities/Clock/GameClock.h"
+#include "Objects/UI/Text/BottomCenteredText.h"
 #include "Objects/UI/Menu/Button.h"
 #include "Objects/Entities/Player/Player.h"
 #include "Objects/Entities/Enemy/Enemy.h"
@@ -26,6 +27,7 @@ private:
 	GameDataRef m_data;
 
 	GameClock m_game_clock;
+	BottomCenteredText m_game_clock_text;
 	TopRightText m_health_text;
 
 	Player m_player;

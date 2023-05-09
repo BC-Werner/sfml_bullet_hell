@@ -45,7 +45,7 @@
     <ClCompile Include="src\Objects\UI\Menu\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\UI\HUD\GameClock.cpp">
+    <ClCompile Include="src\Objects\Entities\Clock\GameClock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\UI\Text\CenteredText.cpp">
@@ -149,7 +149,7 @@
     <ClInclude Include="src\Objects\UI\Menu\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Objects\UI\HUD\GameClock.h">
+    <ClInclude Include="src\Objects\Entities\Clock\GameClock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\UI\Text\CenteredText.h">

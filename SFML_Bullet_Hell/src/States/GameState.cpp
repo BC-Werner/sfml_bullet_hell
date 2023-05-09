@@ -24,9 +24,8 @@ GameState::GameState(GameDataRef data)
 		{ window_size.x - PADDING, PADDING }
 	);
 
-	m_game_clock = GameClock(
+	m_game_clock_text = BottomCenteredText(
 		sf::Text("00:00", font, 20), 
-		sf::Color::White, 
 		{ window_size.x / 2.f, window_size.y }
 	);
 
@@ -53,7 +52,7 @@ void GameState::handleInput(sf::Event& event)
 
 void GameState::update(float dt)
 {
-	m_game_clock.update(dt);
+	m_game_clock_text.setString(m_game_clock.to_string());
 	m_player.update(dt);
 	spawn_enemy();
 
@@ -154,7 +153,7 @@ void GameState::update(float dt)
 void GameState::render(sf::RenderWindow& window)
 {
 	m_player.render(window);
-	m_game_clock.render(window);
+	m_game_clock_text.render(window);
 
 	m_data->enemy_manager.render(window);
 	m_data->bullet_manager.render(window);
