@@ -31,6 +31,9 @@ GameState::GameState(GameDataRef data)
 	);
 
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
+
+	m_spawn_time = sf::seconds(1.5f);
+	m_spawn_clock.restart();
 }
 
 GameState::~GameState()
@@ -52,6 +55,7 @@ void GameState::update(float dt)
 {
 	m_game_clock.update(dt);
 	m_player.update(dt);
+	spawn_enemy();
 
 	// TODO: move collision specific logic to a collision manager
 	// Update Collisions
@@ -70,7 +74,7 @@ void GameState::update(float dt)
 		}
 
 		// Collide with other enemies
-		for (EnemyPtr other : m_enemies)
+		for (EnemyPtr other : m_data->enemy_manager.get_enemies())
 		{
 			if (other == enemy) continue;
 
@@ -166,7 +170,8 @@ void GameState::Init()
 		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
 		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
 		e->draw_debug_collider(false);
-		m_data->enemy_manager.get_enemies().push_back(e);
+		//m_data->enemy_manager.get_enemies().push_back(e);
+		m_data->enemy_manager.add_enemy(e);
 	}
 }
 
@@ -179,4 +184,18 @@ void GameState::Pause()
 void GameState::Resume()
 {
 	m_game_clock.Resume();
+}
+
+void GameState::spawn_enemy()
+{
+	if (m_spawn_clock.getElapsedTime() >= m_spawn_time)
+	{
+		sf::Vector2f window_size = m_data->m_window.getView().getSize();
+		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
+		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
+		e->draw_debug_collider(false);
+		m_data->enemy_manager.add_enemy(e);
+		m_spawn_clock.restart();
+		m_data->enemy_manager.clean();
+	}
 }
