@@ -42,3 +42,23 @@ std::vector<BulletPtr>& BulletManager::get_bullets()
 {
 	return m_bullets;
 }
+
+void BulletManager::clean()
+{
+	for (auto it = m_bullets.begin(); it != m_bullets.end(); )
+	{
+		if (!(*it)->is_active())
+		{
+			it = m_bullets.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+}
+
+void BulletManager::clear()
+{
+	m_bullets.clear();
+}

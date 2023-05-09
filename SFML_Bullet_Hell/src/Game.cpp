@@ -24,7 +24,7 @@ void Game::run()
 	while (m_data->m_is_running)
 	{
 		pollEvents();
-		handleInput();
+		//handleInput();
 		updateDt();
 		update(m_dt.asSeconds());
 		render();
@@ -60,6 +60,8 @@ void Game::pollEvents()
 		{
 			m_data->m_is_running = false;
 		}
+
+		handleInput();
 	}
 }
 

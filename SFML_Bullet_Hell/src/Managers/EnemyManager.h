@@ -14,6 +14,9 @@ public:
 	void update_player_position(sf::Vector2f position);
 
 	std::vector<EnemyPtr>& get_enemies();
+	void add_enemy(EnemyPtr enemy);
+	void clean();
+	void clear();
 
 private:
 	std::vector<EnemyPtr> m_enemies;

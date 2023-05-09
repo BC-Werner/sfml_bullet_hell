@@ -45,19 +45,7 @@ void GameState::handleInput(sf::Event& event)
 		Pause();
 	}
 
-	// Debug Game Over
-	if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Z)
-	{
-		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
-	}
-
 	m_player.handleInput(event);
-
-	for (EnemyPtr enemy : m_enemies)
-	{
-		if (enemy->active)
-			enemy->handleInput(event);
-	}
 }
 
 void GameState::update(float dt)
@@ -104,7 +92,7 @@ void GameState::update(float dt)
 		}
 	}
 
-	// Update bullets
+	// Update bullet collision
 	auto bullets = m_data->bullet_manager.get_bullets();
 	for (BulletPtr bullet : bullets)
 	{

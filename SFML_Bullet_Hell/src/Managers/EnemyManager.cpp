@@ -43,6 +43,31 @@ void EnemyManager::update_player_position(sf::Vector2f position)
 	m_player_position = position;
 }
 
+void EnemyManager::add_enemy(EnemyPtr enemy)
+{
+	m_enemies.push_back(enemy);
+}
+
+void EnemyManager::clean()
+{
+	for (auto it = m_enemies.begin(); it != m_enemies.end(); )
+	{
+		if ((*it)->active == false)
+		{
+			it = m_enemies.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+}
+
+void EnemyManager::clear()
+{
+	m_enemies.clear();
+}
+
 std::vector<EnemyPtr>& EnemyManager::get_enemies()
 {
 	return m_enemies;

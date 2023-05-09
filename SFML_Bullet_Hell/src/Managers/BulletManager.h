@@ -12,6 +12,8 @@ public:
 	void SpawnBullet(BulletData data);
 
 	std::vector<BulletPtr>& get_bullets();
+	void clean();
+	void clear();
 
 private:
 	std::vector<BulletPtr> m_bullets;
