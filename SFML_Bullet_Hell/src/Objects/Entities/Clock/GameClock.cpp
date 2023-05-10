@@ -41,7 +41,10 @@ float GameClock::GetElapsedSeconds() const
 
 sf::Time GameClock::GetElapsedTime() const
 {
-	return m_c.getElapsedTime();
+	if (!isPaused) {
+		return sf::Time(sf::seconds(runtime + m_c.getElapsedTime().asSeconds()));
+	}
+	return sf::Time(sf::seconds(runtime));
 }
 
 std::string GameClock::to_string() const
