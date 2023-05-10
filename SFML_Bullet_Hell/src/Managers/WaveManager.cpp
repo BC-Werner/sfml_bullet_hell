@@ -15,8 +15,8 @@ void WaveManager::load_waves()
 {
 	// Debug
 	m_waves.push_back({ ScreenDirection::ScreenAny, 3, sf::Time(sf::seconds(3.5f)), sf::Time(sf::seconds(0.5f * 60)) });
-	m_waves.push_back({ ScreenDirection::ScreenBottom, 8, sf::Time(sf::seconds(4.5f)), sf::Time(sf::seconds(1.0f * 60)) });
-	m_waves.push_back({ ScreenDirection::ScreenLeft, 10, sf::Time(sf::seconds(3.5f)), sf::Time(sf::seconds(1.5f * 60)) });
+	//m_waves.push_back({ ScreenDirection::ScreenBottom, 8, sf::Time(sf::seconds(4.5f)), sf::Time(sf::seconds(1.0f * 60)) });
+	//m_waves.push_back({ ScreenDirection::ScreenLeft, 10, sf::Time(sf::seconds(6.5f)), sf::Time(sf::seconds(1.5f * 60)) });
 }
 
 void WaveManager::update(sf::Time game_time)
@@ -39,4 +39,9 @@ void WaveManager::update(sf::Time game_time)
 	{
 		m_current_wave++;
 	}
+}
+
+bool WaveManager::is_last_wave() const
+{
+	return m_current_wave == m_waves.size();
 }

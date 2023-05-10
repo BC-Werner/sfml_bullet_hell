@@ -12,6 +12,8 @@ public:
 	void load_waves();
 	void update(sf::Time game_time);
 
+	bool is_last_wave() const;
+
 private:
 	std::vector<Wave> m_waves;
 	SpawnerPtr m_spawner;

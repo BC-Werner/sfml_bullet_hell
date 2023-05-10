@@ -36,9 +36,6 @@ GameState::GameState(GameDataRef data)
 
 	m_player.set_position({ window_size.x / 2.f, window_size.y / 2.f });
 
-	m_spawn_time = sf::seconds(1.5f);
-	m_spawn_clock.restart();
-
 	m_wave_manager = WaveManager(std::make_unique<EnemySpawner>(m_spawner));
 }
 
@@ -62,13 +59,6 @@ void GameState::update(float dt)
 	m_game_clock_text.setString(m_game_clock.to_string());
 	m_player.update(dt);
 
-	// Spawn New Enemies
-	//if (m_spawn_clock.getElapsedTime() >= m_spawn_time)
-	//{
-	//	int screen = Random::Int(1, 4);
-	//	m_spawner.Spawn((ScreenDirection)screen);
-	//	m_spawn_clock.restart();
-	//}
 	m_wave_manager.update(m_game_clock.GetElapsedTime());
 
 	// TODO: move collision specific logic to a collision manager
@@ -164,6 +154,12 @@ void GameState::update(float dt)
 		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
 		return;
 	}
+
+	if (m_wave_manager.is_last_wave() && m_data->enemy_manager.get_active() == 0)
+	{
+		m_data->state_manager.AddState(StateRef(std::make_unique<GameOverState>(m_data)), true);
+		return;
+	}
 }
 
 void GameState::render(sf::RenderWindow& window)
@@ -182,11 +178,6 @@ void GameState::Init()
 	m_data->enemy_manager.clear();
 	m_data->bullet_manager.clear();
 	m_wave_manager.load_waves();
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	int screen = Random::Int(1, 4);
-	//	m_spawner.Spawn((ScreenDirection)screen);
-	//}
 }
 
 void GameState::Pause()

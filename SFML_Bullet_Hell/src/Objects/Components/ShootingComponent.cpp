@@ -37,7 +37,6 @@ void ShootingComponent::Shoot(BulletData data)
 		canShoot = false;
 		m_time_since_last_shot.restart();
 	}
-	std::cout << m_time_since_last_shot.getElapsedTime().asSeconds() << std::endl;
 }
 
 void ShootingComponent::set_reload_time(float seconds)

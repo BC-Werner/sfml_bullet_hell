@@ -34,8 +34,5 @@ private:
 	TopRightText m_health_text;
 
 	Player m_player;
-
-	sf::Clock m_spawn_clock;
-	sf::Time m_spawn_time;
 };
 

@@ -17,6 +17,7 @@ public:
 	void add_enemy(EnemyPtr enemy);
 	void clean();
 	void clear();
+	int get_active() const;
 
 private:
 	std::vector<EnemyPtr> m_enemies;

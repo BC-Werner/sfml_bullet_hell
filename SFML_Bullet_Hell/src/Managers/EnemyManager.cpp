@@ -68,6 +68,18 @@ void EnemyManager::clear()
 	m_enemies.clear();
 }
 
+int EnemyManager::get_active() const
+{
+	int active = 0;
+
+	for (auto enemy : m_enemies)
+	{
+		if (enemy->active)
+			active++;
+	}
+	return active;
+}
+
 std::vector<EnemyPtr>& EnemyManager::get_enemies()
 {
 	return m_enemies;
