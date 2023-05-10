@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "EnemySpawner.h"
+#include "Random.h"
 
-EnemySpawner::EnemySpawner(GameDataRef data)
-	: m_data(data)
+EnemySpawner::EnemySpawner(sf::Vector2f window_size, EnemyManager& manager, BulletManager& bullet_manager)
+	: m_window_size(window_size), m_enemy_manager(manager), m_bullet_manager(bullet_manager)
 {
 }
 
@@ -12,32 +13,31 @@ EnemySpawner::~EnemySpawner()
 
 void EnemySpawner::Spawn(ScreenDirection direction)
 {
-	sf::Vector2f window_size = m_data->m_window.getView().getSize();
-	float x, y;
+	sf::Vector2f pos;
 
 	switch (direction)
 	{
 	case ScreenTop:
-		x = Random::Float(0.f, window_size.x);
-		y = -100.f;
+		pos.x = Random::Float(0.f, m_window_size.x);
+		pos.y = -100.f;
 		break;
 	case ScreenRight:
-		x = window_size.x + 100.f;
-		y = Random::Float(0.f, window_size.y);
+		pos.x = m_window_size.x + 100.f;
+		pos.y = Random::Float(0.f, m_window_size.y);
 		break;
 	case ScreenBottom:
-		x = Random::Float(0.f, window_size.x);
-		y = window_size.y + 100.f;
+		pos.x = Random::Float(0.f, m_window_size.x);
+		pos.y = m_window_size.y + 100.f;
 		break;
 	case ScreenLeft:
-		x = -100.f;
-		y = Random::Float(0.f, window_size.y);
+		pos.x = -100.f;
+		pos.y = Random::Float(0.f, m_window_size.y);
 		break;
 	}
 
-	EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
-	e->set_position({x,y});
+	EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_bullet_manager);
+	e->set_position(pos);
 	e->draw_debug_collider(false);
-	m_data->enemy_manager.add_enemy(e);
-	m_data->enemy_manager.clean();
+	m_enemy_manager.add_enemy(e);
+	m_enemy_manager.clean();
 }

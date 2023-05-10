@@ -12,7 +12,11 @@ GameState::GameState(GameDataRef data)
 			100, 
 			data->asset_manager.getFont("Kanit")
 		),
-		m_spawner(data),
+		m_spawner(
+			data->m_window.getView().getSize(),
+			data->enemy_manager,
+			data->bullet_manager
+		),
 		m_health_text()
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();

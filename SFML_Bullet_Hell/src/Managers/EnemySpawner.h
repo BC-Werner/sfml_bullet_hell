@@ -1,18 +1,20 @@
 #pragma once
-#include "Game.h"
+#include "EnemyManager.h"
 
 enum ScreenDirection { ScreenTop = 1, ScreenRight, ScreenBottom, ScreenLeft };
 
 class EnemySpawner
 {
 public:
-	EnemySpawner(GameDataRef data);
+	EnemySpawner(sf::Vector2f window_size, EnemyManager& manager, BulletManager& bullet_manager);
 	~EnemySpawner();
 
 	void Spawn(ScreenDirection direction);
 
 private:
-	GameDataRef m_data;
+	EnemyManager& m_enemy_manager;
+	BulletManager& m_bullet_manager;
+	const sf::Vector2f m_window_size;
 };
 
 
