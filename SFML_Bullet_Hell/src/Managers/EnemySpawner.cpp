@@ -13,6 +13,10 @@ EnemySpawner::~EnemySpawner()
 
 void EnemySpawner::Spawn(ScreenDirection direction)
 {
+	if (direction == ScreenAny)
+	{
+		direction = (ScreenDirection)Random::Int(1, 4);
+	}
 	sf::Vector2f pos;
 
 	switch (direction)

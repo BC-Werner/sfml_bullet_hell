@@ -1,7 +1,7 @@
 #pragma once
 #include "EnemyManager.h"
 
-enum ScreenDirection { ScreenTop = 1, ScreenRight, ScreenBottom, ScreenLeft };
+enum ScreenDirection { ScreenAny = 0, ScreenTop = 1, ScreenRight, ScreenBottom, ScreenLeft };
 
 class EnemySpawner
 {
