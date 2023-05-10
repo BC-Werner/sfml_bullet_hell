@@ -7,7 +7,7 @@ Enemy::Enemy(float radius, bool isActive, BulletManager& bullet_manager)
 	:	m_health_component(100, 0.1f),
 		m_circle_shape(radius, Random::Int(4,8)),
 		m_collider_component(radius * 0.7f),
-		m_shooting_component(bullet_manager),
+		m_shooting_component(1.5f, bullet_manager),
 		active(isActive),
 		m_draw_debug_collider(false),
 		m_speed(125.f)

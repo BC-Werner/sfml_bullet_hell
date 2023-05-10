@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "ShootingComponent.h"
 
-ShootingComponent::ShootingComponent(BulletManager& bullet_manager)
+ShootingComponent::ShootingComponent(float spawn_cooldown, BulletManager& bullet_manager)
 	:	canShoot(true), 
+		spawnFlag(false),
 		m_bm_ref(bullet_manager),
-		m_reload_time(sf::seconds(0.25f))
+		m_shot_interval(sf::seconds(0.25f)),
+		m_spawn_shot_cooldown(sf::seconds(spawn_cooldown))
 {
 	m_time_since_last_shot.restart();
 }
@@ -15,7 +17,16 @@ ShootingComponent::~ShootingComponent()
 
 void ShootingComponent::Shoot(BulletData data)
 {
-	if (m_time_since_last_shot.getElapsedTime() >= m_reload_time)
+	if (m_time_since_last_shot.getElapsedTime() >= m_spawn_shot_cooldown)
+	{
+		spawnFlag = true;
+	}
+	if (!spawnFlag)
+	{
+		return;
+	}
+
+	if (m_time_since_last_shot.getElapsedTime() >= m_shot_interval)
 	{
 		canShoot = true;
 	}
@@ -30,5 +41,5 @@ void ShootingComponent::Shoot(BulletData data)
 
 void ShootingComponent::set_reload_time(float seconds)
 {
-	m_reload_time = sf::seconds(seconds);
+	m_shot_interval = sf::seconds(seconds);
 }
