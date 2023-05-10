@@ -168,10 +168,36 @@ void GameState::Init()
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
 	for (int i = 0; i < 3; i++)
 	{
+		int screen = Random::Int(1, 4);
+		float x, y;
+
+		switch (screen)
+		{
+		// Top
+		case 1:
+			x = Random::Float(0.f, window_size.x);
+			y = -100.f;
+			break;
+		// Right
+		case 2:
+			x = window_size.x + 100.f;
+			y = Random::Float(0.f, window_size.y);
+			break;
+		// Bottom
+		case 3:
+			x = Random::Float(0.f, window_size.x);
+			y = window_size.y + 100.f;
+			break;
+		// Left
+		case 4:
+			x = -100.f;
+			y = Random::Float(0.f, window_size.y);
+			break;
+		}
+
 		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
-		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
+		e->set_position({x, y});
 		e->draw_debug_collider(false);
-		//m_data->enemy_manager.get_enemies().push_back(e);
 		m_data->enemy_manager.add_enemy(e);
 	}
 }
@@ -192,8 +218,35 @@ void GameState::spawn_enemy()
 	if (m_spawn_clock.getElapsedTime() >= m_spawn_time)
 	{
 		sf::Vector2f window_size = m_data->m_window.getView().getSize();
+		int screen = Random::Int(1, 4);
+		float x, y;
+
+		switch (screen)
+		{
+		// Top
+		case 1:
+			x = Random::Float(0.f, window_size.x);
+			y = -100.f;
+			break;
+		// Right
+		case 2:
+			x = window_size.x + 100.f;
+			y = Random::Float(0.f, window_size.y);
+			break;
+		// Bottom
+		case 3:
+			x = Random::Float(0.f, window_size.x);
+			y = window_size.y + 100.f;
+			break;
+		// Left
+		case 4:
+			x = -100.f;
+			y = Random::Float(0.f, window_size.y);
+			break;
+		}
+
 		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
-		e->set_position({ Random::Float(100.f, window_size.x - 100.f), Random::Float(100.f, window_size.y - 100.f) });
+		e->set_position({x,y});
 		e->draw_debug_collider(false);
 		m_data->enemy_manager.add_enemy(e);
 		m_spawn_clock.restart();
