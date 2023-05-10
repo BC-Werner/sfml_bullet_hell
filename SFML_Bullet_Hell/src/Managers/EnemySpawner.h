@@ -16,5 +16,6 @@ private:
 	BulletManager& m_bullet_manager;
 	const sf::Vector2f m_window_size;
 };
+using SpawnerPtr = std::shared_ptr<EnemySpawner>;
 
 

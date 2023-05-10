@@ -13,6 +13,7 @@ public:
 	void Resume(); 
 	void Pause(); 
 	float GetElapsedSeconds() const;
+	sf::Time GetElapsedTime() const;
 	std::string to_string() const;
 };
 

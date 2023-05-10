@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Game.h"
 #include "Managers/EnemySpawner.h"
+#include "Managers/WaveManager.h"
 #include "Objects/Entities/Clock/GameClock.h"
 #include "Objects/UI/Text/BottomCenteredText.h"
 #include "Objects/UI/Menu/Button.h"
@@ -26,6 +27,7 @@ private:
 
 	GameDataRef m_data;
 	EnemySpawner m_spawner;
+	WaveManager m_wave_manager;
 
 	GameClock m_game_clock;
 	BottomCenteredText m_game_clock_text;

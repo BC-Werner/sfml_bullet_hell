@@ -39,6 +39,11 @@ float GameClock::GetElapsedSeconds() const
 	return runtime;
 }
 
+sf::Time GameClock::GetElapsedTime() const
+{
+	return m_c.getElapsedTime();
+}
+
 std::string GameClock::to_string() const
 {
 	float seconds = GetElapsedSeconds();
