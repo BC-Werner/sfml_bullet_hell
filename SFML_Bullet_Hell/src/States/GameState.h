@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Game.h"
+#include "Managers/EnemySpawner.h"
 #include "Objects/Entities/Clock/GameClock.h"
 #include "Objects/UI/Text/BottomCenteredText.h"
 #include "Objects/UI/Menu/Button.h"
@@ -22,9 +23,9 @@ public:
 	virtual void Resume() override;
 
 private:
-	void spawn_enemy();
 
 	GameDataRef m_data;
+	EnemySpawner m_spawner;
 
 	GameClock m_game_clock;
 	BottomCenteredText m_game_clock_text;

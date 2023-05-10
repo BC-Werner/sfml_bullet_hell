@@ -12,6 +12,7 @@ GameState::GameState(GameDataRef data)
 			100, 
 			data->asset_manager.getFont("Kanit")
 		),
+		m_spawner(data),
 		m_health_text()
 {
 	sf::Vector2f window_size = m_data->m_window.getView().getSize();
@@ -54,7 +55,14 @@ void GameState::update(float dt)
 {
 	m_game_clock_text.setString(m_game_clock.to_string());
 	m_player.update(dt);
-	spawn_enemy();
+
+	// Spawn New Enemies
+	if (m_spawn_clock.getElapsedTime() >= m_spawn_time)
+	{
+		int screen = Random::Int(1, 4);
+		m_spawner.Spawn((ScreenDirection)screen);
+		m_spawn_clock.restart();
+	}
 
 	// TODO: move collision specific logic to a collision manager
 	// Update Collisions
@@ -117,6 +125,7 @@ void GameState::update(float dt)
 				{
 					enemy->get_health_component().lose_health(bullet->get_damage());
 					bullet->deactivate();
+					m_player.get_health_component().gain_health(1);
 				}
 			}
 		}
@@ -165,40 +174,10 @@ void GameState::Init()
 {
 	m_data->enemy_manager.clear();
 	m_data->bullet_manager.clear();
-	sf::Vector2f window_size = m_data->m_window.getView().getSize();
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		int screen = Random::Int(1, 4);
-		float x, y;
-
-		switch (screen)
-		{
-		// Top
-		case 1:
-			x = Random::Float(0.f, window_size.x);
-			y = -100.f;
-			break;
-		// Right
-		case 2:
-			x = window_size.x + 100.f;
-			y = Random::Float(0.f, window_size.y);
-			break;
-		// Bottom
-		case 3:
-			x = Random::Float(0.f, window_size.x);
-			y = window_size.y + 100.f;
-			break;
-		// Left
-		case 4:
-			x = -100.f;
-			y = Random::Float(0.f, window_size.y);
-			break;
-		}
-
-		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
-		e->set_position({x, y});
-		e->draw_debug_collider(false);
-		m_data->enemy_manager.add_enemy(e);
+		m_spawner.Spawn((ScreenDirection)screen);
 	}
 }
 
@@ -211,45 +190,4 @@ void GameState::Pause()
 void GameState::Resume()
 {
 	m_game_clock.Resume();
-}
-
-void GameState::spawn_enemy()
-{
-	if (m_spawn_clock.getElapsedTime() >= m_spawn_time)
-	{
-		sf::Vector2f window_size = m_data->m_window.getView().getSize();
-		int screen = Random::Int(1, 4);
-		float x, y;
-
-		switch (screen)
-		{
-		// Top
-		case 1:
-			x = Random::Float(0.f, window_size.x);
-			y = -100.f;
-			break;
-		// Right
-		case 2:
-			x = window_size.x + 100.f;
-			y = Random::Float(0.f, window_size.y);
-			break;
-		// Bottom
-		case 3:
-			x = Random::Float(0.f, window_size.x);
-			y = window_size.y + 100.f;
-			break;
-		// Left
-		case 4:
-			x = -100.f;
-			y = Random::Float(0.f, window_size.y);
-			break;
-		}
-
-		EnemyPtr e = std::make_shared<Enemy>(Random::Float(10.f, 50.f), true, m_data->bullet_manager);
-		e->set_position({x,y});
-		e->draw_debug_collider(false);
-		m_data->enemy_manager.add_enemy(e);
-		m_spawn_clock.restart();
-		m_data->enemy_manager.clean();
-	}
 }
