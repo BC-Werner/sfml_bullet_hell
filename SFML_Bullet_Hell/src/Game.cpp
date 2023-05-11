@@ -48,6 +48,7 @@ void Game::initResourceManager()
 {
 	m_data->asset_manager.LoadFont("Kanit", "resources/Kanit.ttf");
 	m_data->asset_manager.LoadTexture("Triangle", "resources/triangle.png");
+	m_data->asset_manager.LoadWaves("Default Waves", "resources/waves.ini");
 }
 
 void Game::pollEvents()

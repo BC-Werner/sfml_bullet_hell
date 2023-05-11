@@ -1,6 +1,7 @@
 #pragma once
 #include "Objects/Engine/Wave.h"
 #include "EnemySpawner.h"
+#include "Managers/AssetManager.h"
 
 class WaveManager
 {
@@ -9,7 +10,7 @@ public:
 	WaveManager(SpawnerPtr spawner);
 	~WaveManager();
 
-	void load_waves();
+	void load_waves(AssetManager& asset_manager);
 	void update(sf::Time game_time);
 
 	bool is_last_wave() const;

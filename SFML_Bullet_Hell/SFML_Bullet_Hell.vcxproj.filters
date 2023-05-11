@@ -244,5 +244,6 @@
     <None Include="sfml_baseline.props" />
     <None Include="sfml_debug_dependencies.props" />
     <None Include="sfml_release_dependencies.props" />
+    <None Include="resources\waves.ini" />
   </ItemGroup>
 </Project>

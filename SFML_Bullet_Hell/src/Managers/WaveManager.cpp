@@ -11,12 +11,15 @@ WaveManager::~WaveManager()
 {
 }
 
-void WaveManager::load_waves()
+void WaveManager::load_waves(AssetManager& asset_manager)
 {
 	// Debug
-	m_waves.push_back({ ScreenDirection::ScreenAny, 3, sf::Time(sf::seconds(3.5f)), sf::Time(sf::seconds(0.5f * 60)) });
+	//m_waves.push_back({ ScreenDirection::ScreenAny, 3, sf::Time(sf::seconds(3.5f)), sf::Time(sf::seconds(0.5f * 60)) });
 	//m_waves.push_back({ ScreenDirection::ScreenBottom, 8, sf::Time(sf::seconds(4.5f)), sf::Time(sf::seconds(1.0f * 60)) });
 	//m_waves.push_back({ ScreenDirection::ScreenLeft, 10, sf::Time(sf::seconds(6.5f)), sf::Time(sf::seconds(1.5f * 60)) });
+
+	m_waves = asset_manager.getWaves("Default Waves");
+	m_current_wave = 0;
 }
 
 void WaveManager::update(sf::Time game_time)

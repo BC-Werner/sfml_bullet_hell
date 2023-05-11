@@ -177,7 +177,7 @@ void GameState::Init()
 {
 	m_data->enemy_manager.clear();
 	m_data->bullet_manager.clear();
-	m_wave_manager.load_waves();
+	m_wave_manager.load_waves(m_data->asset_manager);
 }
 
 void GameState::Pause()

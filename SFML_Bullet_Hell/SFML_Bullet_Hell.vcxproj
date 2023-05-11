@@ -250,6 +250,7 @@
     <ClInclude Include="src\Objects\UI\Text\TopLeftText.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\waves.ini" />
     <None Include="sfml_baseline.props" />
     <None Include="sfml_debug_dependencies.props" />
     <None Include="sfml_release_dependencies.props" />
